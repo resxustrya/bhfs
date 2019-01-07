@@ -21,7 +21,7 @@ namespace HFSRBO.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("bfhs", throwIfV1Schema: false)
         {
         }
 

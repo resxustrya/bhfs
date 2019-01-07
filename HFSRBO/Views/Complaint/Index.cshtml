@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Complaint Form";
+}
+<div class="container">
+    <div class="row center">
+        <h3>Complaint Form</h3>
+    </div>
+    <div class="card white darken-4">
+        <form action="@Url.Action("SubmitForm","Complaint")" method="post">
+            <div class="card-content">
+                <div class="row">
+                    <div class="col l12 m12 s12">
+                        <div class="row">
+                            <h4>Name of Complainant</h4>
+                            <div class="input-field col l4 m12 s12 center">
+                                <input type="text" class="validate" name="firstname" />
+                                <label for="firstname">Firstname</label>
+                            </div>
+                            <div class="input-field col l4 m12 s12">
+                                <input type="text" name="lastname" />
+                                <label for="lastname">Lastname</label>
+                            </div>
+                            <div class="input-field col l3 m12 s12">
+                                <input type="text" name="mi" />
+                                <label for="mi">Middle Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col l3 m12 s12 center">
+                                <input type="number" class="validate" name="age" />
+                                <label for="age">Age</label>
+                            </div>
+                            <div class="input-field col l3 m12 s12">
+                                <select name="civil_status">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label for="civil_status">Civil Status</label>
+                            </div>
+                            <div class="input-field col l3 m12 s12">
+                                <select name="gender">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Others</option>
+                                </select>
+                                <label for="gender">Gender</label>
+                            </div>
+                            <div class="input-field col l3 s12 m12">
+                                <input type="text" name="date" class="datepicker">
+                                <label for="date">Date</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col l12 s12 m12">
+                                <textarea id="address" class="materialize-textarea"></textarea>
+                                <label for="address">Address</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col l8 m12 s12">
+                                <input type="text" name="name_facility_complained" />
+                                <label for="name_facility_complained">Name of Facility being complained</label>
+                            </div>
+                            <div class="input-field col l4 m12 s12">
+                                <select name="facility_type">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                                <label for="facility_type">Type of Health Facility</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col l12 s12 m12">
+                                <textarea id="facility_address" class="materialize-textarea"></textarea>
+                                <label for="facility_address">Facility Address</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Patient Information (if applicable:)</h4>
+                            <div class="input-field col l3 m12 s12 center">
+                                <input type="text" class="validate" name="p_firstname" />
+                                <label for="p_firstname">Firstname</label>
+                            </div>
+                            <div class="input-field col l3 m12 s12">
+                                <input type="text" name="p_lastname" />
+                                <label for="p_lastname">Lastname</label>
+                            </div>
+                            <div class="input-field col l3 m12 s12">
+                                <input type="text" name="p_mi" />
+                                <label for="p_mi">Middle Name</label>
+                            </div>
+                            <div class="input-field col l3 m12 s12">
+                                <input type="text" name="date_confined" class="datepicker" />
+                                <label for="p_mi">Date patient confined(if applicable)</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Complaint Information</h4>
+                            <div class="input-field col l12 s12 m12">
+                                <textarea id="nature_of_complaint" class="materialize-textarea"></textarea>
+                                <label for="nature_of_complaint">Nature of Complaint</label>
+                            </div>
+                            <div class="input-field col l12 s12 m12">
+                                <textarea id="assistance_needed" class="materialize-textarea"></textarea>
+                                <label for="assistance_needed">Assistance Needed</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>By checking agree, you attest to the truth and veracity of the above-mentioned fact and statement. Any false statement and misrepresentation you made could be a ground for civil, criminal and administrative action under law by the injured party.</p>
+                            <label>
+                                <input type="checkbox" name="agree" />
+                                <span>I agree.</span>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col l12 m12 s12">
+                                <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>       
+</div>
+
+

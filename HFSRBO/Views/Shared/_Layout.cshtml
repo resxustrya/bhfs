@@ -1,44 +1,114 @@
-﻿<!DOCTYPE html>
+﻿@using HFSRBO.Models
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/material/css")
+    <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="@Url.Action("ComplaintsType","MasterData")">Type of Complaint</a></li>
+        <li><a href="@Url.Action("Staffs","MasterData")">List of Assigned Staff</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">three</a></li>
+    </ul>
+    <nav class="green" role="navigation">
+        <div class="nav-wrapper container navbar-fixed white-text">
+            <a style="padding:0;height:80px;" id="logo-container" href="@Url.Action("Index","Home")" class="brand-logo left white-text"><img src="@Url.Content("~/Images/health_facility_banner.png")" style="height:80px;" /></a>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <ul class="right hide-on-med-and-down white-text">
+                    <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">home</i></a></li>
+                    <li><a href="badges.html" class="white-text">Components</a></li>
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger white-text" href="#!" data-target="dropdown1"><i class="material-icons left">menu</i>Menu <i class="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+            }
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    <main>@RenderBody()</main>
+    
+    @Html.Partial("modals")
+    <footer class="page-footer green">
+        <div class="container">
+            <div class="row">
+                <div class="col l4 s12">
+                    <h5 class="white-text">Address <i class="material-icons">location_on</i></h5>
+                    <p class="grey-text text-lighten-4">Osmeña Blvd, Cebu City, Cebu, Philippines</p>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">PHONE NUMBER <i class="material-icons">local_phone</i></h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">(032) 418-4822</a></li>
+
+                    </ul>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">EMAIL <i class="material-icons">email</i></h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">dohro7@gmail.com</a></li>
+
+                    </ul>
+                </div>
+                
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © Copyright 2018.
+                Information System - ICTU
+            </div>
+        </div>
+    </footer>
+    
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/material/js")
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems, options);
+
+            var modal = document.querySelectorAll('.modal');
+            var modal_instances = M.Modal.init(elems, options);
+
+            var select = document.querySelectorAll('select');
+            var select_instance = M.FormSelect.init(select, options);
+
+            var float = document.querySelectorAll('.fixed-action-btn');
+            var float_instances = M.FloatingActionButton.init(elems, options);
+
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+            $('select').formSelect();
+            $(".dropdown-trigger").dropdown();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+        });
+    </script>
     @RenderSection("scripts", required: false)
+    
 </body>
 </html>

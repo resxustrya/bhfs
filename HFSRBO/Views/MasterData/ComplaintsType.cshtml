@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "ComplaintsType";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col l12 m12 s12">
+            <h5>List of Complaint Type</h5>
+            <div class="card white darken-1">
+                <div class="card-content">
+                    <table id="type_complaint" class="mdl-data-tabl">
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>*</th>
+                           
+                        </tr>
+                        @foreach(var tp in Model)
+                        {
+                            <tr>
+                                <td>@tp.ID</td>
+                                <td>@tp.Description</td>
+                                <td>
+                                    <a class="btn red">Delete</a> 
+                                    <a class="btn red lighten-2">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red add modal-trigger" data-target="add_type_complaint">
+        <i class="large material-icons">add_circle</i>
+    </a>
+</div>
