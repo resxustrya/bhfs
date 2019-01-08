@@ -9,13 +9,79 @@
         <h5>List of hospitals / facility complaints</h5>
         <div class="card white darken-1">
             <div class="card-content">
-                <table id="type_complaint" class="responsive-table">
+                <table id="complaint" class="responsive-table centered" style="border:dotted;">
                     <tr>
-                        <th>ID</th>
-                        <th>Description</th>
-                        <th>*</th>
-
+                        <th>Date Received</th>
+                        <th>Code Number (track code &/or complaint form control)</th>
+                        <th>Form of Communication received</th>
+                        <th>Name of Complainant</th>
+                        <th>Nature of Complaint (apply to code)</th>
+                        <th>Name of Health Facility Being Complained</th>
+                        <th>Address</th>
+                        <th>Ownership</th>
+                        <th>Staff Assigned</th>
+                        <th>Action Taken</th>
+                        <th>Date Informed the HF/concerned office</th>
+                        <th>Date HF/concerned office submitted reply</th>
+                        <th>Date released to records section</th>
+                        <th>Date Resolution of the complaint released to records/client</th>
+                        <th>Status</th>
+                        <th>Options</th>
                     </tr>
+                    @foreach(complaints complaint in Model)
+                    {
+                        <tr>
+                            <td>@complaint.date.Value.ToShortDateString()</td>
+                            <td>@complaint.Code</td>
+                            <td>
+                               @{ String communication_form = ""; }
+                                @switch (complaint.communication_form)
+                                {
+                                    case "1":
+                                        communication_form = "By Photo";break;
+                                    case "2":
+                                        communication_form = "By mail";break;
+                                    case "3":
+                                        communication_form = "Interview walk-in";break;
+                                }
+                                @communication_form
+                            </td>
+                            <td>@complaint.firstname.ToUpper() @complaint.mi.ToUpper() @complaint.lastname.ToUpper()</td>
+                            <td>@complaint.nature_of_complaint</td>
+                            <td>@complaint.name_facility_complained</td>
+                            <td>@complaint.facility_address</td>
+                            <td>
+                                @{ String ownership = "";}
+                                @if(complaint.ownership == "1")
+                                {
+                                    ownership = "Government";
+                                }
+                                else
+                                {
+                                    ownership = "Private";
+                                }
+                                @ownership
+                            </td>
+                            <td>-Staff Assigned-</td>
+                            <td><button class="waves-effect waves-light btn-small"><i class="material-icons">drag_handle</i></button></td>
+                            <td>@complaint.date_informed_the_hf.Value.ToShortDateString()</td>
+                            <td>@complaint.date_hf_submitted_reply.Value.ToShortDateString()</td>
+                            <td>@complaint.date_release_to_records.Value.ToShortDateString()</td>
+                            <td>@complaint.date_final_resolution.Value.ToShortDateString()</td>
+                            <td>
+                                @{ String status = "";}
+                                @if(complaint.status == "1")
+                                {
+                                    status = "On Progress";
+                                }
+                                else
+                                {
+                                    status = "Resolved / Closed";
+                                }
+                                @status
+                            </td>
+                        </tr>
+                    }
                 </table>
             </div>
         </div>

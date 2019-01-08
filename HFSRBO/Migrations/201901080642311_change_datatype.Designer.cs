@@ -7,13 +7,13 @@ namespace HFSRBO.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class staff_assigend : IMigrationMetadata
+    public sealed partial class change_datatype : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(staff_assigend));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(change_datatype));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901070947547_staff_assigend"; }
+            get { return "201901080642311_change_datatype"; }
         }
         
         string IMigrationMetadata.Source

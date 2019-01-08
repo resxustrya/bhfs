@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Complaint Form";
+    var tc = (new bhfsContext()).type_complaint.ToList();
 }
 <div class="container">
     <div class="row center">
@@ -8,6 +9,7 @@
     </div>
     <div class="card white darken-4">
         <form action="@Url.Action("SubmitForm","Complaint")" method="post">
+            @Html.AntiForgeryToken();
             <div class="card-content">
                 <div class="row">
                     <div class="col l12 m12 s12">
@@ -21,7 +23,7 @@
                                 <input type="text" name="lastname" />
                                 <label for="lastname">Lastname</label>
                             </div>
-                            <div class="input-field col l3 m12 s12">
+                            <div class="input-field col l4 m12 s12">
                                 <input type="text" name="mi" />
                                 <label for="mi">Middle Name</label>
                             </div>
@@ -34,18 +36,20 @@
                             <div class="input-field col l3 m12 s12">
                                 <select name="civil_status">
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Separated">Separated</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
                                 </select>
                                 <label for="civil_status">Civil Status</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
                                 <select name="gender">
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Others</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                    <option value="O">Others</option>
                                 </select>
                                 <label for="gender">Gender</label>
                             </div>
@@ -56,7 +60,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="address" class="materialize-textarea"></textarea>
+                                <textarea id="address" class="materialize-textarea" name="address"></textarea>
                                 <label for="address">Address</label>
                             </div>
                         </div>
@@ -78,7 +82,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="facility_address" class="materialize-textarea"></textarea>
+                                <textarea id="facility_address" class="materialize-textarea" name="facility_address"></textarea>
                                 <label for="facility_address">Facility Address</label>
                             </div>
                         </div>
@@ -98,27 +102,74 @@
                             </div>
                             <div class="input-field col l3 m12 s12">
                                 <input type="text" name="date_confined" class="datepicker" />
-                                <label for="p_mi">Date patient confined(if applicable)</label>
+                                <label for="date_confined">Date patient confined(if applicable)</label>
                             </div>
                         </div>
                         <div class="row">
                             <h4>Complaint Information</h4>
+                            <div class="col l12 m12 s12">
+                                <h6>Type of complaint :</h6>
+                                @foreach (type_complaint t in tc)
+                                {
+                                    <label for="@t.ID">
+                                        <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
+                                        <span>@t.Description</span>
+                                    </label>
+                                }
+                                <div class="input-field">
+                                    <input type="text" name="other_complaint" />
+                                    <label for="other_complaint">Others.</label>
+                                </div>
+                            </div>
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="nature_of_complaint" class="materialize-textarea"></textarea>
+                                <textarea id="nature_of_complaint" class="materialize-textarea" name="nature_of_complaint"></textarea>
                                 <label for="nature_of_complaint">Nature of Complaint</label>
                             </div>
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="assistance_needed" class="materialize-textarea"></textarea>
+                                <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed"></textarea>
                                 <label for="assistance_needed">Assistance Needed</label>
                             </div>
                         </div>
                         <div class="row">
-                            <p>By checking agree, you attest to the truth and veracity of the above-mentioned fact and statement. Any false statement and misrepresentation you made could be a ground for civil, criminal and administrative action under law by the injured party.</p>
-                            <label>
-                                <input type="checkbox" name="agree" />
-                                <span>I agree.</span>
-                            </label>
+                            <h4>Other Information</h4>
+                            <div class="input-field col l6 s12 m12">
+                                <select name="communication_form">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">By Photo</option>
+                                    <option value="2">By Mail</option>
+                                    <option value="3">Interview walk-in</option>
+                                </select>
+                                <label for="communication_form">Form of Communication received</label>
+                            </div>
+                            <div class="input-field col l6 s12 m12">
+                                <select name="ownership">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option value="1">Government</option>
+                                    <option value="2">Private</option>
+                                </select>
+                                <label for="ownership">Hospital/Facility Ownership</label>
+                            </div>
+                            <div class="input-field col l6 m12 s12">
+                                <input type="text" name="date_informed_the_hf" class="datepicker" />
+                                <label for="date_informed_the_hf">Date Informed the HF/concerned office</label>
+                            </div>
+                            <div class="input-field col l6 m12 s12">
+                                <input type="text" name="date_hf_submitted_reply" class="datepicker" />
+                                <label for="date_hf_submitted_reply">Date HF/concerned office submitted reply</label>
+                            </div>
+                            <div class="input-field col l6 m12 s12">
+                                <input type="text" name="date_release_to_records" class="datepicker" />
+                                <label for="date_release_to_records">Date released to records section</label>
+                            </div>
+                            <div class="input-field col l6 m12 s12">
+                                <input type="text" name="date_final_resolution" class="datepicker" />
+                                <label for="date_final_resolution">Date Resolution of the complaint released to records/client</label>
+                            </div>
                         </div>
+                        <div class="row">
+                            <p>By checking agree, you attest to the truth and veracity of the above-mentioned fact and statement. Any false statement and misrepresentation you made could be a ground for civil, criminal and administrative action under law by the injured party.</p>
+                        </div>
+                        
                         <div class="row">
                             <div class="col l12 m12 s12">
                                 <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Submit</button>

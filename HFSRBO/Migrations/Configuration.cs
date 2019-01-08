@@ -10,6 +10,7 @@ namespace HFSRBO.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "HFSRBO.bhfsContext";
         }
 
         protected override void Seed(HFSRBO.bhfsContext context)

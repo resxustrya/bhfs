@@ -15,7 +15,7 @@ namespace HFSRBO
         }
         private void createRolesandUsers()
         {
-            Models.ApplicationDbContext context = new ApplicationDbContext();
+            ApplicationDbContext context = new ApplicationDbContext();
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));

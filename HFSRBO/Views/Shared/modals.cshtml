@@ -5,7 +5,7 @@
         <form action="@Url.Action("AddComplaintType","MasterData")" method="POST">
             <div class="row">
                 <div class="col l12 m12 s12 input-field">
-                    <input type="text" name="description" required />
+                    <input type="text" name="description" autofocus="true" autocomplete="off" required />
                     <label for="description">Description</label>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         <form action="@Url.Action("AddStaff","MasterData")" method="POST">
             <div class="row">
                 <div class="col l12 m12 s12 input-field">
-                    <input type="text" name="name" required />
+                    <input type="text" name="name" required autocomplete="off" autofocus="true" />
                     <label for="description">Staff Name</label>
                 </div>
             </div>

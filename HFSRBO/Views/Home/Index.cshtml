@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@using Microsoft.AspNet.Identity
+@{ 
     ViewBag.Title = "DOH 7";
 }
 
@@ -18,7 +19,15 @@
                 </div>
             </div>
             <div class="row center">
-                <a href="@Url.Action("Login","Account")" id="download-button" class="btn-large waves-effect waves-light green">Login to your account <i class="material-icons right">send</i></a>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Login", "Account")" id="download-button" class="btn-large waves-effect waves-light green">Login to your account <i class="material-icons right">send</i></a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Home","Complaint")" id="download-button" class="btn-large waves-effect waves-light green">Signed In as @User.Identity.GetUserName()</a>
+                }
+                
             </div>
             <br><br>
         </div>

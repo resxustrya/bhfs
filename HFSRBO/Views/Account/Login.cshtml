@@ -16,16 +16,17 @@
                     
                     <div class="row">
                         <div class="input-field col l12 m12 s12 center">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "white" })
-                            <label for="Email">Email</label>
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "deep-orange darken-4" })
+                            <input autofocus="true" class="white" data-val="true" data-val-required="You must enter your username" id="Email" name="Email" type="text" value="" />
+                            <label for="Email">Username</label>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col l12 m12 s12 center">
-                            @Html.PasswordFor(m => m.Password, new { @class = "white" })
+                            <input class="form-control" data-val="true" data-val-required="You must enter your password" id="Password" name="Password" type="password" />
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
                             <label for="Password">Password</label>
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "deep-orange darken-4" })
                         </div>
                     </div>
                     <div class="row">

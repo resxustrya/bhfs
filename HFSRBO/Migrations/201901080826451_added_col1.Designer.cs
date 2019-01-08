@@ -7,13 +7,13 @@ namespace HFSRBO.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class type_complaint : IMigrationMetadata
+    public sealed partial class added_col1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(type_complaint));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(added_col1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901070659492_type_complaint"; }
+            get { return "201901080826451_added_col1"; }
         }
         
         string IMigrationMetadata.Source

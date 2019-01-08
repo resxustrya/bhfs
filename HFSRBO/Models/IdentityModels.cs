@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace HFSRBO.Models
+namespace HFSRBO
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -21,10 +21,10 @@ namespace HFSRBO.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("bfhs", throwIfV1Schema: false)
+            : base("bhfs", throwIfV1Schema: false)
         {
         }
-
+        
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace HFSRBO
 {
+    [Authorize]
+    [NoCache]
+    [OutputCache(NoStore = true, Duration = 0)]
     public class MasterDataController : Controller
     {
         bhfsContext db = new bhfsContext();

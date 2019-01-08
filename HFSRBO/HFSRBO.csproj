@@ -218,20 +218,52 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
+    <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901070659492_type_complaint.cs" />
-    <Compile Include="Migrations\201901070659492_type_complaint.Designer.cs">
-      <DependentUpon>201901070659492_type_complaint.cs</DependentUpon>
+    <Compile Include="Migrations\201901080339445_InitialCreate.cs" />
+    <Compile Include="Migrations\201901080339445_InitialCreate.Designer.cs">
+      <DependentUpon>201901080339445_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901070947547_staff_assigend.cs" />
-    <Compile Include="Migrations\201901070947547_staff_assigend.Designer.cs">
-      <DependentUpon>201901070947547_staff_assigend.cs</DependentUpon>
+    <Compile Include="Migrations\201901080509311_new_tables.cs" />
+    <Compile Include="Migrations\201901080509311_new_tables.Designer.cs">
+      <DependentUpon>201901080509311_new_tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080642311_change_datatype.cs" />
+    <Compile Include="Migrations\201901080642311_change_datatype.Designer.cs">
+      <DependentUpon>201901080642311_change_datatype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080702058_add_col.cs" />
+    <Compile Include="Migrations\201901080702058_add_col.Designer.cs">
+      <DependentUpon>201901080702058_add_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080702516_change_type.cs" />
+    <Compile Include="Migrations\201901080702516_change_type.Designer.cs">
+      <DependentUpon>201901080702516_change_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080724510_add_col1.cs" />
+    <Compile Include="Migrations\201901080724510_add_col1.Designer.cs">
+      <DependentUpon>201901080724510_add_col1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080736041_added_col.cs" />
+    <Compile Include="Migrations\201901080736041_added_col.Designer.cs">
+      <DependentUpon>201901080736041_added_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080804058_update_col.cs" />
+    <Compile Include="Migrations\201901080804058_update_col.Designer.cs">
+      <DependentUpon>201901080804058_update_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901080826451_added_col1.cs" />
+    <Compile Include="Migrations\201901080826451_added_col1.Designer.cs">
+      <DependentUpon>201901080826451_added_col1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\bhfsContext.cs" />
+    <Compile Include="Models\complaints.cs" />
+    <Compile Include="Models\complaint_types_list.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\staff_assigend.cs" />
@@ -333,11 +365,32 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901070659492_type_complaint.resx">
-      <DependentUpon>201901070659492_type_complaint.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901080339445_InitialCreate.resx">
+      <DependentUpon>201901080339445_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901070947547_staff_assigend.resx">
-      <DependentUpon>201901070947547_staff_assigend.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901080509311_new_tables.resx">
+      <DependentUpon>201901080509311_new_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080642311_change_datatype.resx">
+      <DependentUpon>201901080642311_change_datatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080702058_add_col.resx">
+      <DependentUpon>201901080702058_add_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080702516_change_type.resx">
+      <DependentUpon>201901080702516_change_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080724510_add_col1.resx">
+      <DependentUpon>201901080724510_add_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080736041_added_col.resx">
+      <DependentUpon>201901080736041_added_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080804058_update_col.resx">
+      <DependentUpon>201901080804058_update_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901080826451_added_col1.resx">
+      <DependentUpon>201901080826451_added_col1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
