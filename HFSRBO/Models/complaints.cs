@@ -34,7 +34,8 @@ namespace HFSRBO
         public DateTime? date_hf_submitted_reply { get; set; }
         public DateTime? date_release_to_records { get; set; }
         public DateTime? date_final_resolution { get; set; }
-        public String Region { get; set; }
+        public String region { get; set; }
         public String status { get; set; }
+        public String staff { get; set; }
     }
 }

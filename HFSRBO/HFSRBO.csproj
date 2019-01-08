@@ -218,6 +218,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
+    <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,6 +259,10 @@
     <Compile Include="Migrations\201901080826451_added_col1.cs" />
     <Compile Include="Migrations\201901080826451_added_col1.Designer.cs">
       <DependentUpon>201901080826451_added_col1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901081014066_new col.cs" />
+    <Compile Include="Migrations\201901081014066_new col.Designer.cs">
+      <DependentUpon>201901081014066_new col.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -352,6 +357,7 @@
     <Content Include="Views\MasterData\ComplaintsType.cshtml" />
     <Content Include="Views\Shared\modals.cshtml" />
     <Content Include="Views\MasterData\Staffs.cshtml" />
+    <Content Include="Views\Reporting\Filters.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -391,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901080826451_added_col1.resx">
       <DependentUpon>201901080826451_added_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901081014066_new col.resx">
+      <DependentUpon>201901081014066_new col.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

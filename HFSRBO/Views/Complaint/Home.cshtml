@@ -1,18 +1,19 @@
 ﻿
 @{
     ViewBag.Title = "Home";
+    var db = new bhfsContext();
 }
-
 
 <div class="row">
     <div class="col l12 m12 s12">
         <h5>List of hospitals / facility complaints</h5>
         <div class="card white darken-1">
             <div class="card-content">
-                <table id="complaint" class="responsive-table centered" style="border:dotted;">
+                <table id="complaint" class="responsive-table highlight" style="border:dotted;">
                     <tr>
                         <th>Date Received</th>
                         <th>Code Number (track code &/or complaint form control)</th>
+                        <th>Type of Complaint</th>
                         <th>Form of Communication received</th>
                         <th>Name of Complainant</th>
                         <th>Nature of Complaint (apply to code)</th>
@@ -33,6 +34,20 @@
                         <tr>
                             <td>@complaint.date.Value.ToShortDateString()</td>
                             <td>@complaint.Code</td>
+                            <td>
+                                
+                                    @{
+                                        var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                    }
+                                    <ul>
+                                        @foreach (var ct in complaints_types)
+                                        {
+                                            var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
+                                            <li>@("-"+type.Description)</li>
+                                        }
+                                    </ul>
+                                    Others : @complaint.other_complaint
+                            </td>
                             <td>
                                @{ String communication_form = ""; }
                                 @switch (complaint.communication_form)
@@ -62,23 +77,26 @@
                                 }
                                 @ownership
                             </td>
-                            <td>-Staff Assigned-</td>
-                            <td><button class="waves-effect waves-light btn-small"><i class="material-icons">drag_handle</i></button></td>
+                            <td>@complaint.staff</td>
+                            <td><button class="waves-effect red lighten-1 btn-small"><i class="material-icons">drag_handle</i></button></td>
                             <td>@complaint.date_informed_the_hf.Value.ToShortDateString()</td>
                             <td>@complaint.date_hf_submitted_reply.Value.ToShortDateString()</td>
                             <td>@complaint.date_release_to_records.Value.ToShortDateString()</td>
                             <td>@complaint.date_final_resolution.Value.ToShortDateString()</td>
                             <td>
-                                @{ String status = "";}
-                                @if(complaint.status == "1")
+                                @if (complaint.status == "R")
                                 {
-                                    status = "On Progress";
+                                    <span style="padding:5px;border-radius:2px;" class="green white-text">Resolved</span>
                                 }
                                 else
                                 {
-                                    status = "Resolved / Closed";
+                                    <span style="padding:5px;border-radius:2px;" class="red white-text">Resolved</span>
                                 }
-                                @status
+                               
+                            </td>
+                            <td>
+                                <a href="@Url.Action("DeleteComplaint","Complaint")"><i class="material-icons">delete_forever</i></a>
+                                <a href="@Url.Action("EditComplaint","Complaint")"><i class="material-icons">edit</i></a>
                             </td>
                         </tr>
                     }

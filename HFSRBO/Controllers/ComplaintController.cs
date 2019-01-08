@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.AspNet.Identity;
 namespace HFSRBO.Controllers
 {
     [Authorize]
@@ -55,6 +55,7 @@ namespace HFSRBO.Controllers
             try { complaint.date_release_to_records = Convert.ToDateTime(collection.Get("date_release_to_records")); } catch { }
             try { complaint.date_final_resolution = Convert.ToDateTime(collection.Get("date_final_resolution")); } catch { }
             complaint.status = "O";
+            complaint.staff = User.Identity.GetUserName();
             db.complaints.Add(complaint);
             db.SaveChanges();
 

@@ -34,6 +34,7 @@ namespace HFSRBO
                 var user = new ApplicationUser();
                 user.UserName = "bhfs_admin";
                 user.Email = "bhfs_admin@gmail.com";
+                
 
                 string userPWD = "bhfs_admin_password";
 
