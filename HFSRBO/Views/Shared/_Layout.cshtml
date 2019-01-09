@@ -52,13 +52,12 @@
             <ul class="right hide-on-med-and-down white-text">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">home</i></a></li>
-                    <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">menu</i></a></li>
+                    <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
+                    <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
                 }
                 
                 <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a></li>
             </ul>
-            
             
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>

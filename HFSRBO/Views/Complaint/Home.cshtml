@@ -34,21 +34,20 @@
                     {
                         <tr>
                             <td>@complaint.date_created.ToShortDateString()</td>
-                            <td>@complaint.date.Value.ToShortDateString()</td>
+                            <td>@(complaint.date != null ? complaint.date.Value.ToShortDateString() : "")</td>
                             <td>@complaint.Code</td>
                             <td>
-                                
-                                    @{
-                                        var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                @{
+                                    var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                }
+                                <ul>
+                                    @foreach (var ct in complaints_types)
+                                    {
+                                        var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
+                                        <li>@("-"+type.Description)</li>
                                     }
-                                    <ul>
-                                        @foreach (var ct in complaints_types)
-                                        {
-                                            var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
-                                            <li>@("-"+type.Description)</li>
-                                        }
-                                    </ul>
-                                    <b>Others</b> : @complaint.other_complaint
+                                </ul>
+                                <b>Others</b> : @complaint.other_complaint
                             </td>
                             <td>
                                @{ String communication_form = ""; }
@@ -86,10 +85,10 @@
                             </td>
                             <td>@complaint.staff</td>
                             <td><a><i class="material-icons">drag_handle</i></a></td>
-                            <td>@complaint.date_informed_the_hf.Value.ToShortDateString()</td>
-                            <td>@complaint.date_hf_submitted_reply.Value.ToShortDateString()</td>
-                            <td>@complaint.date_release_to_records.Value.ToShortDateString()</td>
-                            <td>@complaint.date_final_resolution.Value.ToShortDateString()</td>
+                            <td>@(complaint.date_informed_the_hf != null ? complaint.date_informed_the_hf.Value.ToShortDateString() : "")</td>
+                            <td>@(complaint.date_hf_submitted_reply != null ? complaint.date_hf_submitted_reply.Value.ToShortDateString() : "")</td>
+                            <td>@(complaint.date_release_to_records != null ? complaint.date_release_to_records.Value.ToShortDateString() : "")</td>
+                            <td>@(complaint.date_final_resolution != null ? complaint.date_final_resolution.Value.ToShortDateString() : "")</td>
                             <td>
                                 @if (complaint.status == "R")
                                 {
@@ -119,7 +118,8 @@
         <i class="large material-icons">add_circle</i>
     </a>
     <ul>
-        <li><a class="btn-floating blue modal-trigger" href="#filter" onclick="filter(this);" data-url="@Url.Action("Filter","Complaint")"><i class="material-icons">search</i></a></li>
+        <li><a class="btn-floating blue modal-trigger" href="#filter" onclick="filter(this);" data-url="@Url.Action("Filter","Complaint")"><i class="material-icons">poll</i></a></li>
+        <li><a class="btn-floating red modal-trigger" href="#search"><i class="material-icons">search</i></a></li>
     </ul>
 </div>
 @section scripts {
