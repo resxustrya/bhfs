@@ -37,9 +37,8 @@ namespace HFSRBO.Controllers
             complaint.gender = collection.Get("gender");
             try { complaint.date = Convert.ToDateTime(collection.Get("date")); } catch {  }
             complaint.address = collection.Get("address");
-            complaint.name_facility_complained = collection.Get("name_facility_complained");
+            complaint.hospitalID = Convert.ToInt32(collection.Get("hospitalID"));
             complaint.facility_type = collection.Get("facility_type");
-            complaint.facility_address = collection.Get("facility_address");
             complaint.p_firstname = collection.Get("p_firstname");
             complaint.p_lastname = collection.Get("p_lastname");
             complaint.p_mi = collection.Get("p_mi");
@@ -56,6 +55,7 @@ namespace HFSRBO.Controllers
             try { complaint.date_final_resolution = Convert.ToDateTime(collection.Get("date_final_resolution")); } catch { }
             complaint.status = "O";
             complaint.staff = User.Identity.GetUserName();
+            complaint.date_created = DateTime.Now;
             db.complaints.Add(complaint);
             db.SaveChanges();
 
@@ -78,6 +78,10 @@ namespace HFSRBO.Controllers
             
             return RedirectToAction("Home");
            
+        }
+        public ActionResult Filter()
+        {
+            return PartialView();
         }
     }
 }

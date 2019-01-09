@@ -1,8 +1,11 @@
 ﻿
 @{
     ViewBag.Title = "Complaint Form";
-    var tc = (new bhfsContext()).type_complaint.ToList();
+    var db = new bhfsContext();
+    var tc = db.type_complaint.ToList();
+    var hospital_list = db.hospitals.ToList();
 }
+
 <div class="container">
     <div class="row center">
         <h3>Complaint Form</h3>
@@ -67,8 +70,14 @@
 
                         <div class="row">
                             <div class="input-field col l8 m12 s12">
-                                <input type="text" name="name_facility_complained" />
-                                <label for="name_facility_complained">Name of Facility being complained</label>
+                                <select name="hospitalID">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    @foreach (hospitals h in hospital_list)
+                                    {
+                                        <option value="@h.ID">@h.name</option>
+                                    }
+                                </select>
+                                <label for="hospitalID">Name of Health Facility being Complained</label>
                             </div>
                             <div class="input-field col l4 m12 s12">
                                 <select name="facility_type">
@@ -78,12 +87,6 @@
                                     <option value="3">Option 3</option>
                                 </select>
                                 <label for="facility_type">Type of Health Facility</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="facility_address" class="materialize-textarea" name="facility_address"></textarea>
-                                <label for="facility_address">Facility Address</label>
                             </div>
                         </div>
                         <div class="row">

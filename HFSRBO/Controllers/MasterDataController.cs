@@ -19,11 +19,20 @@ namespace HFSRBO
             return View(list);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddComplaintType(FormCollection collection)
         {
             type_complaint tp = new type_complaint();
             tp.Description = collection.Get("description");
             db.type_complaint.Add(tp);
+            db.SaveChanges();
+            return RedirectToAction("ComplaintsType");
+        }
+        public ActionResult DeleteComplaint(String ID)
+        {
+            Int32 id = Convert.ToInt32(ID);
+            var del = db.type_complaint.Where(p => p.ID == id).FirstOrDefault();
+            db.type_complaint.Remove(del);
             db.SaveChanges();
             return RedirectToAction("ComplaintsType");
         }
@@ -33,6 +42,7 @@ namespace HFSRBO
             return View(list);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddStaff(FormCollection collection)
         {
             staff_assigend sa = new staff_assigend();
@@ -40,6 +50,38 @@ namespace HFSRBO
             db.staff_assigend.Add(sa);
             db.SaveChanges();
             return RedirectToAction("Staffs");
+        }
+        public ActionResult DeleteStaff(String ID)
+        {
+            Int32 id = Convert.ToInt32(ID);
+            var del = db.staff_assigend.Where(p => p.ID == id).FirstOrDefault();
+            db.staff_assigend.Remove(del);
+            db.SaveChanges();
+            return RedirectToAction("Staffs");
+        }
+        public ActionResult Hospitals()
+        {
+            var hospitals = db.hospitals.ToList();
+            return View(hospitals);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddHospital(FormCollection collection)
+        {
+            hospitals h = new hospitals();
+            h.name = collection.Get("name");
+            h.address = collection.Get("address");
+            db.hospitals.Add(h);
+            db.SaveChanges();
+            return RedirectToAction("Hospitals");
+        }
+        public ActionResult DeleteHospital(String ID)
+        {
+            Int32 id = Convert.ToInt32(ID);
+            var del_hos = db.hospitals.Where(p => p.ID == id).FirstOrDefault();
+            db.hospitals.Remove(del_hos);
+            db.SaveChanges();
+            return RedirectToAction("Hospitals");
         }
     }
 }

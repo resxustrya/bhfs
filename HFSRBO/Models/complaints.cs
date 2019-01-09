@@ -18,7 +18,7 @@ namespace HFSRBO
         public String gender { get; set; }
         public DateTime? date { get; set; }
         public String address { get; set; }
-        public String name_facility_complained { get; set; }
+        public Int32 hospitalID { get; set; }
         public String facility_type { get; set; }
         public String facility_address { get; set; }
         public String p_firstname { get; set; }
@@ -37,5 +37,6 @@ namespace HFSRBO
         public String region { get; set; }
         public String status { get; set; }
         public String staff { get; set; }
+        public DateTime date_created { get; set; }
     }
 }

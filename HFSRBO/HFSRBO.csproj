@@ -218,7 +218,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
-    <Compile Include="Controllers\ReportingController.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -264,11 +263,32 @@
     <Compile Include="Migrations\201901081014066_new col.Designer.cs">
       <DependentUpon>201901081014066_new col.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901090244074_added_created.cs" />
+    <Compile Include="Migrations\201901090244074_added_created.Designer.cs">
+      <DependentUpon>201901090244074_added_created.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901090454154_added_models.cs" />
+    <Compile Include="Migrations\201901090454154_added_models.Designer.cs">
+      <DependentUpon>201901090454154_added_models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901090514067_add_col2.cs" />
+    <Compile Include="Migrations\201901090514067_add_col2.Designer.cs">
+      <DependentUpon>201901090514067_add_col2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901090606291_change_col.cs" />
+    <Compile Include="Migrations\201901090606291_change_col.Designer.cs">
+      <DependentUpon>201901090606291_change_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901090715577_removed_col.cs" />
+    <Compile Include="Migrations\201901090715577_removed_col.Designer.cs">
+      <DependentUpon>201901090715577_removed_col.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\bhfsContext.cs" />
     <Compile Include="Models\complaints.cs" />
     <Compile Include="Models\complaint_types_list.cs" />
+    <Compile Include="Models\hospitals.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\staff_assigend.cs" />
@@ -291,6 +311,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\health_facility_banner.png" />
     <Content Include="Images\paralax.jpg" />
+    <Content Include="Images\spin.gif" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -312,6 +333,7 @@
     <Content Include="Scripts\material\datatable_material.js" />
     <Content Include="Scripts\material\init.js" />
     <Content Include="Scripts\material\material.js" />
+    <Content Include="Scripts\material\page.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -358,6 +380,8 @@
     <Content Include="Views\Shared\modals.cshtml" />
     <Content Include="Views\MasterData\Staffs.cshtml" />
     <Content Include="Views\Reporting\Filters.cshtml" />
+    <Content Include="Views\Complaint\Filter.cshtml" />
+    <Content Include="Views\MasterData\Hospitals.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -400,6 +424,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901081014066_new col.resx">
       <DependentUpon>201901081014066_new col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901090244074_added_created.resx">
+      <DependentUpon>201901090244074_added_created.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901090454154_added_models.resx">
+      <DependentUpon>201901090454154_added_models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901090514067_add_col2.resx">
+      <DependentUpon>201901090514067_add_col2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901090606291_change_col.resx">
+      <DependentUpon>201901090606291_change_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901090715577_removed_col.resx">
+      <DependentUpon>201901090715577_removed_col.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

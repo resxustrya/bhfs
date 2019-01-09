@@ -28,8 +28,9 @@
 </head>
 <body>
     <ul id="dropdown1" class="dropdown-content">
-        <li><a href="@Url.Action("ComplaintsType","MasterData")">Type of Complaint</a></li>
-        <li><a href="@Url.Action("Staffs","MasterData")">List of Assigned Staff</a></li>
+        <li><a href="@Url.Action("ComplaintsType","MasterData")">Complaint Types</a></li>
+        <li><a href="@Url.Action("Staffs","MasterData")">Assigned Staffs</a></li>
+        <li><a href="@Url.Action("Hospitals","MasterData")">Hospitals</a></li>
     </ul>
     <ul id="dropdown2" class="dropdown-content">
         @if (User.Identity.IsAuthenticated)
@@ -52,8 +53,6 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">home</i></a></li>
-                    <li><a href="@Url.Action("Filters","Reporting")" class="white-text"><i class="material-icons">poll</i></a></li>
-               
                     <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">menu</i></a></li>
                 }
                 

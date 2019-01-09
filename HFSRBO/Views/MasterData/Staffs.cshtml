@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col l12 m12 s12">
-            <h5>List of Assigned Staffs</h5>
+            <h5>Assigned Staffs</h5>
             <div class="card white darken-1">
                 <div class="card-content">
                     <table id="type_complaint" class="responsive-table">
@@ -16,14 +16,14 @@
                             <th>*</th>
 
                         </tr>
-                        @foreach (var staff in Model)
+                        @foreach (staff_assigend staff in Model)
                         {
                             <tr>
                                 <td>@staff.ID</td>
                                 <td>@staff.Name</td>
                                 <td>
-                                    <a class="btn red">Delete</a>
-                                    <a class="btn red lighten-2">Edit</a>
+                                    <a href="@Url.Action("DeleteStaff","MasterData",new { ID = staff.ID })" class="btn red"><i class="material-icons">delete</i></a>
+                                    <a class="btn red"><i class="material-icons">edit</i></a>
                                 </td>
                             </tr>
                         }

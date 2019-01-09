@@ -14,5 +14,6 @@ namespace HFSRBO
         public DbSet<staff_assigend> staff_assigend { get; set; }
         public DbSet<complaints> complaints { get; set; }
         public DbSet<complaint_types_list> complaint_types_list { get; set; }
+        public DbSet<hospitals> hospitals { get; set; }
     }
 }
