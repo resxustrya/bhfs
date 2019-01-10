@@ -283,8 +283,17 @@
     <Compile Include="Migrations\201901090715577_removed_col.Designer.cs">
       <DependentUpon>201901090715577_removed_col.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901100210190_new_table.cs" />
+    <Compile Include="Migrations\201901100210190_new_table.Designer.cs">
+      <DependentUpon>201901100210190_new_table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901100308459_add_col3.cs" />
+    <Compile Include="Migrations\201901100308459_add_col3.Designer.cs">
+      <DependentUpon>201901100308459_add_col3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\actions_takened.cs" />
     <Compile Include="Models\bhfsContext.cs" />
     <Compile Include="Models\complaints.cs" />
     <Compile Include="Models\complaint_types_list.cs" />
@@ -382,6 +391,7 @@
     <Content Include="Views\Reporting\Filters.cshtml" />
     <Content Include="Views\Complaint\Filter.cshtml" />
     <Content Include="Views\MasterData\Hospitals.cshtml" />
+    <Content Include="Views\Complaint\AddAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -439,6 +449,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901090715577_removed_col.resx">
       <DependentUpon>201901090715577_removed_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901100210190_new_table.resx">
+      <DependentUpon>201901100210190_new_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901100308459_add_col3.resx">
+      <DependentUpon>201901100308459_add_col3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

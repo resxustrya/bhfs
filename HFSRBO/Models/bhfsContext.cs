@@ -15,5 +15,6 @@ namespace HFSRBO
         public DbSet<complaints> complaints { get; set; }
         public DbSet<complaint_types_list> complaint_types_list { get; set; }
         public DbSet<hospitals> hospitals { get; set; }
+        public DbSet<actions_takened> actions { get; set; }
     }
 }

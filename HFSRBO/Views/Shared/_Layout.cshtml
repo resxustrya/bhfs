@@ -114,6 +114,9 @@
             var float = document.querySelectorAll('.fixed-action-btn');
             var float_instances = M.FloatingActionButton.init(elems, options);
 
+            var tooltips = document.querySelectorAll('.tooltipped');
+            var tooltips_instances = M.Tooltip.init(elems, options);
+
         });
 
         // Or with jQuery
@@ -126,6 +129,7 @@
             $(".dropdown-trigger").dropdown();
             $('.fixed-action-btn').floatingActionButton();
             $('.modal').modal();
+            $('.tooltipped').tooltip();
         });
     </script>
     @RenderSection("scripts", required: false)

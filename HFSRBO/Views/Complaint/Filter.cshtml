@@ -7,6 +7,7 @@
 <div class="col l12 s12 m12">
     <h5>Search Complaint Data <i class="material-icons">search</i></h5>
     <form action="@Url.Action("Filter","Complaint")" method="post">
+        @Html.AntiForgeryToken()
         <div class="card white darken-1">
             <div class="card-content">
                 <div class="row">

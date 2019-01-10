@@ -20,6 +20,7 @@ namespace HFSRBO.Controllers
         }
         public ActionResult Index()
         {
+            
             return View();
         }
         [HttpPost]
@@ -82,6 +83,34 @@ namespace HFSRBO.Controllers
         public ActionResult Filter()
         {
             return PartialView();
+        }
+        public ActionResult AddAction(String ID)
+        {
+            Session["ComplaintID"] = ID;
+            Int32 ComplaintID = Convert.ToInt32(ID);
+            var actions = db.actions.Where(p => p.ComplaintID == ComplaintID).ToList();
+            return PartialView(actions);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAction(FormCollection collection)
+        {
+            Int32 ComplaintID = Convert.ToInt32(Session["ComplaintID"].ToString());
+            actions_takened actions = new actions_takened();
+            actions.actions = collection.Get("actions");
+            actions.ComplaintID = ComplaintID;
+            actions.DateCreated = DateTime.Now;
+            db.actions.Add(actions);
+            db.SaveChanges();
+
+            return RedirectToAction("Home");
+        }
+        public void DeleteAction(String ID)
+        {
+            Int32 id = Convert.ToInt32(ID);
+            var del = db.actions.Where(p => p.ID == id).FirstOrDefault();
+            db.actions.Remove(del);
+            db.SaveChanges();
         }
     }
 }
