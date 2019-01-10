@@ -392,6 +392,7 @@
     <Content Include="Views\Complaint\Filter.cshtml" />
     <Content Include="Views\MasterData\Hospitals.cshtml" />
     <Content Include="Views\Complaint\AddAction.cshtml" />
+    <Content Include="Views\Complaint\EditComplaint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

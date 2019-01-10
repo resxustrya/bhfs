@@ -80,6 +80,12 @@ namespace HFSRBO.Controllers
             return RedirectToAction("Home");
            
         }
+        public ActionResult EditComplaint(String ID)
+        {
+            var complaint = db.complaints.Where(p => p.ID.ToString() == ID).FirstOrDefault();
+            return View(complaint);
+        }
+
         public ActionResult Filter()
         {
             return PartialView();

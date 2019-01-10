@@ -88,6 +88,7 @@
                                 var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).ToList();
                                 StringBuilder sb = new StringBuilder();
                                 sb.Append("<ul class='left-align'>");
+                                
                                 foreach(actions_takened at in actions)
                                 {
                                     sb.Append("<li>- " + at.actions + "</li>");
@@ -110,8 +111,8 @@
                                 }
                             </td>
                             <td>
-                                <a href="@Url.Action("DeleteComplaint","Complaint")"><i class="material-icons">delete_forever</i></a>
-                                <a href="@Url.Action("EditComplaint","Complaint")"><i class="material-icons">edit</i></a>
+                                <a href="@Url.Action("DeleteComplaint","Complaint",new { ID = complaint.ID })"><i class="material-icons">delete_forever</i></a>
+                                <a href="@Url.Action("EditComplaint","Complaint", new { ID = complaint.ID })"><i class="material-icons">edit</i></a>
                             </td>
                         </tr>
                     }

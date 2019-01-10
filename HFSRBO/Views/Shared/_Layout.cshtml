@@ -9,6 +9,7 @@
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/material/css")
+    
     <style>
       body {
         display: flex;
@@ -122,6 +123,7 @@
         // Or with jQuery
 
         $(document).ready(function () {
+            $("input").attr("autocomplete", "off");
             $('.datepicker').datepicker({
                 format: 'mm/dd/yyyy'
             });
