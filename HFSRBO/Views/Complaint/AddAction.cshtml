@@ -8,21 +8,36 @@
                         <input type="text" name="actions" required autocomplete="off" autofocus="true" />
                         <label for="description">Action Taken</label>
                     </div>
-                    <div class="col l12 m12 s12">
-                        <p>Remove Item</p>
-                        <table>
-                            @foreach (actions_takened at in Model)
-                            {
-                                <tr>
-                                    <td><a href="#" data-url="@Url.Action("DeleteAction","Complaint", new { ID = at.ID })" onclick="remove(this);">@at.actions <i class="material-icons left">delete</i></a></td>
-                                </tr>
-                            }
-                        </table>
+                    <div class="row">
+                        <div class="col l12 m12 s12">
+                            <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Submit</button>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col l12 m12 s12">
-                        <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Submit</button>
+                    <div class="row">
+                        <div class="col l12 m12 s12">
+                            <p>Remove Item</p>
+                            <table>
+                                @foreach (actions_takened at in Model)
+                                {
+                                    <tr>
+                                        <td><a href="#" data-url="@Url.Action("DeleteAction","Complaint", new { ID = at.ID })" onclick="remove(this);">@at.actions <i class="material-icons left">delete</i></a></td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 m12 s12">
+                            <h6>Complaint Status</h6>
+                            <div class="switch">
+                                <label>
+                                    On Progress
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                    Resolved
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -38,21 +38,30 @@
                             </div>
                             <div class="input-field col l3 m12 s12">
                                 <select name="civil_status">
+                                    @{
+                                        string[] civil_status = { "Single", "Married", "Separated", "Divorced", "Widowed" };
+                                    }
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Separated">Separated</option>
-                                    <option value="Divorced">Divorced</option>
-                                    <option value="Widowed">Widowed</option>
+                                    @foreach (String c in civil_status)
+                                    {
+                                        <option value="@c">@c</option>
+                                    }
                                 </select>
                                 <label for="civil_status">Civil Status</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
                                 <select name="gender">
+                                    @{
+                                        var gender = new Dictionary<String, String>();
+                                        gender.Add("M", "Male");
+                                        gender.Add("F", "Female");
+                                        gender.Add("O", "Others");
+                                    }
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="M">Male</option>
-                                    <option value="F">Female</option>
-                                    <option value="O">Others</option>
+                                    @foreach (var s in gender)
+                                    {
+                                        <option value="@s.Key">@s.Value</option>
+                                    }
                                 </select>
                                 <label for="gender">Gender</label>
                             </div>
@@ -81,10 +90,16 @@
                             </div>
                             <div class="input-field col l4 m12 s12">
                                 <select name="facility_type">
+                                    @{
+                                        var facility_type = new Dictionary<String, String>();
+                                        facility_type.Add("H", "Hospital");
+                                        facility_type.Add("DC", "Dental Clinic");
+                                    }
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    @foreach (var ft in facility_type)
+                                    {
+                                        <option value="@ft.Key">@ft.Value</option>
+                                    }
                                 </select>
                                 <label for="facility_type">Type of Health Facility</label>
                             </div>
@@ -138,17 +153,31 @@
                             <div class="input-field col l6 s12 m12">
                                 <select name="communication_form">
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">By Photo</option>
-                                    <option value="2">By Mail</option>
-                                    <option value="3">Interview walk-in</option>
+                                    @{
+                                        var com = new Dictionary<String, String>();
+                                        com.Add("1", "By Photo");
+                                        com.Add("2", "By Mail");
+                                        com.Add("3", "Interview walk-in");
+                                    }
+                                    @foreach (var c in com)
+                                    {
+                                        <option value="@c.Key">@c.Value</option>
+                                    }
                                 </select>
                                 <label for="communication_form">Form of Communication received</label>
                             </div>
                             <div class="input-field col l6 s12 m12">
                                 <select name="ownership">
+                                    @{
+                                        var ownnership = new Dictionary<String, String>();
+                                        ownnership.Add("P", "Private");
+                                        ownnership.Add("G", "Government");
+                                    }
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Government</option>
-                                    <option value="2">Private</option>
+                                    @foreach (var o in ownnership)
+                                    {
+                                        <option value="@o.Key">@o.Value</option>
+                                    }
                                 </select>
                                 <label for="ownership">Hospital/Facility Ownership</label>
                             </div>

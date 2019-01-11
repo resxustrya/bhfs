@@ -291,6 +291,18 @@
     <Compile Include="Migrations\201901100308459_add_col3.Designer.cs">
       <DependentUpon>201901100308459_add_col3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901110451114_change_datatype1.cs" />
+    <Compile Include="Migrations\201901110451114_change_datatype1.Designer.cs">
+      <DependentUpon>201901110451114_change_datatype1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901110503005_change_datatype2.cs" />
+    <Compile Include="Migrations\201901110503005_change_datatype2.Designer.cs">
+      <DependentUpon>201901110503005_change_datatype2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901110544269_add_col4.cs" />
+    <Compile Include="Migrations\201901110544269_add_col4.Designer.cs">
+      <DependentUpon>201901110544269_add_col4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\actions_takened.cs" />
@@ -456,6 +468,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901100308459_add_col3.resx">
       <DependentUpon>201901100308459_add_col3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901110451114_change_datatype1.resx">
+      <DependentUpon>201901110451114_change_datatype1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901110503005_change_datatype2.resx">
+      <DependentUpon>201901110503005_change_datatype2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901110544269_add_col4.resx">
+      <DependentUpon>201901110544269_add_col4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

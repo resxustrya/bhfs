@@ -38,5 +38,6 @@ namespace HFSRBO
         public String status { get; set; }
         public String staff { get; set; }
         public DateTime date_created { get; set; }
+        public Boolean active { get; set; }
     }
 }

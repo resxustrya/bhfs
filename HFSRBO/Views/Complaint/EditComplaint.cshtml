@@ -1,4 +1,5 @@
-﻿@{
+﻿@model complaints
+@{
     ViewBag.Title = "Update";
     var db = new bhfsContext();
     var tc = db.type_complaint.ToList();
@@ -10,7 +11,7 @@
         <h3>Complaint Form</h3>
     </div>
     <div class="card white darken-4">
-        <form action="@Url.Action("SubmitForm","Complaint")" method="post">
+        <form action="@Url.Action("EditComplaint","Complaint")" method="post">
             @Html.AntiForgeryToken()
             <div class="card-content">
                 <div class="row">
@@ -65,7 +66,7 @@
                                 <label for="gender">Gender</label>
                             </div>
                             <div class="input-field col l3 s12 m12">
-                                <input type="text" name="date" class="datepicker" value="@Model.date.ToShortDateString()">
+                                <input type="text" name="date" class="datepicker" value="@(Model.date != null ? Model.date.Value.ToShortDateString() : "")">
                                 <label for="date">Date</label>
                             </div>
                         </div>
@@ -89,10 +90,16 @@
                             </div>
                             <div class="input-field col l4 m12 s12">
                                 <select name="facility_type">
+                                    @{
+                                        var facility_type = new Dictionary<String, String>();
+                                        facility_type.Add("H", "Hospital");
+                                        facility_type.Add("DC", "Dental Clinic");
+                                    }
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    @foreach(var ft in facility_type)
+                                    {
+                                        <option value="@ft.Key" @(ft.Key == Model.facility_type ? " selected" : "")>@ft.Value</option>
+                                    }
                                 </select>
                                 <label for="facility_type">Type of Health Facility</label>
                             </div>
@@ -100,19 +107,19 @@
                         <div class="row">
                             <h4>Patient Information (if applicable:)</h4>
                             <div class="input-field col l3 m12 s12 center">
-                                <input type="text" class="validate" name="p_firstname" />
+                                <input type="text" class="validate" name="p_firstname" value="@Model.p_firstname" />
                                 <label for="p_firstname">Firstname</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_lastname" />
+                                <input type="text" name="p_lastname" value="@Model.p_lastname" />
                                 <label for="p_lastname">Lastname</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_mi" />
+                                <input type="text" name="p_mi" value="@Model.p_mi" />
                                 <label for="p_mi">Middle Name</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
-                                <input type="text" name="date_confined" class="datepicker" />
+                                <input type="text" name="date_confined" class="datepicker" value="@(Model.date_confined != null ? Model.date_confined.Value.ToShortDateString() : "")" />
                                 <label for="date_confined">Date patient confined(if applicable)</label>
                             </div>
                         </div>
@@ -122,22 +129,28 @@
                                 <h6>Type of complaint :</h6>
                                 @foreach (type_complaint t in tc)
                                 {
+                                    var ischeck = "";
+                                    var complaint_type = db.complaint_types_list.Where(p => p.ComplaintID == Model.ID && t.ID == p.ComplaintTypeId).FirstOrDefault();
+                                    if(complaint_type != null)
+                                    {
+                                        ischeck = " checked";
+                                    }
                                     <label for="@t.ID">
-                                        <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
+                                        <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" @ischeck />
                                         <span>@t.Description</span>
                                     </label>
                                 }
                                 <div class="input-field">
-                                    <input type="text" name="other_complaint" />
+                                    <input type="text" name="other_complaint" value="@Model.other_complaint" />
                                     <label for="other_complaint">Others.</label>
                                 </div>
                             </div>
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="nature_of_complaint" class="materialize-textarea" name="nature_of_complaint"></textarea>
+                                <textarea id="nature_of_complaint" class="materialize-textarea" name="nature_of_complaint">@Model.nature_of_complaint</textarea>
                                 <label for="nature_of_complaint">Nature of Complaint</label>
                             </div>
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed"></textarea>
+                                <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed">@Model.assistance_needed</textarea>
                                 <label for="assistance_needed">Assistance Needed</label>
                             </div>
                         </div>
@@ -146,41 +159,54 @@
                             <div class="input-field col l6 s12 m12">
                                 <select name="communication_form">
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">By Photo</option>
-                                    <option value="2">By Mail</option>
-                                    <option value="3">Interview walk-in</option>
+                                    @{ 
+                                        var com = new Dictionary<String, String>();
+                                        com.Add("1", "By Photo");
+                                        com.Add("2", "By Mail");
+                                        com.Add("3", "Interview walk-in");
+                                    }
+                                    @foreach (var c in com)
+                                    {
+                                        <option value="@c.Key" @(c.Key == Model.communication_form ? " selected" : "")>@c.Value</option>
+                                    }
                                 </select>
                                 <label for="communication_form">Form of Communication received</label>
                             </div>
                             <div class="input-field col l6 s12 m12">
                                 <select name="ownership">
+                                    @{ 
+                                        var ownnership = new Dictionary<String, String>();
+                                        ownnership.Add("P", "Private");
+                                        ownnership.Add("G", "Government");
+                                    }
                                     <option value="" disabled selected>Choose your option</option>
-                                    <option value="1">Government</option>
-                                    <option value="2">Private</option>
+                                    @foreach(var o in ownnership)
+                                    {
+                                        <option value="@o.Key" @(o.Key == Model.ownership ? " selected" : "")>@o.Value</option>
+                                    }
                                 </select>
                                 <label for="ownership">Hospital/Facility Ownership</label>
                             </div>
                             <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_informed_the_hf" class="datepicker" />
+                                <input type="text" name="date_informed_the_hf" class="datepicker" value="@(Model.date_informed_the_hf != null ? Model.date_informed_the_hf.Value.ToShortDateString() : "")" />
                                 <label for="date_informed_the_hf">Date Informed the HF/concerned office</label>
                             </div>
                             <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_hf_submitted_reply" class="datepicker" />
+                                <input type="text" name="date_hf_submitted_reply" class="datepicker" value="@(Model.date_hf_submitted_reply != null ? Model.date_hf_submitted_reply.Value.ToShortDateString() : "")" />
                                 <label for="date_hf_submitted_reply">Date HF/concerned office submitted reply</label>
                             </div>
                             <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_release_to_records" class="datepicker" />
+                                <input type="text" name="date_release_to_records" class="datepicker" value="@(Model.date_release_to_records != null ? Model.date_release_to_records.Value.ToShortDateString() : "")" />
                                 <label for="date_release_to_records">Date released to records section</label>
                             </div>
                             <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_final_resolution" class="datepicker" />
+                                <input type="text" name="date_final_resolution" class="datepicker" value="@(Model.date_final_resolution != null ? Model.date_final_resolution.Value.ToShortDateString() : "")" />
                                 <label for="date_final_resolution">Date Resolution of the complaint released to records/client</label>
                             </div>
                         </div>
                         <div class="row">
                             <p>By checking agree, you attest to the truth and veracity of the above-mentioned fact and statement. Any false statement and misrepresentation you made could be a ground for civil, criminal and administrative action under law by the injured party.</p>
                         </div>
-
                         <div class="row">
                             <div class="col l12 m12 s12">
                                 <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Submit</button>
