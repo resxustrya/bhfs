@@ -67,8 +67,15 @@
                             <td>
                                 @{ 
                                     var hospital = db.hospitals.Where(p => p.ID == complaint.hospitalID).FirstOrDefault();
+                                    if(hospital == null)
+                                    {
+                                        hospital = new hospitals();
+                                        hospital.address = "";
+                                        hospital.name = "";
+                                    }
                                 }
                                 @hospital.name <br />, <b>@hospital.address</b>
+                                
                             </td>
                             <td>@hospital.address</td>
                             <td>
