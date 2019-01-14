@@ -414,6 +414,7 @@
     <Content Include="Views\MasterData\Hospitals.cshtml" />
     <Content Include="Views\Complaint\AddAction.cshtml" />
     <Content Include="Views\Complaint\EditComplaint.cshtml" />
+    <Content Include="Views\Complaint\Status.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

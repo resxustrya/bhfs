@@ -113,11 +113,11 @@
                                 <td>
                                     @if (complaint.status == "O")
                                     {
-                                        <span style="padding:5px;border-radius:2px;" class="green white-text">Resolved</span>
+                                        <a href="#filter" style="padding:5px;border-radius:2px;font-size:0.9em;" class="red white-text modal-trigger"  data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">On-Progress</a>
                                     }
                                     else
                                     {
-                                        <span style="padding:5px;border-radius:2px;" class="red white-text">On Progress</span>
+                                        <a href="#filter" style="padding:5px;border-radius:2px;" class="green white-text modal-trigger"  data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">Resolved</a>
                                     }
                                 </td>
                                 <td>
@@ -157,7 +157,16 @@
             });
             
         }
-        
+        function status(el)
+        {
+            var url = $(el).data('url');
+            $(".loading").show();
+            $(".modal_content").html('');
+            $.get(url, function (res) {
+                $(".modal_content").html(res);
+                $(".loading").hide();
+            });
+        }
     </script>
 }
 

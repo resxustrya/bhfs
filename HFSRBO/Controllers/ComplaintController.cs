@@ -159,6 +159,7 @@ namespace HFSRBO.Controllers
         [HttpPost]
         public ActionResult Filter(FormCollection collection, String[] complaint_type, String[] hospitals)
         {
+            
             Int32[] Int_complaint_types = { };
             Int32[] Int_hospitals = { };
             
@@ -192,7 +193,24 @@ namespace HFSRBO.Controllers
                               Int_hospitals.Contains(c.hospitalID)
                               select c).Distinct().ToList();
             }
+            
             return View("~/Views/Complaint/Home.cshtml", complaints);
+        }
+        public ActionResult Status(String ID)
+        {
+            Session["ComplaintID"] = ID;
+            Int32 id = Convert.ToInt32(Session["ComplaintID"].ToString());
+            var complaint = db.complaints.Where(p => p.ID == id).FirstOrDefault();
+            return PartialView(complaint);
+        }
+        [HttpPost]
+        public ActionResult Status(FormCollection collection)
+        {
+            Int32 ID = Convert.ToInt32(Session["ComplaintID"].ToString());
+            var complaint = db.complaints.Where(p => p.ID == ID).FirstOrDefault();
+            complaint.status = collection.Get("status");
+            db.SaveChanges();
+            return RedirectToAction("Home");
         }
     }
 }
