@@ -44,7 +44,15 @@
         {
             <li><a href="@Url.Action("Login","Account")">Login</a></li>
         }
-        
+    </ul>
+    <ul class="sidenav" id="sidenav">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
+            <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
+        }
+
+        <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a></li>
     </ul>
     <nav class="green" role="navigation">
         <div class="nav-wrapper container navbar-fixed white-text">
@@ -59,8 +67,7 @@
                 
                 <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a></li>
             </ul>
-            
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#" data-target="sidenav" class="sidenav-trigger right white-text"><i class="material-icons">menu</i></a>
         </div>
     </nav>
     <main>@RenderBody()</main>
@@ -118,6 +125,8 @@
             var tooltips = document.querySelectorAll('.tooltipped');
             var tooltips_instances = M.Tooltip.init(elems, options);
 
+            var sidenave = document.querySelectorAll('.sidenav');
+            var sidenav_instances = M.Sidenav.init(elems, options);
         });
 
         // Or with jQuery
@@ -132,6 +141,7 @@
             $('.fixed-action-btn').floatingActionButton();
             $('.modal').modal();
             $('.tooltipped').tooltip();
+            $('.sidenav').sidenav();
         });
     </script>
     @RenderSection("scripts", required: false)

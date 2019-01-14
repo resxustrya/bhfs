@@ -223,6 +223,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="EncyptDecrypt.cs" />
     <Compile Include="Migrations\201901080339445_InitialCreate.cs" />
     <Compile Include="Migrations\201901080339445_InitialCreate.Designer.cs">
       <DependentUpon>201901080339445_InitialCreate.cs</DependentUpon>
@@ -302,6 +303,14 @@
     <Compile Include="Migrations\201901110544269_add_col4.cs" />
     <Compile Include="Migrations\201901110544269_add_col4.Designer.cs">
       <DependentUpon>201901110544269_add_col4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901140316016_new_col.cs" />
+    <Compile Include="Migrations\201901140316016_new_col.Designer.cs">
+      <DependentUpon>201901140316016_new_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901140322067_change_datatype3.cs" />
+    <Compile Include="Migrations\201901140322067_change_datatype3.Designer.cs">
+      <DependentUpon>201901140322067_change_datatype3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -408,6 +417,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -477,6 +487,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901110544269_add_col4.resx">
       <DependentUpon>201901110544269_add_col4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901140316016_new_col.resx">
+      <DependentUpon>201901140316016_new_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901140322067_change_datatype3.resx">
+      <DependentUpon>201901140322067_change_datatype3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

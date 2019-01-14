@@ -26,7 +26,6 @@ namespace HFSRBO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(FormCollection collection, String[] complaint_type)
         {
-
             complaints complaint = new complaints();
             SaveComplaint(collection,complaint,complaint_type, true);
             return RedirectToAction("Home");
@@ -34,22 +33,22 @@ namespace HFSRBO.Controllers
 
         public void SaveComplaint(FormCollection collection, complaints complaint,String[] complaint_type,Boolean isNew)
         {
-            complaint.firstname = collection.Get("firstname");
-            complaint.lastname = collection.Get("lastname");
-            complaint.mi = collection.Get("mi");
+            complaint.firstname = EncyptDecrypt.Encrypt(collection.Get("firstname"));
+            complaint.lastname = EncyptDecrypt.Encrypt(collection.Get("lastname"));
+            complaint.mi = EncyptDecrypt.Encrypt(collection.Get("mi"));
             try { complaint.age = Convert.ToInt32(collection.Get("age")); } catch { }
             complaint.civil_status = collection.Get("civil_status");
-            complaint.gender = collection.Get("gender");
+            complaint.gender = EncyptDecrypt.Encrypt(collection.Get("gender"));
             try { complaint.date = Convert.ToDateTime(collection.Get("date")); } catch { }
-            complaint.address = collection.Get("address");
+            complaint.address = EncyptDecrypt.Encrypt(collection.Get("address"));
             complaint.hospitalID = Convert.ToInt32(collection.Get("hospitalID"));
             complaint.facility_type = collection.Get("facility_type");
-            complaint.p_firstname = collection.Get("p_firstname");
-            complaint.p_lastname = collection.Get("p_lastname");
-            complaint.p_mi = collection.Get("p_mi");
+            complaint.p_firstname = EncyptDecrypt.Encrypt(collection.Get("p_firstname"));
+            complaint.p_lastname = EncyptDecrypt.Encrypt(collection.Get("p_lastname"));
+            complaint.p_mi = EncyptDecrypt.Encrypt(collection.Get("p_mi"));
             try { complaint.date_confined = Convert.ToDateTime(collection.Get("date_confined")); } catch { }
 
-            complaint.other_complaint = collection.Get("other_complaint");
+            complaint.other_complaint = EncyptDecrypt.Encrypt(collection.Get("other_complaint"));
             complaint.nature_of_complaint = collection.Get("nature_of_complaint");
             complaint.assistance_needed = collection.Get("assistance_needed");
             complaint.communication_form = collection.Get("communication_form");
@@ -59,6 +58,11 @@ namespace HFSRBO.Controllers
             try { complaint.date_release_to_records = Convert.ToDateTime(collection.Get("date_release_to_records")); } catch { }
             try { complaint.date_final_resolution = Convert.ToDateTime(collection.Get("date_final_resolution")); } catch { }
             complaint.status = "O";
+            if (isNew)
+            {
+                complaint.year = DateTime.Now.Year;
+            }
+            
             complaint.staff = User.Identity.GetUserName();
             complaint.date_created = DateTime.Now;
 
@@ -150,6 +154,45 @@ namespace HFSRBO.Controllers
             var del = db.actions.Where(p => p.ID == id).FirstOrDefault();
             db.actions.Remove(del);
             db.SaveChanges();
+        }
+
+        [HttpPost]
+        public ActionResult Filter(FormCollection collection, String[] complaint_type, String[] hospitals)
+        {
+            Int32[] Int_complaint_types = { };
+            Int32[] Int_hospitals = { };
+            
+            IEnumerable<complaints> complaints = null;
+            try { Int_complaint_types = Array.ConvertAll(complaint_type, s => int.Parse(s)); } catch { }
+            try { Int_hospitals = Array.ConvertAll(hospitals, s => int.Parse(s)); } catch { }
+
+            if(Int_complaint_types.Length > 0 && Int_hospitals.Length <= 0)
+            {
+                complaints = (from c in db.complaints
+
+                              join ctl in db.complaint_types_list
+                                on c.ID equals ctl.ComplaintID
+                              where Int_complaint_types.Contains(ctl.ComplaintTypeId)
+                              select c).Distinct().ToList();
+            }
+
+            if (Int_complaint_types.Length <= 0 && Int_hospitals.Length > 0)
+            {
+                complaints = (from c in db.complaints where
+                              Int_hospitals.Contains(c.hospitalID)
+                              select c).Distinct().ToList();
+            }
+
+            if (Int_complaint_types.Length > 0 && Int_hospitals.Length > 0)
+            {
+                complaints = (from c in db.complaints
+                              join ctl in db.complaint_types_list
+                              on c.ID equals ctl.ComplaintID
+                              where Int_complaint_types.Contains(ctl.ComplaintTypeId) &&
+                              Int_hospitals.Contains(c.hospitalID)
+                              select c).Distinct().ToList();
+            }
+            return View("~/Views/Complaint/Home.cshtml", complaints);
         }
     }
 }

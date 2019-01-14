@@ -32,7 +32,7 @@
                     {
                         <div class="col l6 m12 s12">
                             <label for="@h.ID" class="l6 m12 s12">
-                                <input type="checkbox" id="@h.ID" class="filled-in" name="hospital[]" value="@h.ID" />
+                                <input type="checkbox" id="@h.ID" class="filled-in" name="hospitals[]" value="@h.ID" />
                                 <span>@h.name</span>
                             </label>
                         </div>
@@ -60,11 +60,11 @@
         <div class="row">
             <h6>Filter by Date Created</h6>
             <div class="input-field col l6 s12 m12">
-                <input type="date" name="date_from">
+                <input type="date" name="date_from" />
                 <label for="date_from">Complaint From</label>
             </div>
             <div class="input-field col l6 s12 m12">
-                <input type="date" name="date_to">
+                <input type="date" name="date_to" />
                 <label for="date_to">Complaint To</label>
             </div>
         </div>

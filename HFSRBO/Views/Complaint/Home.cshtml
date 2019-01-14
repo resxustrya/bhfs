@@ -1,4 +1,5 @@
-﻿@using System.Text;
+﻿@model IEnumerable<complaints>
+@using System.Text;
 @{
     ViewBag.Title = "Home";
     var db = new bhfsContext();
@@ -30,99 +31,102 @@
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
-                    @foreach(complaints complaint in Model)
+                    @if (Model != null && Model.Count() > 0)
                     {
-                        <tr>
-                            <td>@complaint.date_created.ToShortDateString()</td>
-                            <td>@(complaint.date != null ? complaint.date.Value.ToShortDateString() : "")</td>
-                            <td>@complaint.Code</td>
-                            <td>
+                        foreach (complaints complaint in Model)
+                        {
+                            <tr>
+                                <td>@complaint.date_created.ToShortDateString()</td>
+                                <td>@(complaint.date != null ? complaint.date.Value.ToShortDateString() : "")</td>
+                                <td>@complaint.Code</td>
+                                <td>
+                                    @{
+                                        var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                    }
+                                    <ul>
+                                        @foreach (var ct in complaints_types)
+                                        {
+                                            var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
+                                            <li>@("-" + type.Description)</li>
+                                        }
+                                    </ul>
+                                    <b>Others</b> : @EncyptDecrypt.Decrypt(complaint.other_complaint)
+                                </td>
+                                <td>
+                                    @{ String communication_form = ""; }
+                                    @switch (complaint.communication_form)
+                                    {
+                                        case "1":
+                                            communication_form = "By Photo"; break;
+                                        case "2":
+                                            communication_form = "By mail"; break;
+                                        case "3":
+                                            communication_form = "Interview walk-in"; break;
+                                    }
+                                    @communication_form
+                                </td>
+                                <td>@EncyptDecrypt.Decrypt(complaint.firstname).ToUpper()  @EncyptDecrypt.Decrypt(complaint.mi).ToUpper() @EncyptDecrypt.Decrypt(complaint.lastname).ToUpper()</td>
+                                <td>@complaint.nature_of_complaint</td>
+                                <td>
+                                    @{
+                                        var hospital = db.hospitals.Where(p => p.ID == complaint.hospitalID).FirstOrDefault();
+                                        if (hospital == null)
+                                        {
+                                            hospital = new hospitals();
+                                            hospital.address = "";
+                                            hospital.name = "";
+                                        }
+                                    }
+                                    @hospital.name <br />, <b>@hospital.address</b>
+
+                                </td>
+                                <td>@hospital.address</td>
+                                <td>
+                                    @{ String ownership = "";}
+                                    @if (complaint.ownership == "1")
+                                    {
+                                        ownership = "Government";
+                                    }
+                                    else
+                                    {
+                                        ownership = "Private";
+                                    }
+                                    @ownership
+                                </td>
+                                <td>@complaint.staff</td>
                                 @{
-                                    var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
-                                }
-                                <ul>
-                                    @foreach (var ct in complaints_types)
+                                    var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                    StringBuilder sb = new StringBuilder();
+                                    sb.Append("<ul class='left-align'>");
+
+                                    foreach (actions_takened at in actions)
                                     {
-                                        var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
-                                        <li>@("-"+type.Description)</li>
+                                        sb.Append("<li>- " + at.actions + "</li>");
                                     }
-                                </ul>
-                                <b>Others</b> : @complaint.other_complaint
-                            </td>
-                            <td>
-                               @{ String communication_form = ""; }
-                                @switch (complaint.communication_form)
-                                {
-                                    case "1":
-                                        communication_form = "By Photo";break;
-                                    case "2":
-                                        communication_form = "By mail";break;
-                                    case "3":
-                                        communication_form = "Interview walk-in";break;
+                                    sb.Append("</ul>");
                                 }
-                                @communication_form
-                            </td>
-                            <td>@complaint.firstname.ToUpper() @complaint.mi.ToUpper() @complaint.lastname.ToUpper()</td>
-                            <td>@complaint.nature_of_complaint</td>
-                            <td>
-                                @{ 
-                                    var hospital = db.hospitals.Where(p => p.ID == complaint.hospitalID).FirstOrDefault();
-                                    if(hospital == null)
+                                <td><a href="#filter" data-url="@Url.Action("AddAction","Complaint",new { ID = complaint.ID })" onclick="filter(this);" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="@sb.ToString()"><i class="material-icons">drag_handle</i></a></td>
+                                <td>@(complaint.date_informed_the_hf != null ? complaint.date_informed_the_hf.Value.ToShortDateString() : "")</td>
+                                <td>@(complaint.date_hf_submitted_reply != null ? complaint.date_hf_submitted_reply.Value.ToShortDateString() : "")</td>
+                                <td>@(complaint.date_release_to_records != null ? complaint.date_release_to_records.Value.ToShortDateString() : "")</td>
+                                <td>@(complaint.date_final_resolution != null ? complaint.date_final_resolution.Value.ToShortDateString() : "")</td>
+                                <td>
+                                    @if (complaint.status == "O")
                                     {
-                                        hospital = new hospitals();
-                                        hospital.address = "";
-                                        hospital.name = "";
+                                        <span style="padding:5px;border-radius:2px;" class="green white-text">Resolved</span>
                                     }
-                                }
-                                @hospital.name <br />, <b>@hospital.address</b>
-                                
-                            </td>
-                            <td>@hospital.address</td>
-                            <td>
-                                @{ String ownership = "";}
-                                @if(complaint.ownership == "1")
-                                {
-                                    ownership = "Government";
-                                }
-                                else
-                                {
-                                    ownership = "Private";
-                                }
-                                @ownership
-                            </td>
-                            <td>@complaint.staff</td>
-                            @{ 
-                                var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).ToList();
-                                StringBuilder sb = new StringBuilder();
-                                sb.Append("<ul class='left-align'>");
-                                
-                                foreach(actions_takened at in actions)
-                                {
-                                    sb.Append("<li>- " + at.actions + "</li>");
-                                }
-                                sb.Append("</ul>");
-                            }
-                            <td><a href="#filter" data-url="@Url.Action("AddAction","Complaint",new { ID = complaint.ID })" onclick="filter(this);" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="@sb.ToString()"><i class="material-icons">drag_handle</i></a></td>
-                            <td>@(complaint.date_informed_the_hf != null ? complaint.date_informed_the_hf.Value.ToShortDateString() : "")</td>
-                            <td>@(complaint.date_hf_submitted_reply != null ? complaint.date_hf_submitted_reply.Value.ToShortDateString() : "")</td>
-                            <td>@(complaint.date_release_to_records != null ? complaint.date_release_to_records.Value.ToShortDateString() : "")</td>
-                            <td>@(complaint.date_final_resolution != null ? complaint.date_final_resolution.Value.ToShortDateString() : "")</td>
-                            <td>
-                                @if (complaint.status == "O")
-                                {
-                                    <span style="padding:5px;border-radius:2px;" class="green white-text">Resolved</span>
-                                }
-                                else
-                                {
-                                    <span style="padding:5px;border-radius:2px;" class="red white-text">On Progress</span>
-                                }
-                            </td>
-                            <td>
-                                <a href="@Url.Action("DeleteComplaint","Complaint",new { ID = complaint.ID })"><i class="material-icons">delete_forever</i></a>
-                                <a href="@Url.Action("EditComplaint","Complaint", new { ID = complaint.ID })"><i class="material-icons">edit</i></a>
-                            </td>
-                        </tr>
-                    }
+                                    else
+                                    {
+                                        <span style="padding:5px;border-radius:2px;" class="red white-text">On Progress</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("DeleteComplaint","Complaint",new { ID = complaint.ID })"><i class="material-icons">delete_forever</i></a>
+                                    <a href="@Url.Action("EditComplaint","Complaint", new { ID = complaint.ID })"><i class="material-icons">edit</i></a>
+                                </td>
+                            </tr>
+                          }
+                      }
                 </table>
             </div>
         </div>

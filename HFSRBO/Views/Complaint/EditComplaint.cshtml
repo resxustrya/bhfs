@@ -19,15 +19,15 @@
                         <div class="row">
                             <h4>Name of Complainant</h4>
                             <div class="input-field col l4 m12 s12 center">
-                                <input type="text" class="validate" name="firstname" value="@Model.firstname" />
+                                <input type="text" class="validate" name="firstname" value="@EncyptDecrypt.Decrypt(Model.firstname)" />
                                 <label for="firstname">Firstname</label>
                             </div>
                             <div class="input-field col l4 m12 s12">
-                                <input type="text" name="lastname" value="@Model.lastname" />
+                                <input type="text" name="lastname" value="@EncyptDecrypt.Decrypt(Model.lastname)" />
                                 <label for="lastname">Lastname</label>
                             </div>
                             <div class="input-field col l4 m12 s12">
-                                <input type="text" name="mi" value="@Model.mi" />
+                                <input type="text" name="mi" value="@EncyptDecrypt.Decrypt(Model.mi)" />
                                 <label for="mi">Middle Name</label>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                     <option value="" disabled selected>Choose your option</option>
                                     @foreach(var s in gender)
                                     {
-                                        <option value="@s.Key" @(s.Key == Model.gender ? " selected" : "")>@s.Value</option>
+                                        <option value="@s.Key" @(s.Key ==  EncyptDecrypt.Decrypt(Model.gender) ? " selected" : "")>@s.Value</option>
                                     }
                                 </select>
                                 <label for="gender">Gender</label>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col l12 s12 m12">
-                                <textarea id="address" class="materialize-textarea" name="address">@Model.address</textarea>
+                                <textarea id="address" class="materialize-textarea" name="address">@EncyptDecrypt.Decrypt(Model.address)</textarea>
                                 <label for="address">Address</label>
                             </div>
                         </div>
@@ -107,15 +107,15 @@
                         <div class="row">
                             <h4>Patient Information (if applicable:)</h4>
                             <div class="input-field col l3 m12 s12 center">
-                                <input type="text" class="validate" name="p_firstname" value="@Model.p_firstname" />
+                                <input type="text" class="validate" name="p_firstname" value="@EncyptDecrypt.Decrypt(Model.p_firstname)" />
                                 <label for="p_firstname">Firstname</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_lastname" value="@Model.p_lastname" />
+                                <input type="text" name="p_lastname" value="@EncyptDecrypt.Decrypt(Model.p_lastname)" />
                                 <label for="p_lastname">Lastname</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_mi" value="@Model.p_mi" />
+                                <input type="text" name="p_mi" value="@EncyptDecrypt.Decrypt(Model.p_mi)" />
                                 <label for="p_mi">Middle Name</label>
                             </div>
                             <div class="input-field col l3 m12 s12">
@@ -141,7 +141,7 @@
                                     </label>
                                 }
                                 <div class="input-field">
-                                    <input type="text" name="other_complaint" value="@Model.other_complaint" />
+                                    <input type="text" name="other_complaint" value="@EncyptDecrypt.Decrypt(Model.other_complaint)" />
                                     <label for="other_complaint">Others.</label>
                                 </div>
                             </div>

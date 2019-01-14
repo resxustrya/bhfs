@@ -39,5 +39,6 @@ namespace HFSRBO
         public String staff { get; set; }
         public DateTime date_created { get; set; }
         public Boolean active { get; set; }
+        public Int32 year { get; set; }
     }
 }
