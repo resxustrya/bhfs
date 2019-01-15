@@ -333,6 +333,7 @@
     <Content Include="Content\material.css" />
     <Content Include="Content\fonts.css" />
     <Content Include="Content\materialize.css" />
+    <Content Include="Content\page.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\paralax.css" />
     <Content Include="favicon.ico" />
@@ -415,6 +416,7 @@
     <Content Include="Views\Complaint\AddAction.cshtml" />
     <Content Include="Views\Complaint\EditComplaint.cshtml" />
     <Content Include="Views\Complaint\Status.cshtml" />
+    <Content Include="Views\Shared\_navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

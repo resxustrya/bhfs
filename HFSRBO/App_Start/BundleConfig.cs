@@ -34,8 +34,8 @@ namespace HFSRBO
             bundles.Add(new StyleBundle("~/material/css").Include(
                       "~/Content/fonts.css",
                       "~/Content/materialize.css",
-                      "~/Content/paralax.css"
-                      
+                      "~/Content/paralax.css",
+                      "~/Content/page.css"
                       ));
             
         }

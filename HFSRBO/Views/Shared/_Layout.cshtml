@@ -1,5 +1,4 @@
-﻿@using HFSRBO.Models
-@using Microsoft.AspNet.Identity
+﻿
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,90 +8,29 @@
     <title>@ViewBag.Title</title>
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/material/css")
-    
     <style>
       body {
         display: flex;
         min-height: 100vh;
         flex-direction: column;
-      }
-      #complaint tr th{
-          font-size : 0.7em;
-      }
-      #complaint tr td{
-          font-size : 0.7em;
-      }
-      main {
+        }
+        #complaint tr th{
+            font-size : 0.7em;
+        }
+        #complaint tr td{
+            font-size : 0.7em;
+        }
+        main {
         flex: 1 0 auto;
-      }
+        }
+        .dropdown-content{
+            overflow: visible !important;
+        }
     </style>
 </head>
 <body>
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="@Url.Action("ComplaintsType","MasterData")">Complaint Types</a></li>
-        <li><a href="@Url.Action("Staffs","MasterData")">Assigned Staffs</a></li>
-        <li><a href="@Url.Action("Hospitals","MasterData")">Hospitals</a></li>
-    </ul>
-    <ul id="dropdown2" class="dropdown-content">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <li><a href="#">@User.Identity.GetUserName()</a></li>
-            <li class="divider"></li>
-            <li><a href="@Url.Action("Logoff","Account")">Logout</a></li>
-        }
-        else
-        {
-            <li><a href="@Url.Action("Login","Account")">Login</a></li>
-        }
-    </ul>
-    <ul class="sidenav" id="sidenav">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
-            <li>
-                <a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a>
-                <ul>
-                    <li><a href="@Url.Action("ComplaintsType","MasterData")">Complaint Types</a></li>
-                    <li><a href="@Url.Action("Staffs","MasterData")">Assigned Staffs</a></li>
-                    <li><a href="@Url.Action("Hospitals","MasterData")">Hospitals</a></li>
-                </ul>
-            </li>
-        }
-
-        <li>
-            <a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a>
-            <ul>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a href="#">@User.Identity.GetUserName()</a></li>
-                    <li class="divider"></li>
-                    <li><a href="@Url.Action("Logoff","Account")">Logout</a></li>
-                }
-                else
-                {
-                    <li><a href="@Url.Action("Login","Account")">Login</a></li>
-                }
-            </ul>
-        </li>
-    </ul>
-    <nav class="green" role="navigation">
-        <div class="nav-wrapper container navbar-fixed white-text">
-            <a style="padding:0;height:80px;" id="logo-container" href="@Url.Action("Index","Home")" class="brand-logo left white-text"><img src="@Url.Content("~/Images/health_facility_banner.png")" style="height:80px;" /></a>
-            
-            <ul class="right hide-on-med-and-down white-text">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
-                    <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
-                }
-                
-                <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a></li>
-            </ul>
-            <a href="#" data-target="sidenav" class="sidenav-trigger right white-text"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
+    @Html.Partial("_navbar")
     <main>@RenderBody()</main>
-    
     @Html.Partial("modals")
     <footer class="page-footer green">
         <div class="container">
@@ -163,7 +101,19 @@
             $('.modal').modal();
             $('.tooltipped').tooltip();
             $('.sidenav').sidenav();
+
+            $('.dropdown-button3').dropdown({
+                tabIndex: 40,
+                inDuration: 300,
+                outDuration: 225,
+                constrain_width: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: ($('.dropdown-content').width() * 3) / 2.5 + 5, // Spacing from edge
+                belowOrigin: false, // Displays dropdown below the button
+                alignment: 'left' // Displays dropdown with edge aligned to the left of button
+            });
         });
+        
     </script>
     @RenderSection("scripts", required: false)
     
