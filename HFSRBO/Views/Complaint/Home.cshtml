@@ -95,7 +95,7 @@
                                 </td>
                                 <td>@complaint.staff</td>
                                 @{
-                                    var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                    var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).OrderByDescending(p => p.DateCreated).ToList();
                                     StringBuilder sb = new StringBuilder();
                                     sb.Append("<ul class='left-align'>");
 

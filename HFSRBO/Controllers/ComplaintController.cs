@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-namespace HFSRBO.Controllers
+using System.IO;
+
+namespace HFSRBO
 {
     [Authorize]
     [NoCache]
@@ -193,7 +195,16 @@ namespace HFSRBO.Controllers
                               Int_hospitals.Contains(c.hospitalID)
                               select c).Distinct().ToList();
             }
-            
+            if(collection.Get("display") == "P")
+            {
+                (new print_complaints()).print_complaint(complaints);
+                var fileStream = new FileStream(Server.MapPath("~/PDF/complaints.pdf"),
+                                        FileMode.Open,
+                                        FileAccess.Read
+                                    );
+                var fsResult = new FileStreamResult(fileStream, "application/pdf");
+                return fsResult;
+            }
             return View("~/Views/Complaint/Home.cshtml", complaints);
         }
         public ActionResult Status(String ID)
@@ -203,6 +214,7 @@ namespace HFSRBO.Controllers
             var complaint = db.complaints.Where(p => p.ID == id).FirstOrDefault();
             return PartialView(complaint);
         }
+
         [HttpPost]
         public ActionResult Status(FormCollection collection)
         {
