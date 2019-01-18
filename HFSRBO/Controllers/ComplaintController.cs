@@ -164,7 +164,10 @@ namespace HFSRBO
             
             Int32[] Int_complaint_types = { };
             Int32[] Int_hospitals = { };
-            
+
+            DateTime date_from = Convert.ToDateTime(collection.Get("date_from"));
+            DateTime date_To = Convert.ToDateTime(collection.Get("date_to"));
+
             IEnumerable<complaints> complaints = null;
             try { Int_complaint_types = Array.ConvertAll(complaint_type, s => int.Parse(s)); } catch { }
             try { Int_hospitals = Array.ConvertAll(hospitals, s => int.Parse(s)); } catch { }
@@ -197,7 +200,7 @@ namespace HFSRBO
             }
             if(collection.Get("display") == "P")
             {
-                (new print_complaints()).print_complaint(complaints);
+                (new print_complaints()).print_complaint(complaints,date_from,date_To);
                 var fileStream = new FileStream(Server.MapPath("~/PDF/complaints.pdf"),
                                         FileMode.Open,
                                         FileAccess.Read
