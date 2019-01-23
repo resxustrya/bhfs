@@ -45,6 +45,7 @@ namespace HFSRBO
 
             doc.Add(header);
 
+
             PdfPTable sheet_num = new PdfPTable(1);
             sheet_num.WidthPercentage = 100f;
             float[] sheet_num_withs = { 100 };
@@ -61,19 +62,19 @@ namespace HFSRBO
             doc.Add(sheet_num);
 
 
-            PdfPTable _thead_page_break = new PdfPTable(15);
+            PdfPTable _thead_page_break = new PdfPTable(14);
             _thead_page_break.WidthPercentage = 100f;
-            float[] first_with = { 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40 };
+            float[] first_with = { 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40, 40 };
             _thead_page_break.SetWidths(first_with);
             
+
 
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("DATE RECEIVED", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("CODE", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("NAME OF HEALTH FACILITY", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+            _thead_page_break.AddCell(new PdfPCell(new Paragraph("OWNERSHIP", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("NAME OF COMPLAINANT", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("TYPES OF COMPLAINT", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-            _thead_page_break.AddCell(new PdfPCell(new Paragraph("ADRESS", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-            _thead_page_break.AddCell(new PdfPCell(new Paragraph("OWNERSHIP", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("STAFF ASSIGNED", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("ACTION TAKEN", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             _thead_page_break.AddCell(new PdfPCell(new Paragraph("DATE INFORMED THE HF/CONCERNED OFFICE", new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
@@ -85,21 +86,29 @@ namespace HFSRBO
 
             doc.Add(_thead_page_break);
            
-           
-            PageEvent pe = new PageEvent();
-            writer.PageEvent = pe;
-
-
-            PdfPTable complaints_table = new PdfPTable(15);
+            PdfPTable complaints_table = new PdfPTable(14);
             complaints_table.WidthPercentage = 100f;
             _thead_page_break.SetWidths(first_with);
 
+            PageEvent pe = new PageEvent();
+            writer.PageEvent = pe;
+
             foreach (complaints complaint in complaints)
             {
+                
                 complaints_table.AddCell(new PdfPCell(new Paragraph(complaint.date != null ? complaint.date.Value.ToShortDateString() : "", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph(complaint.Code, new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 var health_facility = db.hospitals.Where(p => p.ID == complaint.hospitalID).FirstOrDefault();
-                complaints_table.AddCell(new PdfPCell(new Paragraph(health_facility.name, new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+
+                Paragraph hospital_info = new Paragraph();
+                Chunk hostpital_name = new Chunk(health_facility.name +"\n", new Font(Font.FontFamily.HELVETICA, 8f));
+                Chunk address_name = new Chunk(", " +health_facility.address, new Font(Font.FontFamily.HELVETICA, 8f, Font.BOLD));
+
+                hospital_info.Add(hostpital_name);
+                hospital_info.Add(address_name);
+                complaints_table.AddCell(new PdfPCell(hospital_info) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+
+                complaints_table.AddCell(new PdfPCell(new Paragraph(complaint.ownership == "G" ? "Government" : "Private", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph(EncyptDecrypt.Decrypt(complaint.firstname) + " "+ EncyptDecrypt.Decrypt(complaint.mi) + " " + EncyptDecrypt.Decrypt(complaint.lastname), new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
 
                 var facility_complaints = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
@@ -109,11 +118,10 @@ namespace HFSRBO
                     var type = db.type_complaint.Where(p => p.ID == ctl.ComplaintTypeId).FirstOrDefault();
                     complaint_desc += "- " + type.Description + "\n";
                 }
-                
 
                 complaints_table.AddCell(new PdfPCell(new Paragraph(complaint_desc, new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-                complaints_table.AddCell(new PdfPCell(new Paragraph("ADRESS", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-                complaints_table.AddCell(new PdfPCell(new Paragraph("OWNERSHIP", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                
+               
                 complaints_table.AddCell(new PdfPCell(new Paragraph("STAFF ASSIGNED", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph("ACTION TAKEN", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph("DATE INFORMED THE HF/CONCERNED OFFICE", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
@@ -123,8 +131,8 @@ namespace HFSRBO
                 complaints_table.AddCell(new PdfPCell(new Paragraph("STATUS", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph("COMMUNICATION", new Font(Font.FontFamily.HELVETICA, 8f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
 
-
             }
+            
             doc.Add(complaints_table);
 
             doc.Close();
