@@ -52,9 +52,9 @@ namespace HFSRBO
             sheet_num.SetWidths(sheet_num_withs);
             String month = "";
             if (date_from.Month == date_to.Month)
-            {
                 month = date_to.ToString("MMMM");
-            }
+            else
+                month = date_to.ToString("MMMM");
 
             sheet_num.AddCell(new PdfPCell(new Paragraph("Month of : " + month, new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0, Padding = 5f });
             sheet_num.AddCell(new PdfPCell(new Paragraph("Year : " + date_to.ToString("yyyy") , new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER,Border = 0 , Padding = 5f});
