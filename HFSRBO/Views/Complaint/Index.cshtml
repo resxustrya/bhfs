@@ -76,32 +76,15 @@
                                 <label for="address">Address</label>
                             </div>
                         </div>
-
                         <div class="row">
-                            <div class="input-field col l8 m12 s12">
-                                <select name="hospitalID">
-                                    <option value="" disabled selected>Choose your option</option>
+                            <div class="l12 m12 s12">
+                                <select name="hospitalID" >
                                     @foreach (hospitals h in hospital_list)
                                     {
                                         <option value="@h.ID">@h.name</option>
                                     }
                                 </select>
                                 <label for="hospitalID">Name of Health Facility being Complained</label>
-                            </div>
-                            <div class="input-field col l4 m12 s12">
-                                <select name="facility_type">
-                                    @{
-                                        var facility_type = new Dictionary<String, String>();
-                                        facility_type.Add("H", "Hospital");
-                                        facility_type.Add("DC", "Dental Clinic");
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach (var ft in facility_type)
-                                    {
-                                        <option value="@ft.Key">@ft.Value</option>
-                                    }
-                                </select>
-                                <label for="facility_type">Type of Health Facility</label>
                             </div>
                         </div>
                         <div class="row">

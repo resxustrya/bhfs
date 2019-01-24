@@ -44,7 +44,6 @@ namespace HFSRBO
             try { complaint.date = Convert.ToDateTime(collection.Get("date")); } catch { }
             complaint.address = EncyptDecrypt.Encrypt(collection.Get("address"));
             complaint.hospitalID = Convert.ToInt32(collection.Get("hospitalID"));
-            complaint.facility_type = collection.Get("facility_type");
             complaint.p_firstname = EncyptDecrypt.Encrypt(collection.Get("p_firstname"));
             complaint.p_lastname = EncyptDecrypt.Encrypt(collection.Get("p_lastname"));
             complaint.p_mi = EncyptDecrypt.Encrypt(collection.Get("p_mi"));

@@ -19,7 +19,7 @@ namespace HFSRBO
         public DateTime? date { get; set; }
         public String address { get; set; }
         public Int32 hospitalID { get; set; }
-        public String facility_type { get; set; }
+       
         public String facility_address { get; set; }
         public String p_firstname { get; set; }
         public String p_lastname { get; set; }
