@@ -24,7 +24,7 @@
         flex: 1 0 auto;
         }
         .dropdown-content{
-            overflow: visible !important;
+            overflow: scroll !important;
         }
     </style>
 </head>
@@ -67,28 +67,32 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/material/js")
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.datepicker');
-            var instances = M.Datepicker.init(elems, options);
+            var instances = M.Datepicker.init(elems);
 
             var modal = document.querySelectorAll('.modal');
-            var modal_instances = M.Modal.init(elems, options);
+            var modal_instances = M.Modal.init(elems);
 
             var select = document.querySelectorAll('select');
-            var select_instance = M.FormSelect.init(select, options);
+            var select_instance = M.FormSelect.init(select);
 
             var float = document.querySelectorAll('.fixed-action-btn');
-            var float_instances = M.FloatingActionButton.init(elems, options);
+            var float_instances = M.FloatingActionButton.init(elems);
 
             var tooltips = document.querySelectorAll('.tooltipped');
-            var tooltips_instances = M.Tooltip.init(elems, options);
+            var tooltips_instances = M.Tooltip.init(elems);
 
             var sidenave = document.querySelectorAll('.sidenav');
-            var sidenav_instances = M.Sidenav.init(elems, options);
+            var sidenav_instances = M.Sidenav.init(elems);
 
             var auto_complete = document.querySelectorAll('.autocomplete');
-            var auto_complete_instances = M.Autocomplete.init(elems, options);
+            var auto_complete_instances = M.Autocomplete.init(elems);
+
+            var chips = document.querySelectorAll('.chips');
+            var chips_instances = M.Chips.init(elems);
            
         });
 
@@ -105,14 +109,6 @@
             $('.modal').modal();
             $('.tooltipped').tooltip();
             $('.sidenav').sidenav();
-            $('#select_hospital').picker({ search: true });
-
-            $('.hospitalselect.autocomplete').autocomplete({
-                data: function () {
-
-                }
-                
-            });
             
         });
         

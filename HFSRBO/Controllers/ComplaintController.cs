@@ -100,7 +100,6 @@ namespace HFSRBO
             }
         }
 
-
         public ActionResult EditComplaint(String ID)
         {
             var complaint = db.complaints.Where(p => p.ID.ToString() == ID).FirstOrDefault();
@@ -126,7 +125,7 @@ namespace HFSRBO
         }
         public ActionResult Filter()
         {
-            return PartialView();
+            return View();
         }
         public ActionResult AddAction(String ID)
         {
@@ -158,14 +157,18 @@ namespace HFSRBO
         }
 
         [HttpPost]
-        public ActionResult Filter(FormCollection collection, String[] complaint_type, String[] hospitals)
+        public ActionResult Filter(FormCollection collection, String[] complaint_type)
         {
-            
+            String[] hospitals = collection.Get("hospitalID").Split(',');
+
             Int32[] Int_complaint_types = { };
             Int32[] Int_hospitals = { };
-
-            DateTime date_from = Convert.ToDateTime(collection.Get("date_from"));
-            DateTime date_To = Convert.ToDateTime(collection.Get("date_to"));
+            DateTime date_from;
+            DateTime date_to;
+           
+            date_from = Convert.ToDateTime(collection.Get("date_from"));
+            date_to = Convert.ToDateTime(collection.Get("date_to"));
+            
 
             IEnumerable<complaints> complaints = null;
             try { Int_complaint_types = Array.ConvertAll(complaint_type, s => int.Parse(s)); } catch { }
@@ -199,7 +202,7 @@ namespace HFSRBO
             }
             if(collection.Get("display") == "P")
             {
-                (new print_complaints()).print_complaint(complaints,date_from,date_To);
+                (new print_complaints()).print_complaint(complaints,date_from,date_to);
                 var fileStream = new FileStream(Server.MapPath("~/PDF/complaints.pdf"),
                                         FileMode.Open,
                                         FileAccess.Read
@@ -207,7 +210,9 @@ namespace HFSRBO
                 var fsResult = new FileStreamResult(fileStream, "application/pdf");
                 return fsResult;
             }
+
             return View("~/Views/Complaint/Home.cshtml", complaints);
+     
         }
         public ActionResult Status(String ID)
         {
@@ -225,6 +230,11 @@ namespace HFSRBO
             complaint.status = collection.Get("status");
             db.SaveChanges();
             return RedirectToAction("Home");
+        }
+        public JsonResult GetHospital()
+        {
+            var hospitals = (from list in db.hospitals select list.name ).ToList();
+            return Json(hospitals,JsonRequestBehavior.AllowGet);
         }
     }
 }
