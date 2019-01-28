@@ -18,6 +18,11 @@ namespace HFSRBO
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            /*
+            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            HttpContext.Current.Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            HttpContext.Current.Response.Cache.SetNoStore();*/
         }
     }
 }

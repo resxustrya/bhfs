@@ -1,4 +1,7 @@
-﻿
+﻿@{ 
+    bhfsContext db = new bhfsContext();
+    var ft = db.facility_type.ToList();
+}
 <div id="add_type_complaint" class="modal">
     <div class="modal-content">
         <h4>Add new type of complaint</h4>
@@ -37,7 +40,7 @@
 
 <div id="add_hospital" class="modal">
     <div class="modal-content">
-        <h4>Add new hospital</h4>
+        <h4>Add new health facility</h4>
         <form action="@Url.Action("AddHospital","MasterData")" method="POST">
             @Html.AntiForgeryToken()
             <div class="row">
@@ -49,6 +52,16 @@
                     <input type="text" name="address" required autocomplete="off" autofocus="true" />
                     <label for="description">Hospital Address</label>
                 </div>
+                <div class="input-field col l12 s12 m12">
+                    <select name="facility_types">
+                        <option value="" disabled selected>Choose your option</option>
+                        @foreach (facility_type f in ft)
+                        {
+                            <option value="@f.ID">@f.Name</option>
+                        }
+                    </select>
+                    <label for="facility_types">Facility Type</label>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
@@ -56,6 +69,25 @@
         </form>
     </div>
 </div>
+
+<div id="add_fal_type" class="modal">
+    <div class="modal-content">
+        <h4>Add new facility type</h4>
+        <form action="@Url.Action("AddFacilityType","MasterData")" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col l12 m12 s12 input-field">
+                    <input type="text" name="name" required autocomplete="off" autofocus="true" />
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div id="search" class="modal">
     <div class="modal-content">
         <div class="nav-wrapper">

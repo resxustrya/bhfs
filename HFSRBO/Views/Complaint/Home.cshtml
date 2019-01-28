@@ -12,23 +12,21 @@
             <div class="card-content">
                 <table id="complaint" class="responsive-table highlight">
                     <tr>
-                        <th>Date Created</th>
                         <th>Date Received</th>
-                        <th>Code Number (track code &/or complaint form control)</th>
-                        <th>Type of Complaint</th>
-                        <th>Form of Communication received</th>
-                        <th>Name of Complainant</th>
-                        <th>Nature of Complaint (apply to code)</th>
+                        <th>Code Number</th>
                         <th>Name of Health Facility Being Complained</th>
                         <th>Address</th>
                         <th>Ownership</th>
-                        <th>Staff Assigned</th>
+                        <th>Name of Complainant</th>
+                        <th>Types of Complaint</th>
                         <th>Action Taken</th>
                         <th>Date Informed the HF/concerned office</th>
                         <th>Date HF/concerned office submitted reply</th>
                         <th>Date released to records section</th>
                         <th>Date Resolution of the complaint released to records/client</th>
+                        <th>Form of Communication received</th>
                         <th>Status</th>
+                        <th>Staff Assigned</th>
                         <th>Options</th>
                     </tr>
                     @if (Model != null && Model.Count() > 0)
@@ -36,37 +34,8 @@
                         foreach (complaints complaint in Model)
                         {
                             <tr>
-                                <td>@complaint.date_created.ToShortDateString()</td>
                                 <td>@(complaint.date != null ? complaint.date.Value.ToShortDateString() : "")</td>
                                 <td>@complaint.Code</td>
-                                <td>
-                                    @{
-                                        var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
-                                    }
-                                    <ul>
-                                        @foreach (var ct in complaints_types)
-                                        {
-                                            var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
-                                            <li>@("-" + type.Description)</li>
-                                        }
-                                    </ul>
-                                    <b>Others</b> : @EncyptDecrypt.Decrypt(complaint.other_complaint)
-                                </td>
-                                <td>
-                                    @{ String communication_form = ""; }
-                                    @switch (complaint.communication_form)
-                                    {
-                                        case "1":
-                                            communication_form = "By Photo"; break;
-                                        case "2":
-                                            communication_form = "By mail"; break;
-                                        case "3":
-                                            communication_form = "Interview walk-in"; break;
-                                    }
-                                    @communication_form
-                                </td>
-                                <td>@EncyptDecrypt.Decrypt(complaint.firstname).ToUpper()  @EncyptDecrypt.Decrypt(complaint.mi).ToUpper() @EncyptDecrypt.Decrypt(complaint.lastname).ToUpper()</td>
-                                <td>@complaint.nature_of_complaint</td>
                                 <td>
                                     @{
                                         var hospital = db.hospitals.Where(p => p.ID == complaint.hospitalID).FirstOrDefault();
@@ -93,7 +62,20 @@
                                     }
                                     @ownership
                                 </td>
-                                <td>@complaint.staff</td>
+                                <td>@EncyptDecrypt.Decrypt(complaint.firstname).ToUpper()  @EncyptDecrypt.Decrypt(complaint.mi).ToUpper() @EncyptDecrypt.Decrypt(complaint.lastname).ToUpper()</td>
+                                <td>
+                                    @{
+                                        var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                    }
+                                    <ul>
+                                        @foreach (var ct in complaints_types)
+                                        {
+                                            var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
+                                            <li>@("-" + type.Description)</li>
+                                        }
+                                    </ul>
+                                    <b>Others</b> : @EncyptDecrypt.Decrypt(complaint.other_complaint)
+                                </td>
                                 @{
                                     var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).OrderByDescending(p => p.DateCreated).ToList();
                                     StringBuilder sb = new StringBuilder();
@@ -111,15 +93,29 @@
                                 <td>@(complaint.date_release_to_records != null ? complaint.date_release_to_records.Value.ToShortDateString() : "")</td>
                                 <td>@(complaint.date_final_resolution != null ? complaint.date_final_resolution.Value.ToShortDateString() : "")</td>
                                 <td>
+                                    @{ String communication_form = ""; }
+                                    @switch (complaint.communication_form)
+                                    {
+                                        case "1":
+                                            communication_form = "By Photo"; break;
+                                        case "2":
+                                            communication_form = "By mail"; break;
+                                        case "3":
+                                            communication_form = "Interview walk-in"; break;
+                                    }
+                                    @communication_form
+                                </td>
+                                <td>
                                     @if (complaint.status == "O")
                                     {
-                                        <a href="#filter" style="padding:5px;border-radius:2px;font-size:0.9em;" class="red white-text modal-trigger"  data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">On-Progress</a>
+                                        <a href="#filter" style="padding:5px;border-radius:2px;font-size:0.9em;" class="red white-text modal-trigger" data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">On-Progress</a>
                                     }
                                     else
                                     {
-                                        <a href="#filter" style="padding:5px;border-radius:2px;" class="green white-text modal-trigger"  data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">Resolved</a>
+                                        <a href="#filter" style="padding:5px;border-radius:2px;" class="green white-text modal-trigger" data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">Resolved</a>
                                     }
                                 </td>
+                                <td>@complaint.staff</td>
                                 <td>
                                     <a href="@Url.Action("DeleteComplaint","Complaint",new { ID = complaint.ID })"><i class="material-icons">delete_forever</i></a>
                                     <a href="@Url.Action("EditComplaint","Complaint", new { ID = complaint.ID })"><i class="material-icons">edit</i></a>

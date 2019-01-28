@@ -126,7 +126,7 @@ namespace HFSRBO
                 Paragraph p_actions = new Paragraph();
                 foreach (actions_takened at in actions)
                 {
-                    Chunk action_chucnk = new Chunk(" - " + at.actions + "\n", new Font(Font.FontFamily.HELVETICA, 7f));
+                    Chunk action_chucnk = new Chunk(" - " + at.actions + " ("+ at.DateCreated.ToShortDateString() +")" + "\n", new Font(Font.FontFamily.HELVETICA, 7f));
                     p_actions.Add(action_chucnk);
                 }
                 

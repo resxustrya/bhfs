@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+
 namespace HFSRBO
 {
-    public class hospitals
+    public class facility_type
     {
-        [Key]
         public Int32 ID { get; set; }
-        public String name { get; set; }
-        public String address { get; set; }
-        public Int32 facilityID { get; set;}
+        public String Name { get; set; }
     }
 }

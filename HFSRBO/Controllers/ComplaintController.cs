@@ -120,6 +120,15 @@ namespace HFSRBO
             Int32 id = Convert.ToInt32(ID);
             var del = db.complaints.Where(p => p.ID == id).FirstOrDefault();
             del.active = false;
+            Session["Current_Removed_Complaint"] = del.ID.ToString();
+            db.SaveChanges();
+            return RedirectToAction("Home");
+        }
+        public ActionResult Undo(String ID)
+        {
+            Int32 id = Convert.ToInt32(ID);
+            var del = db.complaints.Where(p => p.ID == id).FirstOrDefault();
+            del.active = true;
             db.SaveChanges();
             return RedirectToAction("Home");
         }
@@ -148,14 +157,7 @@ namespace HFSRBO
 
             return RedirectToAction("Home");
         }
-        public void DeleteAction(String ID)
-        {
-            Int32 id = Convert.ToInt32(ID);
-            var del = db.actions.Where(p => p.ID == id).FirstOrDefault();
-            db.actions.Remove(del);
-            db.SaveChanges();
-        }
-
+       
         [HttpPost]
         public ActionResult Filter(FormCollection collection, String[] complaint_type)
         {

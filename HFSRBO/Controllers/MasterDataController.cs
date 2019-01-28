@@ -61,8 +61,10 @@ namespace HFSRBO
         }
         public ActionResult Hospitals()
         {
-            var hospitals = db.hospitals.ToList();
-            return View(hospitals);
+            HealthFacilityViewModel hfv = new HealthFacilityViewModel();
+            hfv.hospitals = db.hospitals.ToList();
+            hfv.facility_types = db.facility_type.ToList();
+            return View(hfv);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -71,7 +73,19 @@ namespace HFSRBO
             hospitals h = new hospitals();
             h.name = collection.Get("name");
             h.address = collection.Get("address");
+            h.facilityID = Convert.ToInt32(collection.Get("facility_types"));
             db.hospitals.Add(h);
+            db.SaveChanges();
+            return RedirectToAction("Hospitals");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddFacilityType(FormCollection collection)
+        {
+            facility_type ft = new facility_type();
+            ft.Name = collection.Get("name");
+            db.facility_type.Add(ft);
             db.SaveChanges();
             return RedirectToAction("Hospitals");
         }
