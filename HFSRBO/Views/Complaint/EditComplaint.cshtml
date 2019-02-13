@@ -16,177 +16,185 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col l12 m12 s12">
-                        <div class="row">
-                            <h4>Name of Complainant</h4>
-                            <div class="input-field col l4 m12 s12 center">
-                                <input type="text" class="validate" name="firstname" value="@EncyptDecrypt.Decrypt(Model.firstname)" />
-                                <label for="firstname">Firstname</label>
-                            </div>
-                            <div class="input-field col l4 m12 s12">
-                                <input type="text" name="lastname" value="@EncyptDecrypt.Decrypt(Model.lastname)" />
-                                <label for="lastname">Lastname</label>
-                            </div>
-                            <div class="input-field col l4 m12 s12">
-                                <input type="text" name="mi" value="@EncyptDecrypt.Decrypt(Model.mi)" />
-                                <label for="mi">Middle Name</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col l3 m12 s12 center">
-                                <input type="number" class="validate" name="age" value="@Model.age" />
-                                <label for="age">Age</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <select name="civil_status">
-                                    @{ 
-                                        string []civil_status = {"Single","Married","Separated","Divorced","Widowed" };
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach(String c in civil_status)
-                                    {
-                                        <option value="@c" @(Model.civil_status == c ? " selected" : "")>@c</option>
-                                    }
-                                </select>
-                                <label for="civil_status">Civil Status</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <select name="gender">
-                                    @{ 
-                                        var gender = new Dictionary<String, String>();
-                                        gender.Add("M", "Male");
-                                        gender.Add("F", "Female");
-                                        gender.Add("O", "Others");
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach(var s in gender)
-                                    {
-                                        <option value="@s.Key" @(s.Key ==  EncyptDecrypt.Decrypt(Model.gender) ? " selected" : "")>@s.Value</option>
-                                    }
-                                </select>
-                                <label for="gender">Gender</label>
-                            </div>
-                            <div class="input-field col l3 s12 m12">
-                                <input type="text" name="date" class="datepicker" value="@(Model.date != null ? Model.date.Value.ToShortDateString() : "")">
-                                <label for="date">Date</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="address" class="materialize-textarea" name="address">@EncyptDecrypt.Decrypt(Model.address)</textarea>
-                                <label for="address">Address</label>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col l12 m12 s12">
-                                <select name="hospitalID">
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach (hospitals h in hospital_list)
-                                    {
-                                        <option value="@h.ID" @(h.ID == Model.hospitalID ? " selected" : "")>@h.name</option>
-                                    }
-                                </select>
-                                <label for="hospitalID">Name of Health Facility being Complained</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Patient Information (if applicable:)</h4>
-                            <div class="input-field col l3 m12 s12 center">
-                                <input type="text" class="validate" name="p_firstname" value="@EncyptDecrypt.Decrypt(Model.p_firstname)" />
-                                <label for="p_firstname">Firstname</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_lastname" value="@EncyptDecrypt.Decrypt(Model.p_lastname)" />
-                                <label for="p_lastname">Lastname</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_mi" value="@EncyptDecrypt.Decrypt(Model.p_mi)" />
-                                <label for="p_mi">Middle Name</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <input type="text" name="date_confined" class="datepicker" value="@(Model.date_confined != null ? Model.date_confined.Value.ToShortDateString() : "")" />
-                                <label for="date_confined">Date patient confined(if applicable)</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Complaint Information</h4>
-                            <div class="col l12 m12 s12">
-                                <h6>Type of complaint :</h6>
-                                @foreach (type_complaint t in tc)
-                                {
-                                    var ischeck = "";
-                                    var complaint_type = db.complaint_types_list.Where(p => p.ComplaintID == Model.ID && t.ID == p.ComplaintTypeId).FirstOrDefault();
-                                    if(complaint_type != null)
-                                    {
-                                        ischeck = " checked";
-                                    }
-                                    <label for="@t.ID">
-                                        <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" @ischeck />
-                                        <span>@t.Description</span>
-                                    </label>
-                                }
-                                <div class="input-field">
-                                    <input type="text" name="other_complaint" value="@EncyptDecrypt.Decrypt(Model.other_complaint)" />
-                                    <label for="other_complaint">Others.</label>
+                        <ul class="tabs mdl-color-text--green">
+                            <li class="tab col s3"><a class="active" href="#complainantInfo">Name of Complainant</a></li>
+                            <li class="tab col s3"><a href="#patientInfo">Patient Info. (if applicable)</a></li>
+                            <li class="tab col s3"><a href="#complaintInfo">Complaint Information</a></li>
+                            <li class="tab col s3"><a href="#otherInformation">Other Information</a></li>
+                        </ul>
+                        <hr />
+                        <div id="complainantInfo">
+                            <div class="row">
+                                <div class="input-field col l4 m12 s12 center">
+                                    <input type="text" class="validate" name="firstname" value="@EncyptDecrypt.Decrypt(Model.firstname)" />
+                                    <label for="firstname">Firstname</label>
+                                </div>
+                                <div class="input-field col l4 m12 s12">
+                                    <input type="text" name="lastname" value="@EncyptDecrypt.Decrypt(Model.lastname)" />
+                                    <label for="lastname">Lastname</label>
+                                </div>
+                                <div class="input-field col l4 m12 s12">
+                                    <input type="text" name="mi" value="@EncyptDecrypt.Decrypt(Model.mi)" />
+                                    <label for="mi">Middle Name</label>
                                 </div>
                             </div>
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="nature_of_complaint" class="materialize-textarea" name="nature_of_complaint">@Model.nature_of_complaint</textarea>
-                                <label for="nature_of_complaint">Nature of Complaint</label>
+                            <div class="row">
+                                <div class="input-field col l3 m12 s12 center">
+                                    <input type="number" class="validate" name="age" value="@Model.age" />
+                                    <label for="age">Age</label>
+                                </div>
+                                <div class="input-field col l3 m12 s12">
+                                    <select name="civil_status">
+                                        @{
+                                            string[] civil_status = { "Single", "Married", "Separated", "Divorced", "Widowed" };
+                                        }
+                                        <option value="" disabled selected>Choose your option</option>
+                                        @foreach (String c in civil_status)
+                                        {
+                                            <option value="@c" @(Model.civil_status == c ? " selected" : "")>@c</option>
+                                        }
+                                    </select>
+                                    <label for="civil_status">Civil Status</label>
+                                </div>
+                                <div class="input-field col l3 m12 s12">
+                                    <select name="gender">
+                                        @{
+                                            var gender = new Dictionary<String, String>();
+                                            gender.Add("M", "Male");
+                                            gender.Add("F", "Female");
+                                            gender.Add("O", "Others");
+                                        }
+                                        <option value="" disabled selected>Choose your option</option>
+                                        @foreach (var s in gender)
+                                        {
+                                            <option value="@s.Key" @(s.Key == EncyptDecrypt.Decrypt(Model.gender) ? " selected" : "")>@s.Value</option>
+                                        }
+                                    </select>
+                                    <label for="gender">Gender</label>
+                                </div>
+                                <div class="input-field col l3 s12 m12">
+                                    <input type="text" name="date" class="datepicker" value="@(Model.date != null ? Model.date.Value.ToShortDateString() : "")">
+                                    <label for="date">Date</label>
+                                </div>
                             </div>
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed">@Model.assistance_needed</textarea>
-                                <label for="assistance_needed">Assistance Needed</label>
+                            <div class="row">
+                                <div class="input-field col l12 s12 m12">
+                                    <textarea id="address" class="materialize-textarea" name="address">@EncyptDecrypt.Decrypt(Model.address)</textarea>
+                                    <label for="address">Address</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col l12 m12 s12">
+                                    <select name="hospitalID">
+                                        <option value="" disabled selected>Choose your option</option>
+                                        @foreach (hospitals h in hospital_list)
+                                        {
+                                            <option value="@h.ID" @(h.ID == Model.hospitalID ? " selected" : "")>@h.name</option>
+                                        }
+                                    </select>
+                                    <label for="hospitalID">Name of Health Facility being Complained</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <h4>Other Information</h4>
-                            <div class="input-field col l6 s12 m12">
-                                <select name="communication_form">
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @{ 
-                                        var com = new Dictionary<String, String>();
-                                        com.Add("1", "By Photo");
-                                        com.Add("2", "By Mail");
-                                        com.Add("3", "Interview walk-in");
-                                    }
-                                    @foreach (var c in com)
+                        <div id="patientInfo">
+                            <div class="row">
+                                <div class="input-field col l3 m12 s12 center">
+                                    <input type="text" class="validate" name="p_firstname" value="@EncyptDecrypt.Decrypt(Model.p_firstname)" />
+                                    <label for="p_firstname">Firstname</label>
+                                </div>
+                                <div class="input-field col l3 m12 s12">
+                                    <input type="text" name="p_lastname" value="@EncyptDecrypt.Decrypt(Model.p_lastname)" />
+                                    <label for="p_lastname">Lastname</label>
+                                </div>
+                                <div class="input-field col l3 m12 s12">
+                                    <input type="text" name="p_mi" value="@EncyptDecrypt.Decrypt(Model.p_mi)" />
+                                    <label for="p_mi">Middle Name</label>
+                                </div>
+                                <div class="input-field col l3 m12 s12">
+                                    <input type="text" name="date_confined" class="datepicker" value="@(Model.date_confined != null ? Model.date_confined.Value.ToShortDateString() : "")" />
+                                    <label for="date_confined">Date patient confined(if applicable)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="complaintInfo">
+                            <div class="row">
+                                <div class="col l12 m12 s12">
+                                    <h6>Type of complaint :</h6>
+                                    @foreach (type_complaint t in tc)
                                     {
-                                        <option value="@c.Key" @(c.Key == Model.communication_form ? " selected" : "")>@c.Value</option>
+                                        var ischeck = "";
+                                        var complaint_type = db.complaint_types_list.Where(p => p.ComplaintID == Model.ID && t.ID == p.ComplaintTypeId).FirstOrDefault();
+                                        if (complaint_type != null)
+                                        {
+                                            ischeck = " checked";
+                                        }
+                                        <label for="@t.ID">
+                                            <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" @ischeck />
+                                            <span>@t.Description</span>
+                                        </label>
                                     }
-                                </select>
-                                <label for="communication_form">Form of Communication received</label>
+                                    <div class="input-field">
+                                        <input type="text" name="other_complaint" value="@EncyptDecrypt.Decrypt(Model.other_complaint)" />
+                                        <label for="other_complaint">Others.</label>
+                                    </div>
+                                </div>
+                                <div class="input-field col l12 s12 m12">
+                                    <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed">@Model.assistance_needed</textarea>
+                                    <label for="assistance_needed">Assistance Needed</label>
+                                </div>
                             </div>
-                            <div class="input-field col l6 s12 m12">
-                                <select name="ownership">
-                                    @{ 
-                                        var ownnership = new Dictionary<String, String>();
-                                        ownnership.Add("P", "Private");
-                                        ownnership.Add("G", "Government");
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach(var o in ownnership)
-                                    {
-                                        <option value="@o.Key" @(o.Key == Model.ownership ? " selected" : "")>@o.Value</option>
-                                    }
-                                </select>
-                                <label for="ownership">Hospital/Facility Ownership</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_informed_the_hf" class="datepicker" value="@(Model.date_informed_the_hf != null ? Model.date_informed_the_hf.Value.ToShortDateString() : "")" />
-                                <label for="date_informed_the_hf">Date Informed the HF/concerned office</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_hf_submitted_reply" class="datepicker" value="@(Model.date_hf_submitted_reply != null ? Model.date_hf_submitted_reply.Value.ToShortDateString() : "")" />
-                                <label for="date_hf_submitted_reply">Date HF/concerned office submitted reply</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_release_to_records" class="datepicker" value="@(Model.date_release_to_records != null ? Model.date_release_to_records.Value.ToShortDateString() : "")" />
-                                <label for="date_release_to_records">Date released to records section</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_final_resolution" class="datepicker" value="@(Model.date_final_resolution != null ? Model.date_final_resolution.Value.ToShortDateString() : "")" />
-                                <label for="date_final_resolution">Date Resolution of the complaint released to records/client</label>
+                        </div>
+                        <div id="otherInformation">
+                            <div class="row">
+                                <h4>Other Information</h4>
+                                <div class="input-field col l6 s12 m12">
+                                    <select name="communication_form">
+                                        <option value="" disabled selected>Choose your option</option>
+                                        @{
+                                            var com = new Dictionary<String, String>();
+                                            com.Add("1", "By Photo");
+                                            com.Add("2", "By Mail");
+                                            com.Add("3", "Interview walk-in");
+                                        }
+                                        @foreach (var c in com)
+                                        {
+                                            <option value="@c.Key" @(c.Key == Model.communication_form ? " selected" : "")>@c.Value</option>
+                                        }
+                                    </select>
+                                    <label for="communication_form">Form of Communication received</label>
+                                </div>
+                                <div class="input-field col l6 s12 m12">
+                                    <select name="ownership">
+                                        @{
+                                            var ownnership = new Dictionary<String, String>();
+                                            ownnership.Add("P", "Private");
+                                            ownnership.Add("G", "Government");
+                                        }
+                                        <option value="" disabled selected>Choose your option</option>
+                                        @foreach (var o in ownnership)
+                                        {
+                                            <option value="@o.Key" @(o.Key == Model.ownership ? " selected" : "")>@o.Value</option>
+                                        }
+                                    </select>
+                                    <label for="ownership">Hospital/Facility Ownership</label>
+                                </div>
+                                <div class="input-field col l6 m12 s12">
+                                    <input type="text" name="date_informed_the_hf" class="datepicker" value="@(Model.date_informed_the_hf != null ? Model.date_informed_the_hf.Value.ToShortDateString() : "")" />
+                                    <label for="date_informed_the_hf">Date Informed the HF/concerned office</label>
+                                </div>
+                                <div class="input-field col l6 m12 s12">
+                                    <input type="text" name="date_hf_submitted_reply" class="datepicker" value="@(Model.date_hf_submitted_reply != null ? Model.date_hf_submitted_reply.Value.ToShortDateString() : "")" />
+                                    <label for="date_hf_submitted_reply">Date HF/concerned office submitted reply</label>
+                                </div>
+                                <div class="input-field col l6 m12 s12">
+                                    <input type="text" name="date_release_to_records" class="datepicker" value="@(Model.date_release_to_records != null ? Model.date_release_to_records.Value.ToShortDateString() : "")" />
+                                    <label for="date_release_to_records">Date released to records section</label>
+                                </div>
+                                <div class="input-field col l6 m12 s12">
+                                    <input type="text" name="date_final_resolution" class="datepicker" value="@(Model.date_final_resolution != null ? Model.date_final_resolution.Value.ToShortDateString() : "")" />
+                                    <label for="date_final_resolution">Date Resolution of the complaint released to records/client</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row">

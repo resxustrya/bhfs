@@ -35,22 +35,23 @@ namespace HFSRBO
 
         public void SaveComplaint(FormCollection collection, complaints complaint,String[] complaint_type,Boolean isNew)
         {
-            complaint.firstname = EncyptDecrypt.Encrypt(collection.Get("firstname"));
-            complaint.lastname = EncyptDecrypt.Encrypt(collection.Get("lastname"));
-            complaint.mi = EncyptDecrypt.Encrypt(collection.Get("mi"));
-            try { complaint.age = Convert.ToInt32(collection.Get("age")); } catch { }
-            complaint.civil_status = collection.Get("civil_status");
-            complaint.gender = EncyptDecrypt.Encrypt(collection.Get("gender"));
-            try { complaint.date = Convert.ToDateTime(collection.Get("date")); } catch { }
-            complaint.address = EncyptDecrypt.Encrypt(collection.Get("address"));
-            complaint.hospitalID = Convert.ToInt32(collection.Get("hospitalID"));
-            complaint.p_firstname = EncyptDecrypt.Encrypt(collection.Get("p_firstname"));
-            complaint.p_lastname = EncyptDecrypt.Encrypt(collection.Get("p_lastname"));
-            complaint.p_mi = EncyptDecrypt.Encrypt(collection.Get("p_mi"));
-            try { complaint.date_confined = Convert.ToDateTime(collection.Get("date_confined")); } catch { }
+            /*
+                 complaint.firstname = EncyptDecrypt.Encrypt(collection.Get("firstname"));
+                complaint.lastname = EncyptDecrypt.Encrypt(collection.Get("lastname"));
+                complaint.mi = EncyptDecrypt.Encrypt(collection.Get("mi"));
+                try { complaint.age = Convert.ToInt32(collection.Get("age")); } catch { }
+                complaint.civil_status = collection.Get("civil_status");
+                complaint.gender = EncyptDecrypt.Encrypt(collection.Get("gender"));
+                 complaint.address = EncyptDecrypt.Encrypt(collection.Get("address"));
+                 complaint.p_firstname = EncyptDecrypt.Encrypt(collection.Get("p_firstname"));
+                complaint.p_lastname = EncyptDecrypt.Encrypt(collection.Get("p_lastname"));
+                complaint.p_mi = EncyptDecrypt.Encrypt(collection.Get("p_mi"));
+             */
 
+            try { complaint.date = Convert.ToDateTime(collection.Get("date")); } catch { }
+            complaint.hospitalID = Convert.ToInt32(collection.Get("hospitalID"));
+            try { complaint.date_confined = Convert.ToDateTime(collection.Get("date_confined")); } catch { }
             complaint.other_complaint = EncyptDecrypt.Encrypt(collection.Get("other_complaint"));
-            complaint.nature_of_complaint = collection.Get("nature_of_complaint");
             complaint.assistance_needed = collection.Get("assistance_needed");
             complaint.communication_form = collection.Get("communication_form");
             complaint.ownership = collection.Get("ownership");
@@ -58,10 +59,11 @@ namespace HFSRBO
             try { complaint.date_hf_submitted_reply = Convert.ToDateTime(collection.Get("date_hf_submitted_reply")); } catch { }
             try { complaint.date_release_to_records = Convert.ToDateTime(collection.Get("date_release_to_records")); } catch { }
             try { complaint.date_final_resolution = Convert.ToDateTime(collection.Get("date_final_resolution")); } catch { }
-            complaint.status = "O";
+
             if (isNew)
             {
                 complaint.year = DateTime.Now.Year;
+                complaint.status = "O";
             }
             
             complaint.staff = User.Identity.GetUserName();
@@ -79,7 +81,6 @@ namespace HFSRBO
                 new_complaint.Code = "RO7-" + DateTime.Now.Year.ToString() + "-" + new_complaint.ID;
                 db.SaveChanges();
             }
-            
 
             if (complaint_type != null && complaint_type.Length > 0)
             {
@@ -167,7 +168,7 @@ namespace HFSRBO
             Int32[] Int_hospitals = { };
             DateTime date_from;
             DateTime date_to;
-           
+            String status = collection.Get("status");
             date_from = Convert.ToDateTime(collection.Get("date_from"));
             date_to = Convert.ToDateTime(collection.Get("date_to"));
             

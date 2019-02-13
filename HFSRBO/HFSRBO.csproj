@@ -330,17 +330,30 @@
     <Compile Include="Migrations\201901280503359_new_col1.Designer.cs">
       <DependentUpon>201901280503359_new_col1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902130619078_pccNumber.cs" />
+    <Compile Include="Migrations\201902130619078_pccNumber.Designer.cs">
+      <DependentUpon>201902130619078_pccNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902130828174_new_table2.cs" />
+    <Compile Include="Migrations\201902130828174_new_table2.Designer.cs">
+      <DependentUpon>201902130828174_new_table2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\actions_takened.cs" />
     <Compile Include="Models\bhfsContext.cs" />
+    <Compile Include="Models\communication.cs" />
+    <Compile Include="Models\CommunicationViewModel.cs" />
     <Compile Include="Models\complaints.cs" />
+    <Compile Include="Models\complaint_nameOfComplainant.cs" />
+    <Compile Include="Models\complaint_patient.cs" />
     <Compile Include="Models\complaint_types_list.cs" />
     <Compile Include="Models\facility_type.cs" />
     <Compile Include="Models\HealthFacilityViewModel.cs" />
     <Compile Include="Models\hospitals.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\pcc_number.cs" />
     <Compile Include="Models\staff_assigend.cs" />
     <Compile Include="Models\type_complaint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -528,6 +541,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901280503359_new_col1.resx">
       <DependentUpon>201901280503359_new_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902130619078_pccNumber.resx">
+      <DependentUpon>201902130619078_pccNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902130828174_new_table2.resx">
+      <DependentUpon>201902130828174_new_table2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -4,194 +4,224 @@
     var db = new bhfsContext();
     var tc = db.type_complaint.ToList();
     var hospital_list = db.hospitals.ToList();
+    var comm = new CommunicationViewModel();
 }
 
-<div class="container">
-    <div class="row center">
-        <h3>Complaint Form</h3>
-    </div>
-    <div class="card white darken-4">
+<div class="row">
+    <div class="col l12 m12 s12">
         <form action="@Url.Action("SubmitForm","Complaint")" method="post">
             @Html.AntiForgeryToken()
-            <div class="card-content">
-                <div class="row">
-                    <div class="col l12 m12 s12">
-                        <div class="row">
-                            <h4>Name of Complainant</h4>
-                            <div class="input-field col l4 m12 s12 center">
-                                <input type="text" class="validate" name="firstname" data-val="true" data-val-required="You must enter firstname" />
-                                <label for="firstname">Firstname</label>
+            <div class="card white darken-4">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col l4 m12 s12">
+                            <h5>Complaint Form</h5>
+                        </div>
+                        <div class="col l4  m12 s12">
+                            <div class="switch center">
+                                <label>
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                    <span>Anonymous</span>
+                                </label>
                             </div>
-                            <div class="input-field col l4 m12 s12">
-                                <input type="text" name="lastname" />
-                                <label for="lastname">Lastname</label>
-                            </div>
-                            <div class="input-field col l4 m12 s12">
-                                <input type="text" name="mi" />
-                                <label for="mi">Middle Name</label>
+                            <div class="input-field col 12 m12 s12">
+                                <input type="text" name="codeNumber" style="text-align:center;" required />
+                                <label for="codeNumber">Code Number</label>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="input-field col l3 m12 s12 center">
-                                <input type="number" class="validate" name="age" />
-                                <label for="age">Age</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <select name="civil_status">
-                                    @{
-                                        string[] civil_status = { "Single", "Married", "Separated", "Divorced", "Widowed" };
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach (String c in civil_status)
-                                    {
-                                        <option value="@c">@c</option>
-                                    }
-                                </select>
-                                <label for="civil_status">Civil Status</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <select name="gender">
-                                    @{
-                                        var gender = new Dictionary<String, String>();
-                                        gender.Add("M", "Male");
-                                        gender.Add("F", "Female");
-                                        gender.Add("O", "Others");
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach (var s in gender)
-                                    {
-                                        <option value="@s.Key">@s.Value</option>
-                                    }
-                                </select>
-                                <label for="gender">Gender</label>
-                            </div>
-                            <div class="input-field col l3 s12 m12">
-                                <input type="text" name="date" class="datepicker">
-                                <label for="date">Date</label>
-                            </div>
+                        <div class="col l4 m12 s12">
+                            <button type="submit" name="submit" class="waves-effect waves-light btn-large green right"><i class="material-icons left">check</i> Save</button>
                         </div>
-                        <div class="row">
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="address" class="materialize-textarea" name="address"></textarea>
-                                <label for="address">Address</label>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 m12 s12">
+                            <ul class="tabs mdl-color-text--green">
+                                <li class="tab col s3"><a class="active" href="#complainantInfo">Name of Complainant</a></li>
+                                <li class="tab col s3"><a href="#patientInfo">Patient Info. (if applicable)</a></li>
+                                <li class="tab col s3"><a href="#complaintInfo">Complaint Information</a></li>
+                                <li class="tab col s3"><a href="#otherInformation">Other Information</a></li>
+                            </ul>
+                            <div id="complainantInfo" style="padding-top:20px;">
+                                <div class="row">
+                                    
+                                    <div class="input-field col l4 m12 s12 center">
+                                        <input type="text" class="validate" name="firstname" data-val="true" data-val-required="You must enter firstname" />
+                                        <label for="firstname">Firstname</label>
+                                    </div>
+                                    <div class="input-field col l4 m12 s12">
+                                        <input type="text" name="lastname" />
+                                        <label for="lastname">Lastname</label>
+                                    </div>
+                                    <div class="input-field col l4 m12 s12">
+                                        <input type="text" name="mi" />
+                                        <label for="mi">Middle Name</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col l3 m12 s12 center">
+                                        <input type="number" class="validate" name="age" />
+                                        <label for="age">Age</label>
+                                    </div>
+                                    <div class="input-field col l3 m12 s12">
+                                        <select name="civil_status">
+                                            @{
+                                                string[] civil_status = { "Single", "Married", "Separated", "Divorced", "Widowed" };
+                                            }
+                                            <option value="" disabled selected>Choose your option</option>
+                                            @foreach (String c in civil_status)
+                                            {
+                                                <option value="@c">@c</option>
+                                            }
+                                        </select>
+                                        <label for="civil_status">Civil Status</label>
+                                    </div>
+                                    <div class="input-field col l3 m12 s12">
+                                        <select name="gender">
+                                            @{
+                                                var gender = new Dictionary<String, String>();
+                                                gender.Add("M", "Male");
+                                                gender.Add("F", "Female");
+                                                gender.Add("O", "Others");
+                                            }
+                                            <option value="" disabled selected>Choose your option</option>
+                                            @foreach (var s in gender)
+                                            {
+                                                <option value="@s.Key">@s.Value</option>
+                                            }
+                                        </select>
+                                        <label for="gender">Gender</label>
+                                    </div>
+                                    <div class="input-field col l3 s12 m12">
+                                        <input type="text" name="date" class="datepicker">
+                                        <label for="date">Date</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col l12 s12 m12">
+                                        <textarea id="address" class="materialize-textarea" name="address"></textarea>
+                                        <label for="address">Address</label>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="l12 m12 s12">
-                                <select name="hospitalID" >
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach (hospitals h in hospital_list)
-                                    {
-                                        <option value="@h.ID">@h.name</option>
-                                    }
-                                </select>
-                                <label for="hospitalID">Name of Health Facility being Complained</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Patient Information (if applicable:)</h4>
-                            <div class="input-field col l3 m12 s12 center">
-                                <input type="text" class="validate" name="p_firstname" />
-                                <label for="p_firstname">Firstname</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_lastname" />
-                                <label for="p_lastname">Lastname</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <input type="text" name="p_mi" />
-                                <label for="p_mi">Middle Name</label>
-                            </div>
-                            <div class="input-field col l3 m12 s12">
-                                <input type="text" name="date_confined" class="datepicker" />
-                                <label for="date_confined">Date patient confined(if applicable)</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h4>Complaint Information</h4>
-                            <div class="col l12 m12 s12">
-                                <h6>Type of complaint :</h6>
-                                @foreach (type_complaint t in tc)
-                                {
-                                    <label for="@t.ID">
-                                        <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
-                                        <span>@t.Description</span>
-                                    </label>
-                                }
-                                <div class="input-field">
-                                    <input type="text" name="other_complaint" />
-                                    <label for="other_complaint">Others.</label>
+                            <div id="patientInfo" style="padding-top:20px;">
+                                <div class="row">
+                                    <div class="input-field col l3 m12 s12 center">
+                                        <input type="text" class="validate" name="p_firstname" />
+                                        <label for="p_firstname">Firstname</label>
+                                    </div>
+                                    <div class="input-field col l3 m12 s12">
+                                        <input type="text" name="p_lastname" />
+                                        <label for="p_lastname">Lastname</label>
+                                    </div>
+                                    <div class="input-field col l3 m12 s12">
+                                        <input type="text" name="p_mi" />
+                                        <label for="p_mi">Middle Name</label>
+                                    </div>
+                                    <div class="input-field col l3 m12 s12">
+                                        <input type="text" name="date_confined" class="datepicker" />
+                                        <label for="date_confined">Date patient confined(if applicable)</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="nature_of_complaint" class="materialize-textarea" name="nature_of_complaint"></textarea>
-                                <label for="nature_of_complaint">Nature of Complaint</label>
+                            <div id="complaintInfo" style="padding-top:20px;">
+                                <div class="row">
+                                    <div class="input-field l12 m12 s12">
+                                        <select name="hospitalID">
+                                            <option value="" disabled selected>Choose your option</option>
+                                            @foreach (hospitals h in hospital_list)
+                                            {
+                                                <option value="@h.ID">@h.name</option>
+                                            }
+                                        </select>
+                                        <label for="hospitalID">Name of Health Facility being Complained</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col l12 m12 s12">
+                                        <h6>Type of complaint :</h6>
+                                        @foreach (type_complaint t in tc)
+                                        {
+                                            <p>
+                                                <label for="@t.ID">
+                                                    <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
+                                                    <span>@t.Description</span>
+                                                </label>
+                                            </p>
+                                        }
+                                        <div class="input-field">
+                                            <input type="text" name="other_complaint" />
+                                            <label for="other_complaint">Others.</label>
+                                        </div>
+                                    </div>
+                                    <div class="input-field col l12 s12 m12">
+                                        <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed"></textarea>
+                                        <label for="assistance_needed">Assistance Needed</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="input-field col l12 s12 m12">
-                                <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed"></textarea>
-                                <label for="assistance_needed">Assistance Needed</label>
+                            <div id="otherInformation" style="padding-top:20px;">
+                                <div class="row">
+                                    <div class="input-field col l6 s12 m12">
+                                        <select name="communication_form">
+                                            <option value="" disabled selected>Choose your option</option>
+
+                                            @foreach (var c in comm.communication)
+                                            {
+                                                <option value="@c.ID">@c.desc</option>
+                                            }
+                                        </select>
+                                        <label for="communication_form">Form of Communication received</label>
+                                    </div>
+                                    <div class="input-field col l6 s12 m12">
+                                        <select name="ownership">
+                                            @{
+                                                var ownnership = new Dictionary<String, String>();
+                                                ownnership.Add("P", "Private");
+                                                ownnership.Add("G", "Government");
+                                            }
+                                            <option value="" disabled selected>Choose your option</option>
+                                            @foreach (var o in ownnership)
+                                            {
+                                                <option value="@o.Key">@o.Value</option>
+                                            }
+                                        </select>
+                                        <label for="ownership">Hospital/Facility Ownership</label>
+                                    </div>
+                                    <div class="input-field col l6 m12 s12">
+                                        <input type="text" name="date_informed_the_hf" class="datepicker" />
+                                        <label for="date_informed_the_hf">Date Informed the HF/concerned office</label>
+                                    </div>
+                                    <div class="input-field col l6 m12 s12">
+                                        <input type="text" name="date_hf_submitted_reply" class="datepicker" />
+                                        <label for="date_hf_submitted_reply">Date HF/concerned office submitted reply</label>
+                                    </div>
+                                    <div class="input-field col l6 m12 s12">
+                                        <input type="text" name="date_release_to_records" class="datepicker" />
+                                        <label for="date_release_to_records">Date released to records section</label>
+                                    </div>
+                                    <div class="input-field col l6 m12 s12">
+                                        <input type="text" name="date_final_resolution" class="datepicker" />
+                                        <label for="date_final_resolution">Date Resolution of the complaint released to records/client</label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <h4>Other Information</h4>
-                            <div class="input-field col l6 s12 m12">
-                                <select name="communication_form">
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @{
-                                        var com = new Dictionary<String, String>();
-                                        com.Add("1", "By Photo");
-                                        com.Add("2", "By Mail");
-                                        com.Add("3", "Interview walk-in");
-                                    }
-                                    @foreach (var c in com)
-                                    {
-                                        <option value="@c.Key">@c.Value</option>
-                                    }
-                                </select>
-                                <label for="communication_form">Form of Communication received</label>
-                            </div>
-                            <div class="input-field col l6 s12 m12">
-                                <select name="ownership">
-                                    @{
-                                        var ownnership = new Dictionary<String, String>();
-                                        ownnership.Add("P", "Private");
-                                        ownnership.Add("G", "Government");
-                                    }
-                                    <option value="" disabled selected>Choose your option</option>
-                                    @foreach (var o in ownnership)
-                                    {
-                                        <option value="@o.Key">@o.Value</option>
-                                    }
-                                </select>
-                                <label for="ownership">Hospital/Facility Ownership</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_informed_the_hf" class="datepicker" />
-                                <label for="date_informed_the_hf">Date Informed the HF/concerned office</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_hf_submitted_reply" class="datepicker" />
-                                <label for="date_hf_submitted_reply">Date HF/concerned office submitted reply</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_release_to_records" class="datepicker" />
-                                <label for="date_release_to_records">Date released to records section</label>
-                            </div>
-                            <div class="input-field col l6 m12 s12">
-                                <input type="text" name="date_final_resolution" class="datepicker" />
-                                <label for="date_final_resolution">Date Resolution of the complaint released to records/client</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col l12 m12 s12">
-                                <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Submit</button>
+                            <div class="row">
+                                <div class="col l12 m12 s12">
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-    </div>       
+    </div>
 </div>
+
+
+
+
 
 

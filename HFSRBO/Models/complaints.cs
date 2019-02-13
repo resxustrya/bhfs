@@ -10,23 +10,10 @@ namespace HFSRBO
         [Key]
         public Int32 ID { get; set; }
         public String Code { get; set; }
-        public String firstname { get; set; }
-        public String lastname { get; set; }
-        public String mi { get; set; }
-        public Int32 age { get; set; }
-        public String civil_status { get; set; }
-        public String gender { get; set; }
         public DateTime? date { get; set; }
-        public String address { get; set; }
         public Int32 hospitalID { get; set; }
-       
-        public String facility_address { get; set; }
-        public String p_firstname { get; set; }
-        public String p_lastname { get; set; }
-        public String p_mi { get; set; }
         public DateTime? date_confined { get; set; }
         public String other_complaint { get; set; }
-        public String nature_of_complaint { get; set; }
         public String assistance_needed { get; set; }
         public String communication_form { get; set; }
         public String ownership { get; set; }
@@ -34,11 +21,11 @@ namespace HFSRBO
         public DateTime? date_hf_submitted_reply { get; set; }
         public DateTime? date_release_to_records { get; set; }
         public DateTime? date_final_resolution { get; set; }
-        public String region { get; set; }
         public String status { get; set; }
         public String staff { get; set; }
         public DateTime date_created { get; set; }
         public Boolean active { get; set; }
+        public Boolean annonymos { get; set; }
         public Int32 year { get; set; }
     }
 }

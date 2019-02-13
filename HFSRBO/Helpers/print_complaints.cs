@@ -107,7 +107,7 @@ namespace HFSRBO
                 complaints_table.AddCell(new PdfPCell(hospital_info) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
 
                 complaints_table.AddCell(new PdfPCell(new Paragraph(complaint.ownership == "G" ? "Government" : "Private", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-                complaints_table.AddCell(new PdfPCell(new Paragraph(EncyptDecrypt.Decrypt(complaint.firstname) + " "+ EncyptDecrypt.Decrypt(complaint.mi) + " " + EncyptDecrypt.Decrypt(complaint.lastname), new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                //complaints_table.AddCell(new PdfPCell(new Paragraph(EncyptDecrypt.Decrypt(complaint.firstname) + " "+ EncyptDecrypt.Decrypt(complaint.mi) + " " + EncyptDecrypt.Decrypt(complaint.lastname), new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
 
                 var facility_complaints = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
                 String complaint_desc = "";
