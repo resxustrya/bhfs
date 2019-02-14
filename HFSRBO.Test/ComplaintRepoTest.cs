@@ -1,0 +1,55 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HFSRBO.Infra;
+using HFSRBO.Core;
+namespace HFSRBO.Test
+{
+    [TestClass]
+    public class ComplaintRepoTest
+    {
+        ComplaintsRepository cr;
+        [TestInitialize]
+        public void TestSetup()
+        {
+            cr = new ComplaintsRepository();
+        }
+       
+        public void isRepositoryHasData()
+        {
+            var result = cr.GetComplaints();
+            Assert.IsNotNull(result);
+            var numberRecords = result.Count();
+            Assert.AreEqual(2,numberRecords);
+        }
+      
+        public void ComplaintAddRepo()
+        {
+            complaints _complaint = new complaints
+            {
+                Code = "RC-2",
+                date = DateTime.Now,
+                hospitalID = 2,
+                date_confined = DateTime.Now,
+                other_complaint = "No Nurse",
+                ownership = "P",
+                date_informed_the_hf = DateTime.Now,
+                date_hf_submitted_reply = DateTime.Now,
+                date_release_to_records = DateTime.Now,
+                date_final_resolution = DateTime.Now,
+                status = "O",
+                date_created = DateTime.Now,
+                active = true,
+                year = 2019
+            };
+
+            cr.Add(_complaint);
+            var result = cr.GetComplaints();
+            var numRecords = result.Count();
+            Assert.AreEqual(1, numRecords);
+        }
+    }
+}

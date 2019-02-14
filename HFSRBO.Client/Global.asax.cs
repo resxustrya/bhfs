@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -8,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace HFSRBO
+namespace HFSRBO.Client
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -19,10 +18,8 @@ namespace HFSRBO
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            /*
-            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            HttpContext.Current.Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-            HttpContext.Current.Response.Cache.SetNoStore();*/
+            UnityConfig.RegisterComponents();
+
         }
     }
 }

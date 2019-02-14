@@ -1,0 +1,68 @@
+﻿
+@using Microsoft.AspNet.Identity
+
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="@Url.Action("ComplaintsType","MasterData")">Complaint Types</a></li>
+    <li><a href="@Url.Action("Staffs","MasterData")">Assigned Staffs</a></li>
+    <li><a href="@Url.Action("Hospitals","MasterData")" class="dropdown-button3 d" data-activates='dropdown3' data-hover="hover" data-alignment="left">Health Facilities</a></li>
+</ul>
+
+<ul id="dropdown2" class="dropdown-content">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li><a href="#">@User.Identity.GetUserName()</a></li>
+            <li class="divider"></li>
+            <li><a href="@Url.Action("Logoff","Account")">Logout</a></li>
+    }
+    else
+    {
+        <li><a href="@Url.Action("Login","Account")">Login</a></li>
+    }
+</ul>
+<ul class="sidenav" id="sidenav">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
+            <li>
+                <a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a>
+                <ul>
+                    <li><a href="@Url.Action("ComplaintsType","MasterData")">Complaint Types</a></li>
+                    <li><a href="@Url.Action("Staffs","MasterData")">Assigned Staffs</a></li>
+                    <li><a href="@Url.Action("Hospitals","MasterData")">Health Facilities</a></li>
+                </ul>
+            </li>
+    }
+
+    <li>
+        <a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a>
+        <ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a href="#">@User.Identity.GetUserName()</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("Logoff","Account")">Logout</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Login","Account")">Login</a></li>
+            }
+        </ul>
+    </li>
+</ul>
+<nav class="green" role="navigation">
+    <div class="nav-wrapper container navbar-fixed white-text">
+        <a style="padding:0;height:80px;" id="logo-container" href="@Url.Action("Index","Home")" class="brand-logo left white-text"><img src="@Url.Content("~/Images/health_facility_banner.png")" style="height:80px;" /></a>
+
+        <ul class="right hide-on-med-and-down white-text">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
+                    <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
+            }
+
+            <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown2"><i class="material-icons">account_circle</i></a></li>
+        </ul>
+        <a href="#" data-target="sidenav" class="sidenav-trigger right white-text"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+

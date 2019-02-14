@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ComplaintsType";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col l12 m12 s12">
+            <h5>Complaint Types</h5>
+            <div class="card white darken-1">
+                <div class="card-content">
+                    <table id="type_complaint" class="responsive-table">
+                        <tr>
+                            <th>Description</th>
+                            <th>*</th>
+                           
+                        </tr>
+                        @foreach(type_complaint tp in Model)
+                        {
+                            <tr>
+                                <td>@tp.Description</td>
+                                <td>
+                                    <a href="@Url.Action("DeleteComplaint","MasterData",new { ID = tp.ID })" class="btn red"><i class="material-icons">delete</i></a> 
+                                    <a class="btn red"><i class="material-icons">edit</i></a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red add modal-trigger" data-target="add_type_complaint">
+        <i class="large material-icons">add_circle</i>
+    </a>
+</div>

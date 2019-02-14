@@ -1,0 +1,161 @@
+﻿@model IEnumerable<complaints>
+@using System.Text;
+@{
+    ViewBag.Title = "Home";
+    var db = new bhfsContext();
+}
+
+<div class="row">
+    <div class="col l12 m12 s12">
+        <h5>Health Facility Complaints</h5>
+        <div class="card white darken-1">
+            <div class="card-content">
+                <table id="complaint" class="responsive-table highlight">
+                    <tr>
+                        <th>Date Received</th>
+                        <th>Code Number</th>
+                        <th>Name of Health Facility Being Complained</th>
+                        <th>Address</th>
+                        <th>Ownership</th>
+                        <th>Name of Complainant</th>
+                        <th>Types of Complaint</th>
+                        <th>Action Taken</th>
+                        <th>Date Informed the HF/concerned office</th>
+                        <th>Date HF/concerned office submitted reply</th>
+                        <th>Date released to records section</th>
+                        <th>Date Resolution of the complaint released to records/client</th>
+                        <th>Form of Communication received</th>
+                        <th>Status</th>
+                        <th>Staff Assigned</th>
+                        <th>Options</th>
+                    </tr>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        foreach (complaints complaint in Model)
+                        {
+                            <tr>
+                                <td>@(complaint.date != null ? complaint.date.Value.ToShortDateString() : "")</td>
+                                <td>@complaint.Code</td>
+                                <td>
+                                    @{
+                                        var hospital = db.hospitals.Where(p => p.ID == complaint.hospitalID).FirstOrDefault();
+                                    }
+                                    @hospital.name
+                                </td>
+                                <td>@hospital.address</td>
+                                <td>
+                                    @{ String ownership = "";}
+                                    @if (complaint.ownership == "1")
+                                    {
+                                        ownership = "Government";
+                                    }
+                                    else
+                                    {
+                                        ownership = "Private";
+                                    }
+                                    @ownership
+                                </td>
+                                <td>@EncyptDecrypt.Decrypt(complaint.firstname).ToUpper()  @EncyptDecrypt.Decrypt(complaint.mi).ToUpper() @EncyptDecrypt.Decrypt(complaint.lastname).ToUpper()</td>
+                                <td>
+                                    @{
+                                        var complaints_types = db.complaint_types_list.Where(p => p.ComplaintID == complaint.ID).ToList();
+                                    }
+                                    <ul>
+                                        @foreach (var ct in complaints_types)
+                                        {
+                                            var type = db.type_complaint.Where(p => p.ID == ct.ComplaintTypeId).FirstOrDefault();
+                                            <li>@("-" + type.Description)</li>
+                                        }
+                                    </ul>
+                                    <b>Others</b> : @EncyptDecrypt.Decrypt(complaint.other_complaint)
+                                </td>
+                                @{
+                                    var actions = db.actions.Where(p => p.ComplaintID == complaint.ID).OrderByDescending(p => p.DateCreated).ToList();
+                                    StringBuilder sb = new StringBuilder();
+                                    sb.Append("<ul class='left-align'>");
+
+                                    foreach (actions_takened at in actions)
+                                    {
+                                        sb.Append("<li>- " + at.actions + "</li>");
+                                    }
+                                    sb.Append("</ul>");
+                                }
+                                <td><a href="#filter" data-url="@Url.Action("AddAction","Complaint",new { ID = complaint.ID })" onclick="filter(this);" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="@sb.ToString()"><i class="material-icons">drag_handle</i></a></td>
+                                <td>@(complaint.date_informed_the_hf != null ? complaint.date_informed_the_hf.Value.ToShortDateString() : "")</td>
+                                <td>@(complaint.date_hf_submitted_reply != null ? complaint.date_hf_submitted_reply.Value.ToShortDateString() : "")</td>
+                                <td>@(complaint.date_release_to_records != null ? complaint.date_release_to_records.Value.ToShortDateString() : "")</td>
+                                <td>@(complaint.date_final_resolution != null ? complaint.date_final_resolution.Value.ToShortDateString() : "")</td>
+                                <td>
+                                    @{ String communication_form = ""; }
+                                    @switch (complaint.communication_form)
+                                    {
+                                        case "1":
+                                            communication_form = "By Photo"; break;
+                                        case "2":
+                                            communication_form = "By mail"; break;
+                                        case "3":
+                                            communication_form = "Interview walk-in"; break;
+                                    }
+                                    @communication_form
+                                </td>
+                                <td>
+                                    @if (complaint.status == "O")
+                                    {
+                                        <a href="#filter" style="padding:5px;border-radius:2px;font-size:0.9em;" class="red white-text modal-trigger" data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">On-Progress</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="#filter" style="padding:5px;border-radius:2px;" class="green white-text modal-trigger" data-url="@Url.Action("Status","Complaint",new { ID = complaint.ID })" onclick="status(this);">Resolved</a>
+                                    }
+                                </td>
+                                <td>@complaint.staff</td>
+                                <td>
+                                    <a href="@Url.Action("DeleteComplaint","Complaint",new { ID = complaint.ID })"><i class="material-icons">delete_forever</i></a>
+                                    <a href="@Url.Action("EditComplaint","Complaint", new { ID = complaint.ID })"><i class="material-icons">edit</i></a>
+                                </td>
+                            </tr>
+                          }
+                      }
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="fixed-action-btn">
+    <a href="@Url.Action("Index","Complaint")" class="btn-floating btn-large red">
+        <i class="large material-icons">add_circle</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating blue" href="@Url.Action("Filter","Complaint")"><i class="material-icons">poll</i></a></li>
+        <li><a class="btn-floating red modal-trigger" href="#search"><i class="material-icons">search</i></a></li>
+    </ul>
+</div>
+@section scripts {
+    <script>
+        function filter(el)
+        {
+            var url = $(el).data('url');
+            $(".loading").show();
+            $(".modal_content").html('');
+            
+            $.get(url, function (res) {
+                $(".modal_content").html(res);
+                $(".loading").hide();
+            });
+            
+        }
+        function status(el)
+        {
+            var url = $(el).data('url');
+            $(".loading").show();
+            $(".modal_content").html('');
+            $.get(url, function (res) {
+                $(".modal_content").html(res);
+                $(".loading").hide();
+            });
+        }
+    </script>
+}
+

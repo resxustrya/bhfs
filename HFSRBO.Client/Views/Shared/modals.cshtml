@@ -1,0 +1,118 @@
+﻿@{ 
+    bhfsContext db = new bhfsContext();
+    var ft = db.facility_type.ToList();
+}
+<div id="add_type_complaint" class="modal">
+    <div class="modal-content">
+        <h4>Add new type of complaint</h4>
+        <form action="@Url.Action("AddComplaintType","MasterData")" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col l12 m12 s12 input-field">
+                    <input type="text" name="description" autofocus="true" autocomplete="off" required />
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="add_staff" class="modal">
+    <div class="modal-content">
+        <h4>Add new staff</h4>
+        <form action="@Url.Action("AddStaff","MasterData")" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col l12 m12 s12 input-field">
+                    <input type="text" name="name" required autocomplete="off" autofocus="true" />
+                    <label for="description">Staff Name</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="add_hospital" class="modal">
+    <div class="modal-content">
+        <h4>Add new health facility</h4>
+        <form action="@Url.Action("AddHospital","MasterData")" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col l12 m12 s12 input-field">
+                    <input type="text" name="name" required autocomplete="off" autofocus="true" />
+                    <label for="description">Hospital Name</label>
+                </div>
+                <div class="input-field col l12 s12 m12">
+                    <input type="text" name="address" required autocomplete="off" autofocus="true" />
+                    <label for="description">Hospital Address</label>
+                </div>
+                <div class="input-field col l12 s12 m12">
+                    <select name="facility_types">
+                        <option value="" disabled selected>Choose your option</option>
+                        @foreach (facility_type f in ft)
+                        {
+                            <option value="@f.ID">@f.Name</option>
+                        }
+                    </select>
+                    <label for="facility_types">Facility Type</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="add_fal_type" class="modal">
+    <div class="modal-content">
+        <h4>Add new facility type</h4>
+        <form action="@Url.Action("AddFacilityType","MasterData")" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col l12 m12 s12 input-field">
+                    <input type="text" name="name" required autocomplete="off" autofocus="true" />
+                    <label for="description">Description</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="search" class="modal">
+    <div class="modal-content">
+        <div class="nav-wrapper">
+            <p>Quick Search</p>
+            <form>
+                <div class="input-field">
+                    <input id="search" type="search" required />
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="filter" class="modal  modal-fixed-footer">
+    <div class="modal-content">
+        
+        <div class="row modal_content">
+
+        </div>
+        <div class="center-align loading">
+            <img class="responsive-img" src="@Url.Content("~/Images/spin.gif")" />
+        </div>
+    </div>
+</div>
