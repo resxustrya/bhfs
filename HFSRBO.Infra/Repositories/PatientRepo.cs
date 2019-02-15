@@ -24,6 +24,7 @@ namespace HFSRBO.Infra
             try
             {
                 db.patient.Remove(db.patient.Where(p => p.complaintID == ID).FirstOrDefault());
+                db.SaveChanges();
             }
             catch { }
         }

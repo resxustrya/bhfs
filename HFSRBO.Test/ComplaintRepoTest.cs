@@ -12,10 +12,12 @@ namespace HFSRBO.Test
     public class ComplaintRepoTest
     {
         ComplaintsRepository cr;
+        ComplaintTypesRepo ct;
         [TestInitialize]
         public void TestSetup()
         {
             cr = new ComplaintsRepository();
+            ct = new ComplaintTypesRepo();
         }
        
         public void isRepositoryHasData()
@@ -50,6 +52,14 @@ namespace HFSRBO.Test
             var result = cr.GetComplaints();
             var numRecords = result.Count();
             Assert.AreEqual(1, numRecords);
+        }
+        [TestMethod]
+        public void ComplaintType()
+        {
+            ct.Add(new type_complaint { ID = 1, Description="Overcharging of Fees" });
+            ct.Add(new type_complaint { ID = 2, Description="Poor Servies"});
+            var result = ct.GetComplaintTypes();
+            Assert.AreEqual(2, result.Count());
         }
     }
 }

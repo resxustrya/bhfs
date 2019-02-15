@@ -16,5 +16,6 @@ namespace HFSRBO.Infra
         public DbSet<complaint_patient> patient { get; set; }
         public DbSet<hospitals> hospitals { get; set; }
         public DbSet<facility_type> facilityType { get; set; }
+        public DbSet<type_complaint> complaintType { get; set; }
     }
 }

@@ -1,0 +1,13 @@
+﻿<h4>Add</h4>
+<form action="@Url.Action("AddComplaintType","MasterData")" method="POST">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col l12 m12 s12 input-field">
+            <input type="text" name="description" autofocus="true" autocomplete="off" required />
+            <label for="description">Description</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+    </div>
+</form>

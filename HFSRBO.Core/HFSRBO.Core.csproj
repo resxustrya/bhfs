@@ -53,11 +53,17 @@
     <Compile Include="hospitals.cs" />
     <Compile Include="Interfaces\IComplaintPatientRepository.cs" />
     <Compile Include="Interfaces\IComplaintsRepository.cs" />
+    <Compile Include="Interfaces\IComplaintTypeRepo.cs" />
+    <Compile Include="Interfaces\IFacilityTypeRepo.cs" />
+    <Compile Include="Interfaces\IHospitalRepo.cs" />
     <Compile Include="Interfaces\INameOfComplainantRepository.cs" />
     <Compile Include="pcc_number.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="staff_assigend.cs" />
     <Compile Include="type_complaint.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

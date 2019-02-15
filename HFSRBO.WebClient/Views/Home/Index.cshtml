@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "DOH 7";
+}
+
+
+<div id="index-banner" class="parallax-container" style="background: rgba(76, 175, 80, 0.5);">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <br><br>
+            <div class="row center">
+                <div class="col l12 s6 m6">
+                    <h2 class="header white-text" style="color:white;">BUREAU OF HEALTH FACILITIES AND SERVICES/DOH REGIONAL OFFICE</h2>
+                </div>
+            </div>
+            <div class="row center">
+                <div class="col l12 s6 m6">
+                    <h5 class="header light">An online hospital and health facility complaint services</h5>
+                </div>
+            </div>
+            <div class="row center">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Login", "Account")" id="download-button" class="btn-large waves-effect waves-light green">Login to your account <i class="material-icons right">send</i></a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Complaints","Complaint")" id="download-button" class="btn-large waves-effect waves-light green">Signed In as @User.Identity.GetUserName()</a>
+                }
+            </div>
+            <br><br>
+        </div>
+    </div>
+    <div class="parallax"><img src="@Url.Content("~/Images/paralax.jpg")" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="container">
+    <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
+                    <h5 class="center">Speeds up development</h5>
+
+                    <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">group</i></h2>
+                    <h5 class="center">User Experience Focused</h5>
+
+                    <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4">
+                <div class="icon-block">
+                    <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
+                    <h5 class="center">Easy to work with</h5>
+
+                    <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

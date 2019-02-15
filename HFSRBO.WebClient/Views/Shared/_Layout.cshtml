@@ -1,0 +1,120 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/material/css")
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #complaint tr th {
+            font-size: 0.7em;
+        }
+
+        #complaint tr td {
+            font-size: 0.7em;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body>
+    @Html.Partial("_navbar")
+    <main>@RenderBody()</main>
+    @Html.Partial("modals")
+    <footer class="page-footer green">
+        <div class="container">
+            <div class="row">
+                <div class="col l4 s12">
+                    <h5 class="white-text">Address <i class="material-icons">location_on</i></h5>
+                    <p class="grey-text text-lighten-4">Osmeña Blvd, Cebu City, Cebu, Philippines</p>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">PHONE NUMBER <i class="material-icons">local_phone</i></h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">(032) 418-4822</a></li>
+
+                    </ul>
+                </div>
+                <div class="col l4 s12">
+                    <h5 class="white-text">EMAIL <i class="material-icons">email</i></h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">dohro7@gmail.com</a></li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © Copyright 2018.
+                Information System - ICTU
+            </div>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/material/js")
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.datepicker');
+            var instances = M.Datepicker.init(elems);
+
+            var modal = document.querySelectorAll('.modal');
+            var modal_instances = M.Modal.init(elems);
+
+            var select = document.querySelectorAll('select');
+            var select_instance = M.FormSelect.init(select);
+
+            var float = document.querySelectorAll('.fixed-action-btn');
+            var float_instances = M.FloatingActionButton.init(elems);
+
+            var tooltips = document.querySelectorAll('.tooltipped');
+            var tooltips_instances = M.Tooltip.init(elems);
+
+            var sidenave = document.querySelectorAll('.sidenav');
+            var sidenav_instances = M.Sidenav.init(elems);
+
+            var auto_complete = document.querySelectorAll('.autocomplete');
+            var auto_complete_instances = M.Autocomplete.init(elems);
+
+            var chips = document.querySelectorAll('.chips');
+            var chips_instances = M.Chips.init(elems);
+
+            var tabs = M.Tabs.init(el, options);
+
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function () {
+            $("input").attr("autocomplete", "off");
+            $('.datepicker').datepicker({
+                format: 'mm/dd/yyyy'
+            });
+            $('select').formSelect();
+            $(".dropdown-trigger").dropdown();
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+            $('.tooltipped').tooltip();
+            $('.sidenav').sidenav();
+            $('.tabs').tabs();
+        });
+
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿@using HFSRBO.WebClient.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="row">
+    <div class="col l4 m6 offset-l4">
+        <h3 class="center-align">Login</h3>
+        <div class="card white darken-5">
+            <div class="card-content">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "red-text" })
+
+                    <div class="row">
+                        <div class="input-field col l12 m12 s12 center">
+                            <input autofocus="true" class="white" data-val="true" data-val-required="You must enter your username" id="Email" name="Email" type="text" value="" />
+                            <label for="Email">Username</label>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col l12 m12 s12 center">
+                            <input class="form-control" data-val="true" data-val-required="You must enter your password" id="Password" name="Password" type="password" />
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                            <label for="Password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col l12 m12 s12">
+                            <button type="submit" name="submit" class="waves-effect waves-light btn-large green">Login</button>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
