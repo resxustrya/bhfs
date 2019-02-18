@@ -1,0 +1,23 @@
+﻿
+<div id="test1" class="col s12">
+    <table id="type_complaint" class="responsive-table">
+        <tr>
+            <th>Health Facility</th>
+            <th>Address</th>
+            <th>Facility Type</th>
+            <th>*</th>
+        </tr>
+        @foreach (var hospital in Model)
+        {
+            <tr>
+                <td>@hospital.hospitalName</td>
+                <td>@hospital.hospitalAddress</td>
+                <td></td>
+                <td>
+                    <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.hospitalID })" class="btn red"><i class="material-icons">delete</i></a>
+                    <a class="btn red"><i class="material-icons">edit</i></a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

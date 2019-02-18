@@ -2,6 +2,9 @@ using System;
 using Unity;
 using HFSRBO.Core;
 using HFSRBO.Infra;
+using HFSRBO.WebClient.Controllers;
+using Unity.Injection;
+
 namespace HFSRBO.WebClient
 {
     /// <summary>
@@ -45,6 +48,9 @@ namespace HFSRBO.WebClient
             container.RegisterType<IComplaintTypeRepo, ComplaintTypesRepo>();
             container.RegisterType<IFacilityTypeRepo, FacilityTypeRepo>();
             container.RegisterType<IHospitalRepo, HospitalRepo>();
+
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<ManageController>(new InjectionConstructor());
         }
     }
 }

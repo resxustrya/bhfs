@@ -240,6 +240,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HealthFacilityHelper.cs" />
     <Compile Include="Migrations\201902150314374_first.cs" />
     <Compile Include="Migrations\201902150314374_first.Designer.cs">
       <DependentUpon>201902150314374_first.cs</DependentUpon>
@@ -335,6 +336,8 @@
     <Content Include="Views\MasterData\EditComplaintType.cshtml" />
     <Content Include="Views\MasterData\AddComplaintType.cshtml" />
     <Content Include="Views\MasterData\HealthFacilities.cshtml" />
+    <Content Include="Views\MasterData\_HealthFacilites.cshtml" />
+    <Content Include="Views\MasterData\_FacilityType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

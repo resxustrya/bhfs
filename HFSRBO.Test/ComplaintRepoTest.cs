@@ -53,7 +53,6 @@ namespace HFSRBO.Test
             var numRecords = result.Count();
             Assert.AreEqual(1, numRecords);
         }
-        [TestMethod]
         public void ComplaintType()
         {
             ct.Add(new type_complaint { ID = 1, Description="Overcharging of Fees" });

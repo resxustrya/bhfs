@@ -34,5 +34,19 @@ namespace HFSRBO.Infra
             var result = db.hospitals;
             return result;
         }
+        public IEnumerable<object> GetHospitalFacilities()
+        {
+            var result = (from hospital in db.hospitals
+                          join facilites in db.facilityType on hospital.facilityID equals facilites.ID
+                          select new
+                          {
+                              hospitalID = hospital.ID,
+                              hospitalName = hospital.name,
+                              hospitalAddress = hospital.address,
+                              facilityType = facilites.Name
+                          }).ToList();
+
+            return result;
+        }
     }
 }

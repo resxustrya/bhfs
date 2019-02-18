@@ -18,6 +18,12 @@ namespace HFSRBO.WebClient
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "StringTabe",
+                url: "{controller}/{action}/tab",
+                defaults: new {controller = "MasterData",action= "HealthFacility",tab = UrlParameter.Optional }
+            );
         }
     }
 }

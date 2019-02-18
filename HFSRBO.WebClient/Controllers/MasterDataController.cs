@@ -71,15 +71,34 @@ namespace HFSRBO.WebClient.Controllers
             catch { }
             return HttpNotFound();
         }
-        public ActionResult HealthFacilities()
+        public ActionResult  HealthFacility(String tab ="1")
         {
-            HospitalFacilityViewModel _hospitalFacilityType = new HospitalFacilityViewModel
+            if(tab == "1")
             {
-                _hospitals = this.hospitals.GetHospitals(),
-                _facilityType = this.facilityType.GetFacilityTypes()
-
+                ViewBag.Tab = tab;
+                var result = hospitals.GetHospitalFacilities();
+                return View("~/Views/MasterData/HealthFacilities.cshtml", result);
+            }
+            else if(tab == "2")
+            {
+                ViewBag.Tab = tab;
+                var result = facilityType.GetFacilityTypes();
+                return View("~/Views/MasterData/HealthFacilities.cshtml", result);
+            }
+            ViewBag.Tab = tab;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddHealthFacility(FormCollection collection)
+        {
+            Core.hospitals _hospital = new Core.hospitals
+            {
+                name = collection.Get("name"),
+                address = collection.Get("address"),
+                facilityID = Convert.ToInt32(collection.Get("facilityID"))
             };
-            return View(_hospitalFacilityType);
+
         }
     }
 }
