@@ -76,7 +76,7 @@ namespace HFSRBO.WebClient.Controllers
             if(tab == "1")
             {
                 ViewBag.Tab = tab;
-                var result = hospitals.GetHospitalFacilities();
+                var result = hospitals.GetHealthFacilities();
                 return View("~/Views/MasterData/HealthFacilities.cshtml", result);
             }
             else if(tab == "2")
@@ -98,7 +98,19 @@ namespace HFSRBO.WebClient.Controllers
                 address = collection.Get("address"),
                 facilityID = Convert.ToInt32(collection.Get("facilityID"))
             };
-
+            hospitals.Add(_hospital);
+            return RedirectToAction("HealthFacility");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddFacilityType(FormCollection collection)
+        {
+            Core.facility_type ft = new facility_type
+            {
+                Name = collection.Get("name")
+            };
+            facilityType.Add(ft);
+            return RedirectToAction("HealthFacility");
         }
     }
 }

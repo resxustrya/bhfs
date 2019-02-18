@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using HFSRBO.Core;
+using HFSRBO.Core.ViewModels;
 namespace HFSRBO.Infra
 {
     public class HospitalRepo : IHospitalRepo
@@ -34,18 +35,17 @@ namespace HFSRBO.Infra
             var result = db.hospitals;
             return result;
         }
-        public IEnumerable<object> GetHospitalFacilities()
-        {
-            var result = (from hospital in db.hospitals
-                          join facilites in db.facilityType on hospital.facilityID equals facilites.ID
-                          select new
-                          {
-                              hospitalID = hospital.ID,
-                              hospitalName = hospital.name,
-                              hospitalAddress = hospital.address,
-                              facilityType = facilites.Name
-                          }).ToList();
 
+        public IEnumerable<HealthFacilityViewModel> GetHealthFacilities()
+        {
+            IEnumerable<HealthFacilityViewModel> result = (from hospital in db.hospitals join ft in db.facilityType on hospital.facilityID equals ft.ID
+            select new HealthFacilityViewModel
+            {
+                ID = hospital.ID,
+                Name =  hospital.name,
+                Address = hospital.address,
+                FacilityType = ft.Name
+            }).ToList();
             return result;
         }
     }

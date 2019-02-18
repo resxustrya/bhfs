@@ -13,11 +13,13 @@ namespace HFSRBO.Test
     {
         ComplaintsRepository cr;
         ComplaintTypesRepo ct;
+        FacilityTypeRepo ft;
         [TestInitialize]
         public void TestSetup()
         {
             cr = new ComplaintsRepository();
             ct = new ComplaintTypesRepo();
+            ft = new FacilityTypeRepo();
         }
        
         public void isRepositoryHasData()
@@ -58,6 +60,15 @@ namespace HFSRBO.Test
             ct.Add(new type_complaint { ID = 1, Description="Overcharging of Fees" });
             ct.Add(new type_complaint { ID = 2, Description="Poor Servies"});
             var result = ct.GetComplaintTypes();
+            Assert.AreEqual(2, result.Count());
+        }
+
+        public void FacilityType()
+        {
+            ft.Add(new facility_type {ID =1, Name = "Health Facility" });
+            ft.Add(new facility_type { ID = 2, Name = "Drug Testing" });
+
+            var result = ft.GetFacilityTypes();
             Assert.AreEqual(2, result.Count());
         }
     }

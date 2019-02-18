@@ -10,11 +10,11 @@
         @foreach (var hospital in Model)
         {
             <tr>
-                <td>@hospital.hospitalName</td>
-                <td>@hospital.hospitalAddress</td>
-                <td></td>
+                <td>@hospital.Name</td>
+                <td>@hospital.Address</td>
+                <td>@hospital.FacilityType</td>
                 <td>
-                    <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.hospitalID })" class="btn red"><i class="material-icons">delete</i></a>
+                    <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.ID })" class="btn red"><i class="material-icons">delete</i></a>
                     <a class="btn red"><i class="material-icons">edit</i></a>
                 </td>
             </tr>
