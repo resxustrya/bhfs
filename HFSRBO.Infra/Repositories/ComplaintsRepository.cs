@@ -10,6 +10,9 @@ namespace HFSRBO.Infra
     public class ComplaintsRepository : IComplaintsRepository
     {
         hfsrboContext db = new hfsrboContext();
+        HospitalRepo hr = new HospitalRepo();
+        communicationsViewModel cvm = new communicationsViewModel();
+        ComplaintTypesRepo ctr = new ComplaintTypesRepo();
         public Int32 Add(complaints _complaints)
         {
             db.complaints.Add(_complaints);
@@ -37,6 +40,16 @@ namespace HFSRBO.Infra
         public IEnumerable<complaints> GetComplaints()
         {
             return db.complaints;
+        }
+        public CreateComplaintViewModel getCreateComplaintViewModel()
+        {
+            CreateComplaintViewModel _viewModel = new CreateComplaintViewModel
+            {
+                _hospitals = hr.GetHospitals(),
+                _communications = cvm._communication,
+                _complaint_type = ctr.GetComplaintTypes()
+            };
+            return _viewModel;
         }
     }
 }

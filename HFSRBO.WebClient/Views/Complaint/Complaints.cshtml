@@ -1,7 +1,13 @@
-﻿
-@{
-    ViewBag.Title = "Complaints";
+﻿@{
+    ViewBag.Title = "Home";
 }
 
-<h2>Complaints</h2>
-
+<div class="fixed-action-btn">
+    <a href="@Url.Action("CreateComplaint","Complaint")" class="btn-floating btn-large red">
+        <i class="large material-icons">add_circle</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating blue" href="@Url.Action("Filter","Complaint")"><i class="material-icons">poll</i></a></li>
+        <li><a class="btn-floating red modal-trigger" href="#search"><i class="material-icons">search</i></a></li>
+    </ul>
+</div>

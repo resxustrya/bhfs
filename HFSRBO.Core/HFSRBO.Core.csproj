@@ -41,25 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="actions_takened.cs" />
-    <Compile Include="communication.cs" />
-    <Compile Include="CommunicationViewModel.cs" />
-    <Compile Include="complaints.cs" />
-    <Compile Include="complaint_nameOfComplainant.cs" />
-    <Compile Include="complaint_patient.cs" />
-    <Compile Include="complaint_types_list.cs" />
-    <Compile Include="facility_type.cs" />
-    <Compile Include="hospitals.cs" />
+    <Compile Include="Models\actions_takened.cs" />
+    <Compile Include="Models\communication.cs" />
+    <Compile Include="Models\CommunicationViewModel.cs" />
+    <Compile Include="Models\complaints.cs" />
+    <Compile Include="Models\complaint_nameOfComplainant.cs" />
+    <Compile Include="Models\complaint_patient.cs" />
+    <Compile Include="Models\complaint_types_list.cs" />
+    <Compile Include="Models\facility_type.cs" />
+    <Compile Include="Models\hospitals.cs" />
     <Compile Include="Interfaces\IComplaintPatientRepository.cs" />
     <Compile Include="Interfaces\IComplaintsRepository.cs" />
     <Compile Include="Interfaces\IComplaintTypeRepo.cs" />
     <Compile Include="Interfaces\IFacilityTypeRepo.cs" />
     <Compile Include="Interfaces\IHospitalRepo.cs" />
     <Compile Include="Interfaces\INameOfComplainantRepository.cs" />
-    <Compile Include="pcc_number.cs" />
+    <Compile Include="Models\pcc_number.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="staff_assigend.cs" />
-    <Compile Include="type_complaint.cs" />
+    <Compile Include="Models\staff_assigend.cs" />
+    <Compile Include="Models\type_complaint.cs" />
+    <Compile Include="ViewModels\communicationsViewModel.cs" />
+    <Compile Include="ViewModels\CreateComplaintViewModel.cs" />
     <Compile Include="ViewModels\HealthFacilityViewModel.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -13,5 +13,7 @@ namespace HFSRBO.Core
         void Remove(Int32 ID);
         IEnumerable<complaints> GetComplaints();
         complaints FindById(Int32 ID);
+        CreateComplaintViewModel getCreateComplaintViewModel();
+
     }
 }

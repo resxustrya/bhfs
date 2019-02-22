@@ -22,7 +22,7 @@
 <ul class="sidenav" id="sidenav">
     @if (User.Identity.IsAuthenticated)
     {
-        <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
+        <li><a href="@Url.Action("Complaints","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
         <li>
             <a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a>
             <ul>
@@ -55,7 +55,7 @@
         <ul class="right hide-on-med-and-down white-text">
             @if (User.Identity.IsAuthenticated)
             {
-                <li><a href="@Url.Action("Home","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
+                <li><a href="@Url.Action("Complaints","Complaint")" class="white-text"><i class="material-icons">menu</i></a></li>
                 <li><a class="dropdown-trigger white-text" href="#" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
             }
 

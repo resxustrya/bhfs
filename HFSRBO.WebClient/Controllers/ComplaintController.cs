@@ -13,10 +13,22 @@ namespace HFSRBO.WebClient
     [OutputCache(NoStore = true, Duration = 0)]
     public class ComplaintController : Controller
     {
+        private IComplaintsRepository cr;
         // GET: Complaint
+        public ComplaintController(IComplaintsRepository cr)
+        {
+            this.cr = cr;
+        }
+        public ComplaintController()
+        {}
         public ActionResult Complaints()
         {
             return View();
+        }
+        public ActionResult CreateComplaint()
+        {
+            CreateComplaintViewModel createComplaintVM = this.cr.getCreateComplaintViewModel();
+            return View(createComplaintVM);
         }
     }
 }

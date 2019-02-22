@@ -338,6 +338,7 @@
     <Content Include="Views\MasterData\HealthFacilities.cshtml" />
     <Content Include="Views\MasterData\_HealthFacilites.cshtml" />
     <Content Include="Views\MasterData\_FacilityType.cshtml" />
+    <Content Include="Views\Complaint\CreateComplaint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
