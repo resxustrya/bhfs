@@ -12,9 +12,11 @@ namespace HFSRBO.Core
         public String firstname { get; set; }
         public String lastname { get; set; }
         public String mi { get; set; }
-        public Int32 age { get; set; }
         public String civil_status { get; set; }
         public String gender { get; set; }
         public String address { get; set; }
+        public String relationship { get; set; }
+        public String telNo { get; set; }
+        public String mobile { get; set; }
     }
 }

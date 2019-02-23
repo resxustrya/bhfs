@@ -14,8 +14,10 @@ namespace HFSRBO.Core
         public Int32 hospitalID { get; set; }
         public DateTime? date_confined { get; set; }
         public String other_complaint { get; set; }
+        public String reasonOfConfinement { get; set; }
         public String assistance_needed { get; set; }
         public String communication_form { get; set; }
+        public String pccNumber { get; set; }
         public String ownership { get; set; }
         public DateTime? date_informed_the_hf { get; set; }
         public DateTime? date_hf_submitted_reply { get; set; }

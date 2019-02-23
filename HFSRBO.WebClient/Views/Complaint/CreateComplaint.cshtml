@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col l12 m12 s12">
-        <form action="@Url.Action("SubmitForm","Complaint")" method="post">
+        <form action="@Url.Action("CreateComplaint","Complaint")" method="post">
             @Html.AntiForgeryToken()
             <div class="card white darken-4">
                 <div class="card-content">
@@ -16,7 +16,7 @@
                         <div class="col l4  m12 s12">
                             <div class="switch center">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="anonymous" value="false">
                                     <span class="lever"></span>
                                     <span>Anonymous</span>
                                 </label>
@@ -33,14 +33,13 @@
                     <div class="row">
                         <div class="col l12 m12 s12">
                             <ul class="tabs mdl-color-text--green">
-                                <li class="tab col s3"><a class="active" href="#complainantInfo">Name of Complainant</a></li>
-                                <li class="tab col s3"><a href="#patientInfo">Patient Info. (if applicable)</a></li>
-                                <li class="tab col s3"><a href="#complaintInfo">Complaint Information</a></li>
-                                <li class="tab col s3"><a href="#otherInformation">Other Information</a></li>
+                                <li class="tab col s3 complainantInfo"><a class="active" href="#complainantInfo">Name of Complainant</a></li>
+                                <li class="tab col s3 patientInfo"><a href="#patientInfo">Patient Info. (if applicable)</a></li>
+                                <li class="tab col s3 complaintInfo"><a href="#complaintInfo">Complaint Information</a></li>
+                                <li class="tab col s3 otherInformation"><a href="#otherInformation">Other Information</a></li>
                             </ul>
-                            <div id="complainantInfo" style="padding-top:20px;">
+                            <div id="complainantInfo" class="disabled" style="padding-top:20px;">
                                 <div class="row">
-
                                     <div class="input-field col l4 m12 s12 center">
                                         <input type="text" class="validate" name="firstname" data-val="true" data-val-required="You must enter firstname" />
                                         <label for="firstname">Firstname</label>
@@ -55,11 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="input-field col l3 m12 s12 center">
-                                        <input type="number" class="validate" name="age" />
-                                        <label for="age">Age</label>
-                                    </div>
-                                    <div class="input-field col l3 m12 s12">
+                                    <div class="input-field col l4 m12 s12">
                                         <select name="civil_status">
                                             @{
                                                 string[] civil_status = { "Single", "Married", "Separated", "Divorced", "Widowed" };
@@ -72,7 +67,7 @@
                                         </select>
                                         <label for="civil_status">Civil Status</label>
                                     </div>
-                                    <div class="input-field col l3 m12 s12">
+                                    <div class="input-field col l4 m12 s12">
                                         <select name="gender">
                                             @{
                                                 var gender = new Dictionary<String, String>();
@@ -88,9 +83,23 @@
                                         </select>
                                         <label for="gender">Gender</label>
                                     </div>
-                                    <div class="input-field col l3 s12 m12">
+                                    <div class="input-field col l4 s12 m12">
                                         <input type="text" name="date" class="datepicker">
                                         <label for="date">Date</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col l4 s12 m12">
+                                        <input type="text" name="relationship">
+                                        <label for="relationship">Relationship to patient</label>
+                                    </div>
+                                    <div class="input-field col l4 s12 m12">
+                                        <input type="text" name="telNo">
+                                        <label for="telNo">Tel No.</label>
+                                    </div>
+                                    <div class="input-field col l4 s12 m12">
+                                        <input type="text" name="mobile">
+                                        <label for="mobile">Tel No.</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -103,28 +112,32 @@
                             </div>
                             <div id="patientInfo" style="padding-top:20px;">
                                 <div class="row">
-                                    <div class="input-field col l3 m12 s12 center">
+                                    <div class="input-field col l4 m12 s12 center">
                                         <input type="text" class="validate" name="p_firstname" />
                                         <label for="p_firstname">Firstname</label>
                                     </div>
-                                    <div class="input-field col l3 m12 s12">
+                                    <div class="input-field col l4 m12 s12">
                                         <input type="text" name="p_lastname" />
                                         <label for="p_lastname">Lastname</label>
                                     </div>
-                                    <div class="input-field col l3 m12 s12">
+                                    <div class="input-field col l4 m12 s12">
                                         <input type="text" name="p_mi" />
                                         <label for="p_mi">Middle Name</label>
                                     </div>
-                                    <div class="input-field col l3 m12 s12">
+                                    <div class="input-field col l4 m12 s12">
                                         <input type="text" name="date_confined" class="datepicker" />
                                         <label for="date_confined">Date patient confined(if applicable)</label>
+                                    </div>
+                                    <div class="input-field col l4 m12 s12 center">
+                                        <input type="number" class="validate" name="age" />
+                                        <label for="age">Age</label>
                                     </div>
                                 </div>
                             </div>
                             <div id="complaintInfo" style="padding-top:20px;">
                                 <div class="row">
                                     <div class="input-field l12 m12 s12">
-                                        <select name="hospitalID">
+                                        <select name="hospitalID" required>
                                             <option value="" disabled selected>Choose your option</option>
                                             @foreach (hospitals h in Model._hospitals)
                                             {
@@ -155,20 +168,40 @@
                                         <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed"></textarea>
                                         <label for="assistance_needed">Assistance Needed</label>
                                     </div>
+                                    <div class="input-field col l12 s12 m12">
+                                        <input type="text" name="reasonOfConfinement" />
+                                        <label for="reasonOfConfinement">Reason of confinment</label>
+                                    </div>
                                 </div>
                             </div>
                             <div id="otherInformation" style="padding-top:20px;">
                                 <div class="row">
-                                    <div class="input-field col l6 s12 m12">
-                                        <select name="communication_form">
-                                            <option value="" disabled selected>Choose your option</option>
-
-                                            @foreach (communication c in Model._communications)
-                                            {
-                                                <option value="@c.ID">@c.desc</option>
-                                            }
-                                        </select>
-                                        <label for="communication_form">Form of Communication received</label>
+                                    <div class="col l6 m12 s12">
+                                        <h6>Form of Communication</h6>
+                                        <div class="row">
+                                            <div class="col l2 m12 s12">
+                                                <div class="switch center" style="margin-top:25px;">
+                                                    <label>
+                                                        <input type="checkbox" name="pccCheck" value="false">
+                                                        <span class="lever"></span>
+                                                        <span>PCC</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="input-field col l3 m12 s12">
+                                                <input type="text" disabled name="pccNumber" />
+                                                <label for="pccNumber">PCC Number</label>
+                                            </div>
+                                            <div class="col l5 s12 m12">
+                                                <select name="communication_form" id="communication_form" class="browser-default" style="margin-top:10px;" >
+                                                    <option value="" disabled selected>Form of Communication received</option>
+                                                    @foreach (communication c in Model._communications)
+                                                    {
+                                                        <option value="@c.ID">@c.desc</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="input-field col l6 s12 m12">
                                         <select name="ownership">
@@ -203,11 +236,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col l12 m12 s12">
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -216,4 +244,30 @@
     </div>
 </div>
 
-
+@section scripts{
+    <script>
+        $("input[name='pccCheck']").change(function () {
+            var stat = $(this).prop('checked');
+            if(stat){
+                $("input[name='pccNumber']").prop('disabled', false);
+                $(this).val(true);
+                $("select[name='communication_form']").prop('disabled', true);
+            } else {
+                $(this).val(false);
+                $("input[name='pccNumber']").prop('disabled', true);
+                $("select[name='communication_form']").prop('disabled', false);
+            }
+        });
+        
+        $("input[name='anonymous']").change(function () {
+            var stat = $(this).prop('checked');
+            if (stat) {
+                $('.complainantInfo').addClass('disabled');
+                $(this).val(true);
+            } else {
+                $(this).val(false);
+                $('.complainantInfo').removeClass('disabled');
+            }
+        });
+    </script>
+}

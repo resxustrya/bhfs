@@ -93,8 +93,7 @@
 
             var chips = document.querySelectorAll('.chips');
             var chips_instances = M.Chips.init(elems);
-
-            var tabs = M.Tabs.init(el, options);
+           
 
         });
 
@@ -103,7 +102,7 @@
         $(document).ready(function () {
             $("input").attr("autocomplete", "off");
             $('.datepicker').datepicker({
-                format: 'mm/dd/yyyy'
+                format: 'yyyy-mm-dd'
             });
             $('select').formSelect();
             $(".dropdown-trigger").dropdown();
@@ -112,6 +111,9 @@
             $('.tooltipped').tooltip();
             $('.sidenav').sidenav();
             $('.tabs').tabs();
+            $(document).ready(function () {
+                $('.collapsible').collapsible();
+            });
         });
 
     </script>

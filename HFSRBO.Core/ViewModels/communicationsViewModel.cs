@@ -17,8 +17,7 @@ namespace HFSRBO.Core
             new communication {ID = 5, desc = "By Snail Mail" },
             new communication {ID = 6, desc = "By Text Message" },
             new communication {ID = 7, desc = "By Interview" },
-            new communication {ID = 8, desc = "By Email" },
-            new communication {ID = 9, desc = "PCC" }
+            new communication {ID = 8, desc = "By Email" }
         };
     }
 }

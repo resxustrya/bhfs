@@ -61,6 +61,7 @@
     <Compile Include="Models\staff_assigend.cs" />
     <Compile Include="Models\type_complaint.cs" />
     <Compile Include="ViewModels\communicationsViewModel.cs" />
+    <Compile Include="ViewModels\ComplaintInfoViewModel.cs" />
     <Compile Include="ViewModels\CreateComplaintViewModel.cs" />
     <Compile Include="ViewModels\HealthFacilityViewModel.cs" />
   </ItemGroup>

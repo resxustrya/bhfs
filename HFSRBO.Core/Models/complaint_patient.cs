@@ -12,5 +12,6 @@ namespace HFSRBO.Core
         public String p_firstname { get; set; }
         public String p_lastname { get; set; }
         public String p_mi { get; set; }
+        public Int32 age { get; set; }
     }
 }

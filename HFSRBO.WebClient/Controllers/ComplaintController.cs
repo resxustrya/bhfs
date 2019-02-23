@@ -30,5 +30,11 @@ namespace HFSRBO.WebClient
             CreateComplaintViewModel createComplaintVM = this.cr.getCreateComplaintViewModel();
             return View(createComplaintVM);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm)
+        {
+            return Json(civm.date.ToShortDateString(), JsonRequestBehavior.AllowGet);
+        }
     }
 }

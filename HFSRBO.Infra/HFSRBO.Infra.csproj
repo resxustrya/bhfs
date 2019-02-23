@@ -99,6 +99,18 @@
     <Compile Include="Migrations\201902150449076_new_tables.Designer.cs">
       <DependentUpon>201902150449076_new_tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902230220343_change_cols.cs" />
+    <Compile Include="Migrations\201902230220343_change_cols.Designer.cs">
+      <DependentUpon>201902230220343_change_cols.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902230229390_added_cols.cs" />
+    <Compile Include="Migrations\201902230229390_added_cols.Designer.cs">
+      <DependentUpon>201902230229390_added_cols.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902230538584_added_column.cs" />
+    <Compile Include="Migrations\201902230538584_added_column.Designer.cs">
+      <DependentUpon>201902230538584_added_column.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ComplaintsRepository.cs" />
@@ -124,6 +136,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902150449076_new_tables.resx">
       <DependentUpon>201902150449076_new_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902230220343_change_cols.resx">
+      <DependentUpon>201902230220343_change_cols.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902230229390_added_cols.resx">
+      <DependentUpon>201902230229390_added_cols.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902230538584_added_column.resx">
+      <DependentUpon>201902230538584_added_column.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
