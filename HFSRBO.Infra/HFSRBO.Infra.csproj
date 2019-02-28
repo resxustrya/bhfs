@@ -111,8 +111,13 @@
     <Compile Include="Migrations\201902230538584_added_column.Designer.cs">
       <DependentUpon>201902230538584_added_column.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902280312169_added_col.cs" />
+    <Compile Include="Migrations\201902280312169_added_col.Designer.cs">
+      <DependentUpon>201902280312169_added_col.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ComplaintAssistanceRepo.cs" />
     <Compile Include="Repositories\ComplaintsRepository.cs" />
     <Compile Include="Repositories\ComplaintTypesRepo.cs" />
     <Compile Include="Repositories\FacilityTypeRepo.cs" />
@@ -145,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902230538584_added_column.resx">
       <DependentUpon>201902230538584_added_column.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902280312169_added_col.resx">
+      <DependentUpon>201902280312169_added_col.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

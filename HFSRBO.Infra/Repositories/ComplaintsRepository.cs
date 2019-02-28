@@ -13,6 +13,7 @@ namespace HFSRBO.Infra
         HospitalRepo hr = new HospitalRepo();
         communicationsViewModel cvm = new communicationsViewModel();
         ComplaintTypesRepo ctr = new ComplaintTypesRepo();
+        ComplaintAssistanceRepo cat = new ComplaintAssistanceRepo();
         public Int32 Add(complaints _complaints)
         {
             db.complaints.Add(_complaints);
@@ -47,7 +48,8 @@ namespace HFSRBO.Infra
             {
                 _hospitals = hr.GetHospitals(),
                 _communications = cvm._communication,
-                _complaint_type = ctr.GetComplaintTypes()
+                _complaint_type = ctr.GetComplaintTypes(),
+                _complaintAssistance = cat.GetComplaintAssistance()
             };
             return _viewModel;
         }

@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IComplaintAssistanceRepo.cs" />
     <Compile Include="Models\actions_takened.cs" />
     <Compile Include="Models\communication.cs" />
     <Compile Include="Models\CommunicationViewModel.cs" />
     <Compile Include="Models\complaints.cs" />
+    <Compile Include="Models\complaint_assistance.cs" />
     <Compile Include="Models\complaint_nameOfComplainant.cs" />
     <Compile Include="Models\complaint_patient.cs" />
     <Compile Include="Models\complaint_types_list.cs" />
@@ -61,8 +63,10 @@
     <Compile Include="Models\staff_assigend.cs" />
     <Compile Include="Models\type_complaint.cs" />
     <Compile Include="ViewModels\communicationsViewModel.cs" />
+    <Compile Include="ViewModels\ComplaintDetailsVM.cs" />
     <Compile Include="ViewModels\ComplaintInfoViewModel.cs" />
     <Compile Include="ViewModels\CreateComplaintViewModel.cs" />
+    <Compile Include="ViewModels\HealthFacilityTypeFacilityVM.cs" />
     <Compile Include="ViewModels\HealthFacilityViewModel.cs" />
   </ItemGroup>
   <ItemGroup />

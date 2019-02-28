@@ -337,11 +337,10 @@
     <Content Include="Views\MasterData\ComplaintTypes.cshtml" />
     <Content Include="Views\MasterData\EditComplaintType.cshtml" />
     <Content Include="Views\MasterData\AddComplaintType.cshtml" />
-    <Content Include="Views\MasterData\HealthFacilities.cshtml" />
-    <Content Include="Views\MasterData\_HealthFacilites.cshtml" />
-    <Content Include="Views\MasterData\_FacilityType.cshtml" />
     <Content Include="Views\Complaint\CreateComplaint.cshtml" />
     <Content Include="Views\Complaint\Filters.cshtml" />
+    <Content Include="Views\MasterData\HealthFacility.cshtml" />
+    <Content Include="Views\MasterData\AddComplaintAssistance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

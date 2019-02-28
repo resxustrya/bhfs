@@ -14,17 +14,24 @@ namespace HFSRBO.WebClient.Controllers
         IComplaintTypeRepo complaintType;
         IFacilityTypeRepo facilityType;
         IHospitalRepo hospitals;
-        public MasterDataController(IComplaintTypeRepo complaintType, IFacilityTypeRepo facilityType,IHospitalRepo hospitals)
+        IComplaintAssistanceRepo complaintAssistance;
+        public MasterDataController(IComplaintTypeRepo complaintType, IFacilityTypeRepo facilityType,IHospitalRepo hospitals, IComplaintAssistanceRepo complaintAssistance)
         {
             this.complaintType = complaintType;
             this.facilityType = facilityType;
             this.hospitals = hospitals;
+            this.complaintAssistance = complaintAssistance;
         }
         
         public ActionResult ComplaintTypes()
         {
-            var result = complaintType.GetComplaintTypes();
-            return View(result);
+            //var result = complaintType.GetComplaintTypes();
+            ComplaintDetailsVM cdvm = new ComplaintDetailsVM
+            {
+                complaintTypes = this.complaintType.GetComplaintTypes(),
+                complaintAssistance = this.complaintAssistance.GetComplaintAssistance()
+            };
+            return View(cdvm);
         }
         [HttpGet]
         public ActionResult AddComplaintType()
@@ -33,9 +40,9 @@ namespace HFSRBO.WebClient.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddComplaintType(FormCollection collection)
+        public ActionResult AddComplaintType(type_complaint ct)
         {
-            complaintType.Add(new type_complaint { Description = collection.Get("description") });
+            complaintType.Add(ct);
             return RedirectToAction("ComplaintTypes");
         }
         public ActionResult EditComplaintType(String ID)
@@ -71,46 +78,41 @@ namespace HFSRBO.WebClient.Controllers
             catch { }
             return HttpNotFound();
         }
-        public ActionResult  HealthFacility(String tab ="1")
+        public ActionResult  HealthFacility()
         {
-            if(tab == "1")
+            var hostpitals = hospitals.GetHealthFacilities();
+            var facilitytypes = facilityType.GetFacilityTypes();
+            HealthFacilityTypeFacilityVM hftvm = new HealthFacilityTypeFacilityVM
             {
-                ViewBag.Tab = tab;
-                var result = hospitals.GetHealthFacilities();
-                return View("~/Views/MasterData/HealthFacilities.cshtml", result);
-            }
-            else if(tab == "2")
-            {
-                ViewBag.Tab = tab;
-                var result = facilityType.GetFacilityTypes();
-                return View("~/Views/MasterData/HealthFacilities.cshtml", result);
-            }
-            ViewBag.Tab = tab;
-            return View();
+                healthFacility = hostpitals,
+                facilityType = facilitytypes
+            };
+            return View(hftvm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddHealthFacility(FormCollection collection)
+        public ActionResult AddHealthFacility(hospitals _hospitals)
         {
-            Core.hospitals _hospital = new Core.hospitals
-            {
-                name = collection.Get("name"),
-                address = collection.Get("address"),
-                facilityID = Convert.ToInt32(collection.Get("facilityID"))
-            };
-            hospitals.Add(_hospital);
+            hospitals.Add(_hospitals);
             return RedirectToAction("HealthFacility");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddFacilityType(FormCollection collection)
+        public ActionResult AddFacilityType(facility_type ft)
         {
-            Core.facility_type ft = new facility_type
-            {
-                Name = collection.Get("name")
-            };
             facilityType.Add(ft);
             return RedirectToAction("HealthFacility");
+        }
+        public ActionResult AddComplaintAssistance()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComplaintAssistance(complaint_assistance _complaintAssistance)
+        {
+            complaintAssistance.Add(_complaintAssistance);
+            return RedirectToAction("ComplaintTypes");
         }
     }
 }

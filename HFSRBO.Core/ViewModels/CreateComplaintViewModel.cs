@@ -11,5 +11,6 @@ namespace HFSRBO.Core
         public IEnumerable<hospitals> _hospitals { get; set; }
         public IEnumerable<communication> _communications { get; set; }
         public IEnumerable<type_complaint> _complaint_type { get; set; }
+        public IEnumerable<complaint_assistance> _complaintAssistance { get; set; }
     }
 }

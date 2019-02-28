@@ -148,27 +148,39 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col l12 m12 s12">
-                                        <h6>Type of complaint :</h6>
-                                        @foreach (type_complaint t in Model._complaint_type)
-                                        {
-                                            <p>
-                                                <label for="@t.ID">
-                                                    <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
-                                                    <span>@t.Description</span>
-                                                </label>
-                                            </p>
-                                        }
-                                        <div class="input-field">
-                                            <input type="text" name="other_complaint" />
-                                            <label for="other_complaint">Others.</label>
-                                        </div>
+                                    <h6>(A.) Type of complaint :</h6>
+                                    @foreach (type_complaint t in Model._complaint_type)
+                                    {
+                                        <p>
+                                            <label for="@t.ID">
+                                                <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
+                                                <span>@t.Description</span>
+                                            </label>
+                                        </p>
+                                    }
+                                    <div class="input-field">
+                                        <input type="text" name="other_complaint" />
+                                        <label for="other_complaint">Others.</label>
                                     </div>
-                                    <div class="input-field col l12 s12 m12">
-                                        <textarea id="assistance_needed" class="materialize-textarea" name="assistance_needed"></textarea>
-                                        <label for="assistance_needed">Assistance Needed</label>
+                                </div>
+                                <div class="row">
+                                    <h6>(B.) Assistance Needed</h6>
+                                    @foreach (complaint_assistance at in Model._complaintAssistance)
+                                    {
+                                        <p>
+                                            <label for="@(at.ID)101">
+                                                <input type="checkbox" id="@(at.ID)101" class="filled-in" name="complaint_assistance[]" value="@at.ID" />
+                                                <span>@at.assistance</span>
+                                            </label>
+                                        </p>
+                                    }
+                                    <div class="input-field">
+                                        <input type="text" name="other_complaint" />
+                                        <label for="other_complaint">Others </label>
                                     </div>
-                                    <div class="input-field col l12 s12 m12">
+                                </div>
+                                <div class="row">
+                                    <div class="input-field">
                                         <input type="text" name="reasonOfConfinement" />
                                         <label for="reasonOfConfinement">Reason of confinment</label>
                                     </div>
