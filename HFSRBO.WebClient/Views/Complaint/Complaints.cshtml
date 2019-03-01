@@ -16,7 +16,7 @@
         </ul>
         <div class="card white darken-1">
             <div class="card-content">
-                <table id="complaint" class="responsive-table highlight">
+                <table id="complaint" class="responsive-table highlight myTable table hover">
                     <tr>
                         <th>Date Received</th>
                         <th>Code Number</th>
@@ -51,3 +51,18 @@
         <li><a class="btn-floating red modal-trigger" href="#search"><i class="material-icons">search</i></a></li>
     </ul>
 </div>
+
+@section scripts{
+    <script>
+        let options = {
+            numberPerPage: 20, //Cantidad de datos por pagina
+            goBar: false, //Barra donde puedes digitar el numero de la pagina al que quiere ir
+            pageCounter: false, //Contador de paginas, en cual estas, de cuantas paginas
+        };
+
+        let filterOptions = {
+        };
+
+        paginate.init('.myTable', options, filterOptions);
+    </script>    
+}

@@ -46,6 +46,7 @@
     <Compile Include="Models\communication.cs" />
     <Compile Include="Models\CommunicationViewModel.cs" />
     <Compile Include="Models\complaints.cs" />
+    <Compile Include="Models\complaint_action_dates.cs" />
     <Compile Include="Models\complaint_assistance.cs" />
     <Compile Include="Models\complaint_nameOfComplainant.cs" />
     <Compile Include="Models\complaint_patient.cs" />

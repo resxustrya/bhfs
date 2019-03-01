@@ -18,7 +18,9 @@ namespace HFSRBO.WebClient
                         "~/Scripts/material/init.js",
                         "~/Scripts/material/datatable.js",
                         "~/Scripts/material/datatable_material.js",
-                        "~/Scripts/selectpicker.js"));
+                        "~/Scripts/selectpicker.js"
+                        
+                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -37,7 +39,6 @@ namespace HFSRBO.WebClient
                       "~/Content/materialize.css",
                       "~/Content/paralax.css",
                       "~/Content/page.css"
-
                       ));
         }
     }
