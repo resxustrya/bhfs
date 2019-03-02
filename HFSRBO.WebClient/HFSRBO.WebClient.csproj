@@ -289,6 +289,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\ligne-paginate.js" />
+    <Content Include="Scripts\material\createComplaintFormSubmit.js" />
     <Content Include="Scripts\material\datatable.js" />
     <Content Include="Scripts\material\datatable_material.js" />
     <Content Include="Scripts\material\init.js" />

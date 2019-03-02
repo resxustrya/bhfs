@@ -30,17 +30,22 @@ namespace HFSRBO.WebClient
             _civm.date_confined = form.Get("date_confined");
             try { _civm.age = Convert.ToInt32(form.Get("age")); } catch { }
             try { _civm.hospitalID = Convert.ToInt32(form.Get("hospitalID")); } catch { }
-            _civm.other_complaint = form.Get("other_complaint");
-            _civm.assistance_needed = form.Get("assistance_needed");
+            
             _civm.reasonOfConfinement = form.Get("reasonOfConfinement");
             _civm.pccCheck = Convert.ToBoolean(form.Get("pccCheck"));
             _civm.pccNumber = form.Get("pccNumber");
             _civm.communication_form = form.Get("communication_form");
             _civm.ownership = form.Get("ownership");
+
+
+            /*
             _civm.date_informed_the_hf = form.Get("date_informed_the_hf");
             _civm.date_hf_submitted_reply = form.Get("date_hf_submitted_reply");
             _civm.date_release_to_records = form.Get("date_release_to_records");
             _civm.date_final_resolution = form.Get("date_final_resolution");
+            */
+
+
 
             return _civm;
         }

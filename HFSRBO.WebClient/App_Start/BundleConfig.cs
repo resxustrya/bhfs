@@ -18,8 +18,8 @@ namespace HFSRBO.WebClient
                         "~/Scripts/material/init.js",
                         "~/Scripts/material/datatable.js",
                         "~/Scripts/material/datatable_material.js",
-                        "~/Scripts/selectpicker.js"
-                        
+                        "~/Scripts/selectpicker.js",
+                        "~/Scripts/material/createComplaintFormSubmit.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

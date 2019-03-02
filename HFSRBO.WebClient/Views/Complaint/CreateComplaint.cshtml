@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col l12 m12 s12">
-        <form action="@Url.Action("CreateComplaint","Complaint")" method="post">
+        <form data-action="@Url.Action("CreateComplaint","Complaint")" name="CreateComplaint" id="CreateComplaint" data-method="post">
             @Html.AntiForgeryToken()
             <div class="card white darken-4">
                 <div class="card-content">
@@ -240,7 +240,7 @@
                                         <li>
                                             <div class="collapsible-header" data-member="date_informed_the_hf" ><i class="material-icons">date_range</i>Date Informed the HF/concerned office </div>
                                             <div class="collapsible-body">
-                                                <input type="hidden" class="datepicker" name="date_informed_the_hf" />
+                                                <input type="hidden" class="datepicker" name="input_date_informed_the_hf" />
                                                 <strong><a class="waves-effect btn-small waves-light green" href="#" id="date_informed_the_hf"><i class="material-icons right">add</i>Add Dates</a></strong>
                                                 <table class="striped date_informed_the_hf"></table>
                                             </div>
@@ -248,7 +248,7 @@
                                         <li>
                                             <div class="collapsible-header" data-member="date_hf_submitted_reply"><i class="material-icons">date_range</i>Date HF/concerned office submitted reply</div>
                                             <div class="collapsible-body">
-                                                <input type="hidden" class="datepicker" name="date_hf_submitted_reply" />
+                                                <input type="hidden" class="datepicker" name="input_date_hf_submitted_reply" />
                                                 <strong><a href="#" class="waves-effect btn-small waves-light green" id="date_hf_submitted_reply"><i class="material-icons right">add</i>Add Dates</a></strong>
                                                 <table class="striped date_hf_submitted_reply"></table>
                                             </div>
@@ -256,7 +256,7 @@
                                         <li>
                                             <div class="collapsible-header" data-member="date_release_to_records"><i class="material-icons">date_range</i>Date released to records section</div>
                                             <div class="collapsible-body">
-                                                <input type="hidden" class="datepicker" name="date_release_to_records" />
+                                                <input type="hidden" class="datepicker" name="input_date_release_to_records" />
                                                 <strong><a class="waves-effect btn-small waves-light green" href="#" id="date_release_to_records"><i class="material-icons right">add</i>Add Dates</a></strong>
                                                 <table class="striped date_release_to_records"></table>
                                             </div>
@@ -264,7 +264,7 @@
                                         <li>
                                             <div class="collapsible-header" data-member="date_final_resolution"><i class="material-icons">date_range</i>Date Resolution of the complaint released to records/client</div>
                                             <div class="collapsible-body">
-                                                <input type="hidden" class="datepicker" name="date_final_resolution" />
+                                                <input type="hidden" class="datepicker" name="input_date_final_resolution" />
                                                 <strong><a href="#" class="waves-effect btn-small waves-light green" id="date_final_resolution"><i class="material-icons right">add</i>Add Dates</a></strong>
                                                 <table class="striped date_final_resolution"></table>
                                             </div>
@@ -295,119 +295,3 @@
         </form>
     </div>
 </div>
-
-@section scripts{
-    <script>
-
-        $('#date_informed_the_hf').click(function () {
-            var el = M.Datepicker.getInstance($("input[name='date_informed_the_hf']"));
-            el.open();
-        });
-        $("input[name='date_informed_the_hf']").change(function () {
-            var date = new Date($(this).val());
-            addDates(date, "date_informed_the_hf");
-        });
-
-        $('#date_hf_submitted_reply').click(function () {
-            var el = M.Datepicker.getInstance($("input[name='date_hf_submitted_reply']"));
-            el.open();
-        });
-        $("input[name='date_hf_submitted_reply']").change(function () {
-            var date = new Date($(this).val());
-            addDates(date, "date_hf_submitted_reply");
-        });
-
-        $('#date_release_to_records').click(function () {
-            var el = M.Datepicker.getInstance($("input[name='date_release_to_records']"));
-            el.open();
-        });
-        $("input[name='date_release_to_records']").change(function () {
-            var date = new Date($(this).val());
-            addDates(date, "date_release_to_records");
-        });
-
-        $('#date_final_resolution').click(function () {
-            var el = M.Datepicker.getInstance($("input[name='date_final_resolution']"));
-            el.open();
-        });
-
-        $("input[name='date_final_resolution']").change(function () {
-            var date = new Date($(this).val());
-            addDates(date, "date_final_resolution");
-        });
-
-        function addDates(date, classMemeber) {
-            $("table."+classMemeber)
-                .append(
-                    "<tr>"
-                    + "<td><input type='text' disabled name='"+classMemeber+"[]' value='" + date.toLocaleDateString() + "' /></td>"
-                    + "<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
-                    + "</tr>"
-                );
-        }
-
-        $("input[name='pccCheck']").change(function () {
-            var stat = $(this).prop('checked');
-            if(stat){
-                $("input[name='pccNumber']").prop('disabled', false);
-                $(this).val(true);
-                $("select[name='communication_form']").prop('disabled', true);
-            } else {
-                $(this).val(false);
-                $("input[name='pccNumber']").prop('disabled', true);
-                $("select[name='communication_form']").prop('disabled', false);
-            }
-        });
-        
-        $("input[name='anonymous']").change(function () {
-            var stat = $(this).prop('checked');
-            if (stat) {
-                $(this).val(true);
-            } else {
-                $(this).val(false);
-            }
-        });
-        
-        $(".addAction").click(function () {
-            var elem = $("#add_type_complaint");
-            elem.modal('open');
-            $("#add_type_complaint .modal-content")
-            .html('')
-            .append(
-                "<div class='row'>"
-                    +"<div class='col l12 m12 s12 input-field'>"
-                        +"<input type='text' name='actionTaken' required autocomplete='off' />"
-                        +"<label for='description'>Action Taken</label>"
-                    + "</div>"
-                    + "<div class='col l12 m12 s12 input-field'>"
-                        + "<input type='date' name='actionDate' required autocomplete='off' />"
-                    + "</div>"
-                +"</div>"
-                +"<div class='modal-footer'>"
-                    +"<button type='submit' class='btn-large waves-effect waves-light green' onclick='addAction();'>Add</button>"
-                +"</div>"              
-            );
-        });
-
-        function romoveMember(el) {
-            var parentEl = $(el).parent().parent();
-            parentEl.remove();
-        }
-
-        function addAction()
-        {
-            var action = $("input[name='actionTaken']").val();
-            var actionDate = $("input[name='actionDate']").val();
-            $("table.actionTakenList")
-               .append(
-                   "<tr>"
-                   + "<td><input type='text' disabled name='actionDate[]' value='" + actionDate + "' /></td>"
-                   + "<td><input type='text' disabled name='actionTaken[]' value='" +action+ "' /></td>"
-                   + "<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
-                   + "</tr>"
-               );
-            $("#add_type_complaint").modal('close');
-        }
-        
-    </script>
-}

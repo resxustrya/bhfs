@@ -5,6 +5,7 @@
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="jquery-1.10.2.js" />
 /// <reference path="ligne-paginate.js" />
+/// <reference path="material/createcomplaintformsubmit.js" />
 /// <reference path="material/datatable.js" />
 /// <reference path="material/datatable_material.js" />
 /// <reference path="material/init.js" />

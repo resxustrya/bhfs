@@ -26,18 +26,23 @@ namespace HFSRBO.Core
         public String date_confined { get; set; }
         public Int32 age { get; set; }
         public Int32 hospitalID { get; set; }
-        public Int32[] complaint_type { get; set; }
-        public String other_complaint { get; set; }
-        public String assistance_needed { get; set; }
+        public String otherComplaint { get; set; }
+        public String otherAssistanceNeeded { get; set; }
         public String reasonOfConfinement { get; set; }
         public Boolean pccCheck { get; set; }
         public String pccNumber { get; set; }
         public String communication_form { get; set; }
         public String ownership { get; set; }
-        public String date_informed_the_hf { get; set; }
-        public String date_hf_submitted_reply { get; set; }
-        public String date_release_to_records { get; set; }
-        public String date_final_resolution { get; set; }
-        
+        public String[] date_informed_the_hf { get; set; }
+        public String[] date_hf_submitted_reply { get; set; }
+        public String[] date_release_to_records { get; set; }
+        public String[] date_final_resolution { get; set; }
+
+        public Int32[] complaint_type { get; set; }
+        public Int32[] assistanceNeeded { get; set; }
+        public String[] actionDate { get; set; }
+        public String[] actionTaken { get; set; }
+
+
     }
 }
