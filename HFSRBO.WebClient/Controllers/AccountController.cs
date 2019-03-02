@@ -86,7 +86,7 @@ namespace HFSRBO.WebClient.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View("~/Views/Home/Index.cshtml", model);
+                    return View(model);
             }
         }
 

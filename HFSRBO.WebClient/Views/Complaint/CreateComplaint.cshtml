@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="input-field col l4 s12 m12">
                                         <input type="text" name="mobile">
-                                        <label for="mobile">Tel No.</label>
+                                        <label for="mobile">Mobile No.</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -241,31 +241,32 @@
                                             <div class="collapsible-header" data-member="date_informed_the_hf" ><i class="material-icons">date_range</i>Date Informed the HF/concerned office </div>
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="date_informed_the_hf" />
-                                                <strong><a href="#" id="date_informed_the_hf"><i class="material-icons">add</i></a></strong>
-                                                <table class="striped date_informed_the_hf">
-
-                                                </table>
+                                                <strong><a class="waves-effect btn-small waves-light green" href="#" id="date_informed_the_hf"><i class="material-icons right">add</i>Add Dates</a></strong>
+                                                <table class="striped date_informed_the_hf"></table>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="collapsible-header" data-member="date_hf_submitted_reply"><i class="material-icons">date_range</i>Date HF/concerned office submitted reply</div>
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="date_hf_submitted_reply" />
-                                                <strong><a href="#" id="date_hf_submitted_reply"><i class="material-icons">add</i></a></strong>
+                                                <strong><a href="#" class="waves-effect btn-small waves-light green" id="date_hf_submitted_reply"><i class="material-icons right">add</i>Add Dates</a></strong>
+                                                <table class="striped date_hf_submitted_reply"></table>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="collapsible-header" data-member="date_release_to_records"><i class="material-icons">date_range</i>Date released to records section</div>
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="date_release_to_records" />
-                                                <strong><a href="#" id="date_release_to_records"><i class="material-icons">add</i></a></strong>
+                                                <strong><a class="waves-effect btn-small waves-light green" href="#" id="date_release_to_records"><i class="material-icons right">add</i>Add Dates</a></strong>
+                                                <table class="striped date_release_to_records"></table>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="collapsible-header" data-member="date_final_resolution"><i class="material-icons">date_range</i>Date Resolution of the complaint released to records/client</div>
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="date_final_resolution" />
-                                                <strong><a href="#" id="date_final_resolution"><i class="material-icons">add</i></a></strong>
+                                                <strong><a href="#" class="waves-effect btn-small waves-light green" id="date_final_resolution"><i class="material-icons right">add</i>Add Dates</a></strong>
+                                                <table class="striped date_final_resolution"></table>
                                             </div>
                                         </li>
                                     </ul>
@@ -304,23 +305,25 @@
         });
         $("input[name='date_informed_the_hf']").change(function () {
             var date = new Date($(this).val());
-            $("table.date_informed_the_hf")
-                .append(
-                    "<tr>"
-                    +"<td><input type='text' disabled name='date_informed_the_hf[]' value='" + date.toLocaleDateString() + "' /></td>"
-                    +"<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
-                    +"</tr>" 
-                );
+            addDates(date, "date_informed_the_hf");
         });
 
         $('#date_hf_submitted_reply').click(function () {
             var el = M.Datepicker.getInstance($("input[name='date_hf_submitted_reply']"));
             el.open();
         });
+        $("input[name='date_hf_submitted_reply']").change(function () {
+            var date = new Date($(this).val());
+            addDates(date, "date_hf_submitted_reply");
+        });
 
         $('#date_release_to_records').click(function () {
             var el = M.Datepicker.getInstance($("input[name='date_release_to_records']"));
             el.open();
+        });
+        $("input[name='date_release_to_records']").change(function () {
+            var date = new Date($(this).val());
+            addDates(date, "date_release_to_records");
         });
 
         $('#date_final_resolution').click(function () {
@@ -328,9 +331,19 @@
             el.open();
         });
 
-        function romoveMember(el) {
-            var parentEl = $(el).parent().parent();
-            parentEl.remove();
+        $("input[name='date_final_resolution']").change(function () {
+            var date = new Date($(this).val());
+            addDates(date, "date_final_resolution");
+        });
+
+        function addDates(date, classMemeber) {
+            $("table."+classMemeber)
+                .append(
+                    "<tr>"
+                    + "<td><input type='text' disabled name='"+classMemeber+"[]' value='" + date.toLocaleDateString() + "' /></td>"
+                    + "<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
+                    + "</tr>"
+                );
         }
 
         $("input[name='pccCheck']").change(function () {
@@ -375,6 +388,11 @@
                 +"</div>"              
             );
         });
+
+        function romoveMember(el) {
+            var parentEl = $(el).parent().parent();
+            parentEl.remove();
+        }
 
         function addAction()
         {
