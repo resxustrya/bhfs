@@ -35,16 +35,15 @@ namespace HFSRBO.WebClient
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComplaint(String[] date_informed_the_hf,String[] date_hf_submitted_reply,String[] date_release_to_records,String[] date_final_resolution, String[] complaint_type,String[] complaint_assistance)
+        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm,String[] date_informed_the_hf,String[] date_hf_submitted_reply,String[] date_release_to_records,String[] date_final_resolution, String[] complaint_type,String[] complaint_assistance,String[] actionTaken,String[] actionDate)
         {
-            return Json(complaint_type.ToList(), JsonRequestBehavior.AllowGet);
-            //return Json(civm.date.ToShortDateString(), JsonRequestBehavior.AllowGet);
+            return Json(actionTaken.ToList(), JsonRequestBehavior.AllowGet);
         }
-        /*
-        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm)
+        
+        public void SaveComplaint(ComplaintInfoViewModel civm,String[] date_informed_the_hf, String[] date_hf_submitted_reply, String[] date_release_to_records, String[] date_final_resolution, String[] complaint_type, String[] complaint_assistance, String[] actionTaken, String[] actionDate)
         {
-            return Json(civm.date.ToShortDateString(), JsonRequestBehavior.AllowGet);
+
         }
-        */
+        
     }
 }

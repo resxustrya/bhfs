@@ -37,15 +37,7 @@ namespace HFSRBO.WebClient
             _civm.communication_form = form.Get("communication_form");
             _civm.ownership = form.Get("ownership");
 
-
-            /*
-            _civm.date_informed_the_hf = form.Get("date_informed_the_hf");
-            _civm.date_hf_submitted_reply = form.Get("date_hf_submitted_reply");
-            _civm.date_release_to_records = form.Get("date_release_to_records");
-            _civm.date_final_resolution = form.Get("date_final_resolution");
-            */
-
-
+            String[] complaintType = form.GetValues("complaint_type");
 
             return _civm;
         }

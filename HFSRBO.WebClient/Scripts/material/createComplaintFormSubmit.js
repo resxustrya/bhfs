@@ -111,33 +111,46 @@ function addAction() {
     $("#add_type_complaint").modal('close');
 }
 
-$("#CreateComplaint").on('submit', function (e) {
-    e.preventDefault();
+$("#btnSave").on('click', function (e) {
+    
+    $("#CustomComplaintForm").remove();
+    $("input[name='actionDate']").remove();
+    $("input[name='actionTaken']").remove();
 
     var form = document.createElement('form');
     form.method = "POST";
-    form.action = $(this).data('action');
+    form.action = $("#CreateComplaint").data('action');
     form.style.display = "none";
+    form.id = "CustomComplaintForm";
+    
+    form.appendChild(createInputElement('__RequestVerificationToken',$("input[name='__RequestVerificationToken']").val()));
+    form.appendChild(createInputElement('codeNumber',$("input[name='codeNumber']").val()));
+    form.appendChild(createInputElement('anonymos', $("input[name='anonymous']").val()));
+    form.appendChild(createInputElement('firstname', $("input[name='firstname']").val()));
+    form.appendChild(createInputElement('lastname',$("input[name='lastname']").val()));
+    form.appendChild(createInputElement('mi', $("input[name='mi']").val()));
+    form.appendChild(createInputElement('civil_status', $("select[name='civil_status']").val()));
+    form.appendChild(createInputElement('gender', $("select[name='gender']").val()));
+    form.appendChild(createInputElement('date', $("input[name='date']").val()));
+    form.appendChild(createInputElement('relationship', $("input[name='relationship']").val()));
+    form.appendChild(createInputElement('telNo', $("input[name='telNo']").val()));
+    form.appendChild(createInputElement('mobile', $("input[name='mobile']").val()));
+    form.appendChild(createInputElement('address', $("input[name='address']").val()));
+    form.appendChild(createInputElement('p_firstname', $("input[name='p_firstname']").val()));
+    form.appendChild(createInputElement('p_lastname', $("input[name='p_lastname']").val()));
+    form.appendChild(createInputElement('p_mi', $("input[name='p_mi']").val()));
+    form.appendChild(createInputElement('date_confined', $("input[name='date_confined']").val()));
+    form.appendChild(createInputElement('age', $("input[name='age']").val()));
+    form.appendChild(createInputElement('hospitalID', $("select[name='hospitalID']").val()));
+    form.appendChild(createInputElement('other_complaint', $("input[name='other_complaint']").val()));
+    form.appendChild(createInputElement('other_assistance', $("input[name='other_assistance']").val()));
+    form.appendChild(createInputElement('reasonOfConfinement', $("input[name='reasonOfConfinement']").val()));
+    form.appendChild(createInputElement('pccCheck', $("input[name='pccCheck']").val()));
+    form.appendChild(createInputElement('pccNumber', $("input[name='pccNumber']").val()));
+    form.appendChild(createInputElement('communication_form', $("input[name='communication_form']").val()));
+    form.appendChild(createInputElement('ownership', $("select[name='ownership']").val()));
 
-    var token = document.createElement("input");
-    token.type = "hidden";
-    token.name = "__RequestVerificationToken";
-    token.value = $("input[name='__RequestVerificationToken']").val();
-    form.appendChild(token);
-
-    var anonymos = document.createElement('input');
-    anonymos.type = "hidden";
-    anonymos.name = "anonymos";
-    anonymos.value = $("input[name='anonymos']").val();
-    form.appendChild(anonymos);
-
-    var codeNumber = document.createElement('input');
-    codeNumber.type = "hidden";
-    codeNumber.name = "codeNumber";
-    codeNumber.value = $("input[name='codeNumber']").val();
-    form.appendChild(codeNumber);
-
-
+    $("input[name='date_informed_the_hf']").remove();
     $('input[name^="date_informed_the_hf"]').each(function () {
         var date_informed_the_hf = document.createElement("input");
         date_informed_the_hf.type = "hidden";
@@ -146,7 +159,7 @@ $("#CreateComplaint").on('submit', function (e) {
         form.appendChild(date_informed_the_hf);
     });
 
-
+    $("input[name='date_hf_submitted_reply']").remove();
     $('input[name^="date_hf_submitted_reply"]').each(function () {
         var date_hf_submitted_reply = document.createElement("input");
         date_hf_submitted_reply.type = "hidden";
@@ -155,6 +168,7 @@ $("#CreateComplaint").on('submit', function (e) {
         form.appendChild(date_hf_submitted_reply);
     });
 
+    $("input[name='date_release_to_records']").remove();
     $('input[name^="date_release_to_records"]').each(function () {
         var date_release_to_records = document.createElement("input");
         date_release_to_records.type = "hidden";
@@ -163,6 +177,7 @@ $("#CreateComplaint").on('submit', function (e) {
         form.appendChild(date_release_to_records);
     });
 
+    
     $('input[name^="date_final_resolution"]').each(function () {
         var date_final_resolution = document.createElement("input");
         date_final_resolution.type = "hidden";
@@ -191,6 +206,30 @@ $("#CreateComplaint").on('submit', function (e) {
         }
     });
 
+    $('input[name^="actionTaken"]').each(function () {
+        var actionTaken = document.createElement("input");
+        actionTaken.type = "hidden";
+        actionTaken.name = "actionTaken[]";
+        actionTaken.value = $(this).val();
+        form.appendChild(actionTaken);
+    });
+    $('input[name^="actionDate"]').each(function () {
+        var actionDate = document.createElement("input");
+        actionDate.type = "hidden";
+        actionDate.name = "actionDate[]";
+        actionDate.value = $(this).val();
+        form.appendChild(actionDate);
+    });
+
     document.body.appendChild(form);
-    $(this).submit();
+    form.submit();
 });
+
+function createInputElement(input,value)
+{
+    var element = document.createElement("input");
+    element.type = "hidden";
+    element.name = input; //"__RequestVerificationToken";
+    element.value = value;//$("input[name='__RequestVerificationToken']").val();
+    return element;
+}
