@@ -11,5 +11,6 @@ namespace HFSRBO.Core
         public Int32 ID { get; set; }
         public Int32 ComplaintID { get; set; }
         public Int32 ComplaintTypeId { get; set; }
+        public String Member { get; set; }
     }
 }

@@ -19,5 +19,6 @@ namespace HFSRBO.Infra
         public DbSet<type_complaint> complaintType { get; set; }
         public DbSet<complaint_assistance> complaintAssistance { get; set; }
         public DbSet<complaint_action_dates> complaintActionDates { get; set; }
+        public DbSet<complaint_types_list> _complaint_types_list { get; set; }
     }
 }

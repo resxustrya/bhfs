@@ -14,6 +14,7 @@ namespace HFSRBO.Core
         IEnumerable<complaints> GetComplaints();
         complaints FindById(Int32 ID);
         CreateComplaintViewModel getCreateComplaintViewModel();
+        void InsertComplaintTypeComplaintAsistance(complaint_types_list _complaint_types_list);
 
     }
 }

@@ -53,5 +53,10 @@ namespace HFSRBO.Infra
             };
             return _viewModel;
         }
+        public void InsertComplaintTypeComplaintAsistance(complaint_types_list _complaint_types_list)
+        {
+            db._complaint_types_list.Add(_complaint_types_list);
+            db.SaveChanges();
+        }
     }
 }
