@@ -242,11 +242,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HealthFacilityHelper.cs" />
-    <Compile Include="Migrations\201902150314374_first.cs" />
-    <Compile Include="Migrations\201902150314374_first.Designer.cs">
-      <DependentUpon>201902150314374_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -365,11 +360,6 @@
       <Project>{dbd84a37-17d4-4493-b996-a0b0e6ccf771}</Project>
       <Name>HFSRBO.Infra</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902150314374_first.resx">
-      <DependentUpon>201902150314374_first.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

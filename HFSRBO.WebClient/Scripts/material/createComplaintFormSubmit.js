@@ -40,21 +40,22 @@
         var stat = $(this).prop('checked');
         if (stat) {
             $("input[name='pccNumber']").prop('disabled', false);
-            $(this).val(true);
+            $(this).val(1);
             $("select[name='communication_form']").prop('disabled', true);
         } else {
-            $(this).val(false);
+            $(this).val(0);
             $("input[name='pccNumber']").prop('disabled', true);
             $("select[name='communication_form']").prop('disabled', false);
         }
     });
 
+
     $("input[name='anonymous']").change(function () {
         var stat = $(this).prop('checked');
         if (stat) {
-            $(this).val(true);
+            $(this).val(1);
         } else {
-            $(this).val(false);
+            $(this).val(0);
         }
     });
 
@@ -125,7 +126,7 @@ $("#btnSave").on('click', function (e) {
     
     form.appendChild(createInputElement('__RequestVerificationToken',$("input[name='__RequestVerificationToken']").val()));
     form.appendChild(createInputElement('codeNumber',$("input[name='codeNumber']").val()));
-    form.appendChild(createInputElement('anonymos', $("input[name='anonymous']").val()));
+    form.appendChild(createInputElement('anonymous', $("input[name='anonymous']").val()));
     form.appendChild(createInputElement('firstname', $("input[name='firstname']").val()));
     form.appendChild(createInputElement('lastname',$("input[name='lastname']").val()));
     form.appendChild(createInputElement('mi', $("input[name='mi']").val()));
@@ -149,6 +150,7 @@ $("#btnSave").on('click', function (e) {
     form.appendChild(createInputElement('pccNumber', $("input[name='pccNumber']").val()));
     form.appendChild(createInputElement('communication_form', $("input[name='communication_form']").val()));
     form.appendChild(createInputElement('ownership', $("select[name='ownership']").val()));
+
 
     $("input[name='date_informed_the_hf']").remove();
     $('input[name^="date_informed_the_hf"]').each(function () {

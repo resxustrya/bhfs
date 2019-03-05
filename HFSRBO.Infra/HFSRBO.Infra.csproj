@@ -127,6 +127,38 @@
     <Compile Include="Migrations\201903040843060_added_col_model.Designer.cs">
       <DependentUpon>201903040843060_added_col_model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903050136291_add_col1.cs" />
+    <Compile Include="Migrations\201903050136291_add_col1.Designer.cs">
+      <DependentUpon>201903050136291_add_col1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050149456_added_col1.cs" />
+    <Compile Include="Migrations\201903050149456_added_col1.Designer.cs">
+      <DependentUpon>201903050149456_added_col1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050255266_change_col.cs" />
+    <Compile Include="Migrations\201903050255266_change_col.Designer.cs">
+      <DependentUpon>201903050255266_change_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050520470_add_change_col.cs" />
+    <Compile Include="Migrations\201903050520470_add_change_col.Designer.cs">
+      <DependentUpon>201903050520470_add_change_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050649383_add_change_col1.cs" />
+    <Compile Include="Migrations\201903050649383_add_change_col1.Designer.cs">
+      <DependentUpon>201903050649383_add_change_col1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050713449_removed_col.cs" />
+    <Compile Include="Migrations\201903050713449_removed_col.Designer.cs">
+      <DependentUpon>201903050713449_removed_col.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050717125_change_col1.cs" />
+    <Compile Include="Migrations\201903050717125_change_col1.Designer.cs">
+      <DependentUpon>201903050717125_change_col1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050724450_remove_col.cs" />
+    <Compile Include="Migrations\201903050724450_remove_col.Designer.cs">
+      <DependentUpon>201903050724450_remove_col.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ComplaintAssistanceRepo.cs" />
@@ -174,6 +206,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903040843060_added_col_model.resx">
       <DependentUpon>201903040843060_added_col_model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050136291_add_col1.resx">
+      <DependentUpon>201903050136291_add_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050149456_added_col1.resx">
+      <DependentUpon>201903050149456_added_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050255266_change_col.resx">
+      <DependentUpon>201903050255266_change_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050520470_add_change_col.resx">
+      <DependentUpon>201903050520470_add_change_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050649383_add_change_col1.resx">
+      <DependentUpon>201903050649383_add_change_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050713449_removed_col.resx">
+      <DependentUpon>201903050713449_removed_col.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050717125_change_col1.resx">
+      <DependentUpon>201903050717125_change_col1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050724450_remove_col.resx">
+      <DependentUpon>201903050724450_remove_col.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

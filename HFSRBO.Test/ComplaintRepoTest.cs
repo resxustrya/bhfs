@@ -21,7 +21,7 @@ namespace HFSRBO.Test
             ct = new ComplaintTypesRepo();
             ft = new FacilityTypeRepo();
         }
-       
+        /*
         public void isRepositoryHasData()
         {
             var result = cr.GetComplaints();
@@ -34,7 +34,7 @@ namespace HFSRBO.Test
         {
             complaints _complaint = new complaints
             {
-                Code = "RC-2",
+                codeNumber = "RC-2",
                 date = DateTime.Now,
                 hospitalID = 2,
                 date_confined = DateTime.Now,
@@ -71,5 +71,6 @@ namespace HFSRBO.Test
             var result = ft.GetFacilityTypes();
             Assert.AreEqual(2, result.Count());
         }
+        */
     }
 }

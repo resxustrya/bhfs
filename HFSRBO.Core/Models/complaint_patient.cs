@@ -7,6 +7,8 @@ namespace HFSRBO.Core
 {
     public class complaint_patient
     {
+        public string date_confined;
+
         [Key]
         public Int32 complaintID { get; set; }
         public String p_firstname { get; set; }

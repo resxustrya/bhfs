@@ -50,6 +50,8 @@ namespace HFSRBO.WebClient
             container.RegisterType<IHospitalRepo, HospitalRepo>();
             container.RegisterType<IComplaintsRepository, ComplaintsRepository>();
             container.RegisterType<IComplaintAssistanceRepo, ComplaintAssistanceRepo>();
+            container.RegisterType<INameOfComplainantRepository, NameOfComplainantRepo>();
+            container.RegisterType<IComplaintPatientRepository, PatientRepo>();
 
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
