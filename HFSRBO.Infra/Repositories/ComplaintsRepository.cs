@@ -46,10 +46,7 @@ namespace HFSRBO.Infra
             var result = db.complaints.Where(p => p.ID == ID).FirstOrDefault();
             return result;
         }
-        public IEnumerable<complaints> GetComplaints()
-        {
-            return db.complaints;
-        }
+       
         public CreateComplaintViewModel getCreateComplaintViewModel()
         {
             CreateComplaintViewModel _viewModel = new CreateComplaintViewModel
@@ -87,6 +84,11 @@ namespace HFSRBO.Infra
         {
             var result = db.complaintActionDates.Where(p => p.complaintID == complaintID).ToList();
             db.complaintActionDates.RemoveRange(result);
+        }
+
+        public IEnumerable<ComplaintInfoViewModel> GetComplaints()
+        {
+            return null;
         }
     }
 }
