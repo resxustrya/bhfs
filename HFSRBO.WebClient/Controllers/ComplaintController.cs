@@ -29,7 +29,14 @@ namespace HFSRBO.WebClient
         {}
         public ActionResult Complaints()
         {
-            return View();
+            IEnumerable<DisplayComplaintViewModel> list = this.cr.GetComplaints();
+            return View(list);
+        }
+
+        public ActionResult GetComplaints()
+        {
+            IEnumerable<DisplayComplaintViewModel> list = this.cr.GetComplaints();
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult CreateComplaint()
         {
@@ -39,11 +46,11 @@ namespace HFSRBO.WebClient
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm,String[] date_informed_the_hf,String[] date_hf_submitted_reply,String[] date_release_to_records,String[] date_final_resolution, String[] complaint_type,String[] complaint_assistance,String[] actionTaken,String[] actionDate)
+        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm,List<String> date_informed_the_hf,List<String> date_hf_submitted_reply,List<String> date_release_to_records,List<String> date_final_resolution, List<String> complaint_type,List<String> complaint_assistance,List<String> actionTaken,List<String> actionDate)
         {
             Boolean isNew = true;
-            try { civm.complaint_type = Array.ConvertAll(complaint_type, s => int.Parse(s)); } catch { }
-            try { civm.assistanceNeeded = Array.ConvertAll(complaint_assistance, s => int.Parse(s)); } catch { }
+            civm.complaint_type = complaint_type;
+            civm.assistanceNeeded = complaint_assistance;
             civm.date_informed_the_hf = date_informed_the_hf;
             civm.date_hf_submitted_reply = date_hf_submitted_reply;
             civm.date_release_to_records = date_release_to_records;
@@ -51,7 +58,7 @@ namespace HFSRBO.WebClient
             civm.actionTaken = actionTaken;
             civm.actionDate = actionDate;
             SaveComplaint(civm,isNew);
-            return Json(actionTaken.ToList(), JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Complaints");
         }
 
         public void SaveComplaint(ComplaintInfoViewModel civm,Boolean isNew)
@@ -66,12 +73,12 @@ namespace HFSRBO.WebClient
             if(civm.complaint_type != null)
             {
                 this.cr.RemoveComplaintTypeByComplaintID(complaintID,"C");
-                foreach (Int32 complaintTypeID in civm.complaint_type)
+                foreach (String complaintTypeID in civm.complaint_type)
                 {
                     this.cr.InsertComplaintTypeAssistance(
                         new complaint_types_list {
                             ComplaintID = complaintID,
-                            ComplaintTypeId = complaintTypeID,
+                            ComplaintTypeId = Int32.Parse(complaintTypeID),
                             Member = "C"
                     });
                 }
@@ -79,13 +86,13 @@ namespace HFSRBO.WebClient
             if(civm.assistanceNeeded != null)
             {
                 this.cr.RemoveComplaintTypeByComplaintID(complaintID, "A");
-                foreach (Int32 complaintTypeID in civm.assistanceNeeded)
+                foreach (String complaintTypeID in civm.assistanceNeeded)
                 {
                     this.cr.InsertComplaintTypeAssistance(
                         new complaint_types_list
                         {
                             ComplaintID = complaintID,
-                            ComplaintTypeId = complaintTypeID,
+                            ComplaintTypeId = Int32.Parse(complaintTypeID),
                             Member = "A"
                         });
                 }
@@ -96,7 +103,7 @@ namespace HFSRBO.WebClient
                 foreach(String s in civm.date_informed_the_hf)
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates {
-                        Date = Convert.ToDateTime(s),
+                        Date = s,
                         complaintID = complaintID,
                         member = "date_informed_the_hf"
                     });
@@ -110,7 +117,7 @@ namespace HFSRBO.WebClient
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates
                     {
-                        Date = Convert.ToDateTime(s),
+                        Date =s,
                         complaintID = complaintID,
                         member = "date_hf_submitted_reply"
                     });
@@ -124,7 +131,7 @@ namespace HFSRBO.WebClient
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates
                     {
-                        Date = Convert.ToDateTime(s),
+                        Date = s,
                         complaintID = complaintID,
                         member = "date_release_to_records"
                     });
@@ -138,7 +145,7 @@ namespace HFSRBO.WebClient
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates
                     {
-                        Date = Convert.ToDateTime(s),
+                        Date = s,
                         complaintID = complaintID,
                         member = "date_final_resolution"
                     });
@@ -157,5 +164,12 @@ namespace HFSRBO.WebClient
                 }
             }
         }
+        public ActionResult DeleteComplaint(String ID)
+        {
+            Int32 complaintID = Convert.ToInt32(ID);
+            this.cr.Remove(complaintID);
+            return RedirectToAction("Complaints");
+        }
+
     }
 }

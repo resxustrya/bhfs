@@ -10,7 +10,7 @@ namespace HFSRBO.Core
     {
         [Key]
         public Int32 ID { get; set; }
-        public DateTime Date { get; set; }
+        public String Date { get; set; }
         public Int32 complaintID { get; set; }
         public String member { get; set; }
     }
