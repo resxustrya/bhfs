@@ -341,6 +341,7 @@
     <Content Include="Views\MasterData\HealthFacility.cshtml" />
     <Content Include="Views\MasterData\AddComplaintAssistance.cshtml" />
     <Content Include="Views\SysAccount\UserAccounts.cshtml" />
+    <Content Include="Views\SysAccount\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
