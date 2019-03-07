@@ -236,13 +236,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MasterDataController.cs" />
+    <Compile Include="Controllers\SysAccountController.cs" />
     <Compile Include="CustomModelBinder\VMComplaintCustomBinder.cs" />
     <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HealthFacilityHelper.cs" />
-    <Compile Include="Helpers\ViewHelper\DisplayComplaintType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -340,9 +340,11 @@
     <Content Include="Views\Complaint\Filters.cshtml" />
     <Content Include="Views\MasterData\HealthFacility.cshtml" />
     <Content Include="Views\MasterData\AddComplaintAssistance.cshtml" />
+    <Content Include="Views\SysAccount\UserAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\ViewHelper\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

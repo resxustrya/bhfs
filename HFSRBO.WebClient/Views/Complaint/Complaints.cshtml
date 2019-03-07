@@ -16,22 +16,22 @@
             <div class="card-content">
                 <table id="complaint" class="responsive-table highlight myTable table hover">
                     <tr>
-                        <th>Date Received</th>
-                        <th>Code Number</th>
-                        <th>Name of Health Facility Being Complained</th>
-                        <th>Address</th>
-                        <th>Ownership</th>
-                        <th>Name of Complainant</th>
-                        <th>Types of Complaint</th>
-                        <th>Assistance Needed</th>
-                        <th>Form of Communication received</th>
-                        <th>Action Taken</th>
-                        <th>Date Informed the HF/concerned office</th>
-                        <th>Date HF/concerned office submitted reply</th>
-                        <th>Date released to records section</th>
-                        <th>Date Resolution of the complaint released to records/client</th>
-                        <th>Status</th>
-                        <th>Staff Assigned</th>
+                        <th width="5%">Date Received</th>
+                        <th width="5%">Code Number</th>
+                        <th width="10%">Name of Health Facility Being Complained</th>
+                        <th width="10%">Address</th>
+                        <th width="10%">Ownership</th>
+                        <th width="10%">Name of Complainant</th>
+                        <th width="10%">Types of Complaint</th>
+                        <th width="10%">Assistance Needed</th>
+                        <th width="10%">Form of Communication received</th>
+                        <th width="20%">Action Taken</th>
+                        <th width="10%">Date Informed the HF/concerned office</th>
+                        <th width="10%">Date HF/concerned office submitted reply</th>
+                        <th width="10%">Date released to records section</th>
+                        <th width="10%">Date Resolution of the complaint released to records/client</th>
+                        <th width="10%">Status</th>
+                        <th width="10%">Staff Assigned</th>
                         <th>Options</th>
                     </tr>
                     @foreach(DisplayComplaintViewModel dcvm in Model)
@@ -65,13 +65,13 @@
                             <td>
                                 @foreach(String complaint in dcvm.complaint_type)
                                 {
-                                    <strong>- @complaint</strong><br />
+                                    <span>- @complaint</span><br />
                                 }
                             </td>
                             <td>
                                 @foreach (String assistance in dcvm.assistanceNeeded)
                                 {
-                                    <strong>- @assistance</strong><br />
+                                    <span>- @assistance</span><br />
                                 }
                             </td>
                             <td>
@@ -93,25 +93,25 @@
                             <td>
                                 @foreach(String s in dcvm.date_informed_the_hf)
                                 {
-                                    <strong>- @s</strong>
+                                    <span>@s</span><br />
                                 }
                             </td>
                             <td>
                                 @foreach (String s in dcvm.date_hf_submitted_reply)
                                 {
-                                    <strong>- @s</strong>
+                                    <span>- @s</span><br />
                                 }
                             </td>
                             <td>
                                 @foreach (String s in dcvm.date_release_to_records)
                                 {
-                                    <strong>- @s</strong>
+                                    <span>- @s</span><br />
                                 }
                             </td>
                             <td>
                                 @foreach (String s in dcvm.date_final_resolution)
                                 {
-                                    <strong>- @s</strong>
+                                    <span>- @s</span><br />
                                 }
                             </td>
                             <td>@dcvm.status</td>

@@ -47,6 +47,12 @@ namespace HFSRBO.WebClient
                     var result1 = UserManager.AddToRole(user.Id, "Admin");
                 }
             }
+            if (!roleManager.RoleExists("Employee"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Employee";
+                roleManager.Create(role);
+            }
         }
     }
 }
