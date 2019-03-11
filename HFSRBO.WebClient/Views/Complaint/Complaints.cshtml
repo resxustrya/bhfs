@@ -114,7 +114,7 @@
                                     <span>- @s</span><br />
                                 }
                             </td>
-                            <td>@dcvm.status</td>
+                            <td>@(dcvm.status == "O" ? "On Going" : "Complete")</td>
                             <td>@dcvm.staff</td>
                             <td>
                                 <a href="@Url.Action("DeleteComplaint","Complaint",new { ID = dcvm.complaintID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete_forever</i></a>
@@ -140,16 +140,5 @@
 </div>
 
 @section scripts{
-    <script>
-        let options = {
-            numberPerPage: 20, //Cantidad de datos por pagina
-            goBar: false, //Barra donde puedes digitar el numero de la pagina al que quiere ir
-            pageCounter: false, //Contador de paginas, en cual estas, de cuantas paginas
-        };
-
-        let filterOptions = {
-        };
-
-        paginate.init('.myTable', options, filterOptions);
-    </script>    
+    
 }

@@ -18,7 +18,7 @@ namespace HFSRBO.WebClient
                         "~/Scripts/material/init.js",
                         "~/Scripts/material/datatable.js",
                         "~/Scripts/material/datatable_material.js",
-                        "~/Scripts/selectpicker.js",
+                        "~/Scripts/select2.js",
                         "~/Scripts/material/createComplaintFormSubmit.js"
                         ));
 
@@ -38,7 +38,8 @@ namespace HFSRBO.WebClient
                       "~/Content/fonts.css",
                       "~/Content/materialize.css",
                       "~/Content/paralax.css",
-                      "~/Content/page.css"
+                      "~/Content/page.css",
+                      "~/Content/select2.css"
                       ));
         }
     }

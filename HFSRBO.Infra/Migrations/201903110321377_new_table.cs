@@ -3,18 +3,16 @@ namespace HFSRBO.Infra.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class added_col_model : DbMigration
+    public partial class new_table : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.complaint_types_list",
+                "dbo.communications",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        ComplaintID = c.Int(nullable: false),
-                        ComplaintTypeId = c.Int(nullable: false),
-                        Member = c.String(),
+                        desc = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -22,7 +20,7 @@ namespace HFSRBO.Infra.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.complaint_types_list");
+            DropTable("dbo.communications");
         }
     }
 }

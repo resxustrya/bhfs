@@ -148,7 +148,7 @@ $("#btnSave").on('click', function (e) {
     form.appendChild(createInputElement('reasonOfConfinement', $("input[name='reasonOfConfinement']").val()));
     form.appendChild(createInputElement('pccCheck', $("input[name='pccCheck']").val()));
     form.appendChild(createInputElement('pccNumber', $("input[name='pccNumber']").val()));
-    form.appendChild(createInputElement('communication_form', $("input[name='communication_form']").val()));
+    form.appendChild(createInputElement('communication_form', $("select[name='communication_form']").val()));
     form.appendChild(createInputElement('ownership', $("select[name='ownership']").val()));
 
 
@@ -235,3 +235,21 @@ function createInputElement(input,value)
     element.value = value;//$("input[name='__RequestVerificationToken']").val();
     return element;
 }
+
+$(document).ready(function () {
+    var url = $("#complaintID").data('get_healthfacility');
+    var data = {};
+    $.getJSON(url, function (res) {
+        for (var i = 0; i < res.length; i++) {
+            data[res[i].Name] = null;
+        }
+    });
+    console.log(data);
+    $('input.autocomplete').autocomplete({
+        data:data
+    });
+});
+
+$('.js-example-basic-single').select2({
+    placeholder: 'Select an option'
+});

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Interfaces\IComplaintAssistanceRepo.cs" />
     <Compile Include="Models\communication.cs" />
-    <Compile Include="Models\CommunicationViewModel.cs" />
     <Compile Include="Models\complaints.cs" />
     <Compile Include="Models\complaint_action_dates.cs" />
     <Compile Include="Models\complaint_assistance.cs" />
@@ -63,11 +62,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\staff_assigend.cs" />
     <Compile Include="Models\type_complaint.cs" />
-    <Compile Include="ViewModels\communicationsViewModel.cs" />
     <Compile Include="ViewModels\ComplaintDetailsVM.cs" />
     <Compile Include="ViewModels\ComplaintInfoViewModel.cs" />
     <Compile Include="ViewModels\CreateComplaintViewModel.cs" />
     <Compile Include="ViewModels\DisplayComplaintViewModel.cs" />
+    <Compile Include="ViewModels\EditComplaintViewModel.cs" />
     <Compile Include="ViewModels\HealthFacilityTypeFacilityVM.cs" />
     <Compile Include="ViewModels\HealthFacilityViewModel.cs" />
   </ItemGroup>

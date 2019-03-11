@@ -39,14 +39,12 @@
                     <label for="description">Hospital Address</label>
                 </div>
                 <div class="input-field col l12 s12 m12">
-                    <select name="facilityID" required>
-                        <option value="" disabled selected>Choose your option</option>
-                        @foreach(facility_type ft in facilityTypes)
+                    <select name="facilityID" class="browser-default js-example-basic-single" style="width:100%;" required>
+                        @foreach (facility_type ft in facilityTypes)
                         {
                             <option value="@ft.ID">@ft.Name</option>
                         }
                     </select>
-                    <label for="facility_types">Facility Type</label>
                 </div>
             </div>
             <div class="modal-footer">

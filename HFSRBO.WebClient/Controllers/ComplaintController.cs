@@ -18,12 +18,14 @@ namespace HFSRBO.WebClient
         private IComplaintsRepository cr;
         private INameOfComplainantRepository nameOfComplainantRepo;
         private IComplaintPatientRepository _patientRepo;
+        private IHospitalRepo hr;
         // GET: Complaint
-        public ComplaintController(IComplaintsRepository cr, INameOfComplainantRepository nameOfComplainantRepo, IComplaintPatientRepository _patientRepo)
+        public ComplaintController(IComplaintsRepository cr, INameOfComplainantRepository nameOfComplainantRepo, IComplaintPatientRepository _patientRepo, IHospitalRepo hr)
         {
             this.cr = cr;
             this.nameOfComplainantRepo = nameOfComplainantRepo;
             this._patientRepo = _patientRepo;
+            this.hr = hr;
         }
         public ComplaintController()
         {}
@@ -170,6 +172,14 @@ namespace HFSRBO.WebClient
             this.cr.Remove(complaintID);
             return RedirectToAction("Complaints");
         }
-
+        public ActionResult GetHealthFacility()
+        {
+            var result = this.hr.GetHealthFacilities().Select(p => new { p.Name, p.ID }).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult EditComplaint(String ID)
+        {
+            return View();
+        }
     }
 }

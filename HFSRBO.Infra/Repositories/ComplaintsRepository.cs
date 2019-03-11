@@ -11,7 +11,6 @@ namespace HFSRBO.Infra
     {
         hfsrboContext db = new hfsrboContext();
         HospitalRepo hr = new HospitalRepo();
-        communicationsViewModel cvm = new communicationsViewModel();
         ComplaintTypesRepo ctr = new ComplaintTypesRepo();
         ComplaintAssistanceRepo cat = new ComplaintAssistanceRepo();
         NameOfComplainantRepo nocp = new NameOfComplainantRepo();
@@ -63,11 +62,17 @@ namespace HFSRBO.Infra
             CreateComplaintViewModel _viewModel = new CreateComplaintViewModel
             {
                 _hospitals = hr.GetHospitals(),
-                _communications = cvm._communication,
+                _communications = this.GetCommunicationForm(),
                 _complaint_type = ctr.GetComplaintTypes(),
                 _complaintAssistance = cat.GetComplaintAssistance()
             };
             return _viewModel;
+        }
+
+        public IEnumerable<communication> GetCommunicationForm()
+        {
+            var result = db._communication;
+            return result;
         }
         public void InsertComplaintTypeAssistance(complaint_types_list _complaint_types_list)
         {
@@ -126,8 +131,7 @@ namespace HFSRBO.Infra
                               hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
                               nameOfComplainant = (from name in db.complainantName where name.complaintId == list.ID select name.firstname + " " + name.mi + " " + name.lastname).FirstOrDefault(),
                               ownership = list.ownership,
-                              /*communication_form = CommunicationViewModel.communication.Where(p => p.ID.ToString() == list.communication_form).FirstOrDefault().desc,*/
-                              communication_form = list.communication_form,
+                              communication_form = (from comm_form in db._communication where comm_form.ID.ToString() == list.communication_form select comm_form.desc).FirstOrDefault(),
                               annonymos = list.annonymos,
                               pccCheck = list.pccCheck,
                               pccNumber = list.pccNumber,
@@ -143,6 +147,5 @@ namespace HFSRBO.Infra
                           }).ToList();
             return result;
         }
-        
     }
 }

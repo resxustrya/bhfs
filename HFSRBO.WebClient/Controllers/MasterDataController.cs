@@ -114,5 +114,15 @@ namespace HFSRBO.WebClient.Controllers
             complaintAssistance.Add(_complaintAssistance);
             return RedirectToAction("ComplaintTypes");
         }
+        public ActionResult DeleteHospital(String ID)
+        {
+            this.hospitals.Remove(Int32.Parse(ID));
+            return RedirectToAction("HealthFacility");
+        }
+        public ActionResult DeleteFacility(String ID)
+        {
+            this.facilityType.Remove(Int32.Parse(ID));
+            return RedirectToAction("HealthFacility");
+        }
     }
 }

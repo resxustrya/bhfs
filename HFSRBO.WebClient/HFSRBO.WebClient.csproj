@@ -260,6 +260,7 @@
     <Content Include="Content\page.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\paralax.css" />
+    <Content Include="Content\select2.css" />
     <Content Include="Content\selectpicker.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -294,6 +295,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\selectpicker.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -342,6 +344,7 @@
     <Content Include="Views\MasterData\AddComplaintAssistance.cshtml" />
     <Content Include="Views\SysAccount\UserAccounts.cshtml" />
     <Content Include="Views\SysAccount\CreateUser.cshtml" />
+    <Content Include="Views\Complaint\EditComplaint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

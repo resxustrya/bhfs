@@ -91,77 +91,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="hfsrboContext.cs" />
-    <Compile Include="Migrations\201902140446492_newcol.cs" />
-    <Compile Include="Migrations\201902140446492_newcol.Designer.cs">
-      <DependentUpon>201902140446492_newcol.cs</DependentUpon>
+    <Compile Include="Migrations\201903110136057_Initial_Migration.cs" />
+    <Compile Include="Migrations\201903110136057_Initial_Migration.Designer.cs">
+      <DependentUpon>201903110136057_Initial_Migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902150449076_new_tables.cs" />
-    <Compile Include="Migrations\201902150449076_new_tables.Designer.cs">
-      <DependentUpon>201902150449076_new_tables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902230220343_change_cols.cs" />
-    <Compile Include="Migrations\201902230220343_change_cols.Designer.cs">
-      <DependentUpon>201902230220343_change_cols.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902230229390_added_cols.cs" />
-    <Compile Include="Migrations\201902230229390_added_cols.Designer.cs">
-      <DependentUpon>201902230229390_added_cols.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902230538584_added_column.cs" />
-    <Compile Include="Migrations\201902230538584_added_column.Designer.cs">
-      <DependentUpon>201902230538584_added_column.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902280312169_added_col.cs" />
-    <Compile Include="Migrations\201902280312169_added_col.Designer.cs">
-      <DependentUpon>201902280312169_added_col.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903010327192_added_table.cs" />
-    <Compile Include="Migrations\201903010327192_added_table.Designer.cs">
-      <DependentUpon>201903010327192_added_table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903040838007_add_col.cs" />
-    <Compile Include="Migrations\201903040838007_add_col.Designer.cs">
-      <DependentUpon>201903040838007_add_col.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903040843060_added_col_model.cs" />
-    <Compile Include="Migrations\201903040843060_added_col_model.Designer.cs">
-      <DependentUpon>201903040843060_added_col_model.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050136291_add_col1.cs" />
-    <Compile Include="Migrations\201903050136291_add_col1.Designer.cs">
-      <DependentUpon>201903050136291_add_col1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050149456_added_col1.cs" />
-    <Compile Include="Migrations\201903050149456_added_col1.Designer.cs">
-      <DependentUpon>201903050149456_added_col1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050255266_change_col.cs" />
-    <Compile Include="Migrations\201903050255266_change_col.Designer.cs">
-      <DependentUpon>201903050255266_change_col.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050520470_add_change_col.cs" />
-    <Compile Include="Migrations\201903050520470_add_change_col.Designer.cs">
-      <DependentUpon>201903050520470_add_change_col.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050649383_add_change_col1.cs" />
-    <Compile Include="Migrations\201903050649383_add_change_col1.Designer.cs">
-      <DependentUpon>201903050649383_add_change_col1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050713449_removed_col.cs" />
-    <Compile Include="Migrations\201903050713449_removed_col.Designer.cs">
-      <DependentUpon>201903050713449_removed_col.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050717125_change_col1.cs" />
-    <Compile Include="Migrations\201903050717125_change_col1.Designer.cs">
-      <DependentUpon>201903050717125_change_col1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903050724450_remove_col.cs" />
-    <Compile Include="Migrations\201903050724450_remove_col.Designer.cs">
-      <DependentUpon>201903050724450_remove_col.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903060254568_change_col2.cs" />
-    <Compile Include="Migrations\201903060254568_change_col2.Designer.cs">
-      <DependentUpon>201903060254568_change_col2.cs</DependentUpon>
+    <Compile Include="Migrations\201903110321377_new_table.cs" />
+    <Compile Include="Migrations\201903110321377_new_table.Designer.cs">
+      <DependentUpon>201903110321377_new_table.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,62 +120,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902140446492_newcol.resx">
-      <DependentUpon>201902140446492_newcol.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903110136057_Initial_Migration.resx">
+      <DependentUpon>201903110136057_Initial_Migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902150449076_new_tables.resx">
-      <DependentUpon>201902150449076_new_tables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902230220343_change_cols.resx">
-      <DependentUpon>201902230220343_change_cols.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902230229390_added_cols.resx">
-      <DependentUpon>201902230229390_added_cols.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902230538584_added_column.resx">
-      <DependentUpon>201902230538584_added_column.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902280312169_added_col.resx">
-      <DependentUpon>201902280312169_added_col.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903010327192_added_table.resx">
-      <DependentUpon>201903010327192_added_table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903040838007_add_col.resx">
-      <DependentUpon>201903040838007_add_col.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903040843060_added_col_model.resx">
-      <DependentUpon>201903040843060_added_col_model.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050136291_add_col1.resx">
-      <DependentUpon>201903050136291_add_col1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050149456_added_col1.resx">
-      <DependentUpon>201903050149456_added_col1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050255266_change_col.resx">
-      <DependentUpon>201903050255266_change_col.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050520470_add_change_col.resx">
-      <DependentUpon>201903050520470_add_change_col.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050649383_add_change_col1.resx">
-      <DependentUpon>201903050649383_add_change_col1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050713449_removed_col.resx">
-      <DependentUpon>201903050713449_removed_col.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050717125_change_col1.resx">
-      <DependentUpon>201903050717125_change_col1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903050724450_remove_col.resx">
-      <DependentUpon>201903050724450_remove_col.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903060254568_change_col2.resx">
-      <DependentUpon>201903060254568_change_col2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903110321377_new_table.resx">
+      <DependentUpon>201903110321377_new_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
