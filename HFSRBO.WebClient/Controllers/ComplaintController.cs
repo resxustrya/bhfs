@@ -179,7 +179,9 @@ namespace HFSRBO.WebClient
         }
         public ActionResult EditComplaint(String ID)
         {
-            return View();
+            Int32 complaintID = Convert.ToInt32(ID);
+            var result = this.cr.EditComplaint(complaintID);
+            return View(result);
         }
     }
 }

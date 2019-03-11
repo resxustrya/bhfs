@@ -9,12 +9,12 @@ namespace HFSRBO.Infra
 {
     public class ComplaintsRepository : IComplaintsRepository
     {
-        hfsrboContext db = new hfsrboContext();
-        HospitalRepo hr = new HospitalRepo();
-        ComplaintTypesRepo ctr = new ComplaintTypesRepo();
-        ComplaintAssistanceRepo cat = new ComplaintAssistanceRepo();
-        NameOfComplainantRepo nocp = new NameOfComplainantRepo();
-        PatientRepo patient = new PatientRepo();
+        private hfsrboContext db = new hfsrboContext();
+        private HospitalRepo hr = new HospitalRepo();
+        private ComplaintTypesRepo ctr = new ComplaintTypesRepo();
+        private ComplaintAssistanceRepo cat = new ComplaintAssistanceRepo();
+        private NameOfComplainantRepo nocp = new NameOfComplainantRepo();
+        private PatientRepo patient = new PatientRepo();
         public Int32 Add(complaints _complaints)
         {
             db.complaints.Add(_complaints);
@@ -145,6 +145,24 @@ namespace HFSRBO.Infra
                               date_final_resolution = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_final_resolution").ToList().Select(p => p.Date).ToList(),
                               _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == list.ID)
                           }).ToList();
+            return result;
+        }
+        public EditComplaintViewModel EditComplaint(Int32 complaintID)
+        {
+            EditComplaintViewModel result = new EditComplaintViewModel
+            {
+                _complaint = this.FindById(complaintID),
+                _nameOfComplainant = this.nocp.FindById(complaintID),
+                _patient = this.patient.FindById(complaintID),
+                _complaint_type_list = this.GetComplaintTypeAssistance(complaintID,"C"),
+                _complaintAssistance = this.GetComplaintTypeAssistance(complaintID,"A"),
+                date_informed_the_hf = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == "date_informed_the_hf").ToList().Select(p => p.Date).ToList(),
+                date_hf_submitted_reply = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == "date_hf_submitted_reply").ToList().Select(p => p.Date).ToList(),
+                date_release_to_records = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == "date_release_to_records").ToList().Select(p => p.Date).ToList(),
+                date_final_resolution = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == "date_final_resolution").ToList().Select(p => p.Date).ToList(),
+                _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == complaintID),
+                _createComplaintViewModel = this.getCreateComplaintViewModel()
+            };
             return result;
         }
     }

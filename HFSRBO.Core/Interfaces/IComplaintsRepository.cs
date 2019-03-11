@@ -23,6 +23,6 @@ namespace HFSRBO.Core
         IEnumerable<DisplayComplaintViewModel> GetComplaints();
         Int32[] GetComplaintTypeAssistance(Int32 complaintID, String member);
         List<String> GetComplaintsDates(Int32 complaintID, String member);
-
+        EditComplaintViewModel EditComplaint(Int32 complaintID);
     }
 }
