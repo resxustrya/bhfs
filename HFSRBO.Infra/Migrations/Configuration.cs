@@ -23,7 +23,7 @@ namespace HFSRBO.Infra.Migrations
             context._communication.Add(new communication { ID = 6, desc = "By Text Message" });
             context._communication.Add(new communication { ID = 7, desc = "By Interview" });
             context._communication.Add(new communication { ID = 8, desc = "By Email" });
-            context._communication.Add(new communication { ID = 9, desc = "Courier" });
+            context._communication.Add(new communication { ID = 9, desc = "Courier (LBC/DHL/JRS etc.)" });
 
             try { context.SaveChanges(); } catch { }
         }

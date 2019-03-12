@@ -14,7 +14,7 @@
                             <h5>[Update]Complaint Form</h5>
                         </div>
                         <div class="col l6 m12 s12">
-                            <button type="button" id="btnSave" class="waves-effect waves-light btn-large green right"><i class="material-icons left">check</i> Save</button>
+                            <button type="button" id="btnSave" class="waves-effect waves-light btn-large green right"><i class="material-icons left">check</i> Save Changes</button>
                         </div>
                     </div>
                     <div class="row">
@@ -31,7 +31,7 @@
                                 <div class="col l4  m12 s12">
                                     <div class="row switch" style="margin-top:20px;">
                                         <label>
-                                            <input type="checkbox" name="anonymous" value="@(Model._complaint.annonymos == true ? "true" : "false")">
+                                            <input type="checkbox" name="anonymous" value="@(Model._complaint.annonymos == true ? "1" : "0")" @(Model._complaint.annonymos == true ? " checked" : "")>
                                             <span class="lever"></span>
                                             <span>Anonymous</span>
                                         </label>
@@ -155,15 +155,17 @@
                                     <h6>(B.) Type of complaint :</h6>
                                     @foreach (type_complaint t in Model._createComplaintViewModel._complaint_type)
                                     {
+                                        bool isCheck = false;
+                                        isCheck = Model._complaint_type_list.Contains(t.ID);
                                         <p>
                                             <label for="@t.ID">
-                                                <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" value="@t.ID" />
+                                                <input type="checkbox" id="@t.ID" class="filled-in" name="complaint_type[]" @(isCheck == true ? " checked" : "") value="@t.ID" />
                                                 <span>@t.Description</span>
                                             </label>
                                         </p>
                                     }
                                     <div class="input-field">
-                                        <input type="text" name="other_complaint" />
+                                        <input type="text" name="other_complaint" value="@Model._complaint.other_complaint" />
                                         <label for="other_complaint">Others.</label>
                                     </div>
                                 </div>
@@ -171,21 +173,23 @@
                                     <h6>(C.) Assistance Needed</h6>
                                     @foreach (complaint_assistance at in Model._createComplaintViewModel._complaintAssistance)
                                     {
+                                        bool isCheck = false;
+                                        isCheck = Model._complaintAssistance.Contains(at.ID);
                                         <p>
                                             <label for="@(at.ID)101">
-                                                <input type="checkbox" id="@(at.ID)101" class="filled-in" name="complaint_assistance[]" value="@at.ID" />
+                                                <input type="checkbox" id="@(at.ID)101" class="filled-in" name="complaint_assistance[]" @(isCheck == true ? " checked" : "") value="@at.ID" />
                                                 <span>@at.assistance</span>
                                             </label>
                                         </p>
                                     }
                                     <div class="input-field">
-                                        <input type="text" name="other_assistance" />
+                                        <input type="text" name="other_assistance" value="@Model._complaint.assistance_needed" />
                                         <label for="other_complaint">Others </label>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="input-field">
-                                        <input type="text" name="reasonOfConfinement" />
+                                        <input type="text" name="reasonOfConfinement" value="@Model._complaint.reasonOfConfinement" />
                                         <label for="reasonOfConfinement">Reason of confinment</label>
                                     </div>
                                 </div>
@@ -198,22 +202,22 @@
                                             <div class="col l2 m12 s12">
                                                 <div class="switch center" style="margin-top:25px;">
                                                     <label>
-                                                        <input type="checkbox" name="pccCheck" value="false">
+                                                        <input type="checkbox" name="pccCheck" value="@(Model._complaint.pccCheck == true ? "1" : "0")" @(Model._complaint.pccCheck == true ? "checked" : "")>
                                                         <span class="lever"></span>
                                                         <span>PCC</span>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="input-field col l3 m12 s12">
-                                                <input type="text" disabled name="pccNumber" />
+                                                <input type="text" name="pccNumber" @(Model._complaint.pccCheck == false ? "disabled" : "") value="@(Model._complaint.pccCheck == true ? Model._complaint.pccNumber : "")" />
                                                 <label for="pccNumber">PCC Number</label>
                                             </div>
                                             <div class="col l5 s12 m12">
-                                                <select name="communication_form" id="communication_form" class="browser-default" style="margin-top:10px;">
+                                                <select name="communication_form" id="communication_form" class="browser-default" style="margin-top:10px;" @(Model._complaint.pccCheck == true ? "disabled" : "")>
                                                     <option value="" disabled selected>Form of Communication received</option>
                                                     @foreach (communication c in Model._createComplaintViewModel._communications)
                                                     {
-                                                        <option value="@c.ID">@c.desc</option>
+                                                        <option value="@c.ID" @(Model._complaint.communication_form == c.ID ? " selected" : "")>@c.desc</option>
                                                     }
                                                 </select>
                                             </div>
@@ -230,7 +234,7 @@
                                             <option value="" disabled selected>Hospital/Facility Ownership</option>
                                             @foreach (var o in ownnership)
                                             {
-                                                <option value="@o.Key">@o.Value</option>
+                                                <option value="@o.Key" @(Model._complaint.ownership == "P" ? " selected" : "")>@o.Value</option>
                                             }
                                         </select>
                                     </div>
@@ -242,7 +246,15 @@
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="input_date_informed_the_hf" />
                                                 <strong><a class="waves-effect btn-small waves-light green" href="#" id="date_informed_the_hf"><i class="material-icons right">add</i>Add Dates</a></strong>
-                                                <table class="striped date_informed_the_hf"></table>
+                                                <table class="striped date_informed_the_hf">
+                                                    @foreach (String s in Model.date_informed_the_hf)
+                                                    {
+                                                        <tr>
+                                                            <td><input type='text' disabled name="date_informed_the_hf[]" value="@s" /></td>
+                                                            <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
+                                                        </tr>
+                                                    }
+                                                </table>
                                             </div>
                                         </li>
                                         <li>
@@ -250,7 +262,15 @@
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="input_date_hf_submitted_reply" />
                                                 <strong><a href="#" class="waves-effect btn-small waves-light green" id="date_hf_submitted_reply"><i class="material-icons right">add</i>Add Dates</a></strong>
-                                                <table class="striped date_hf_submitted_reply"></table>
+                                                <table class="striped date_hf_submitted_reply">
+                                                    @foreach (String s in Model.date_hf_submitted_reply)
+                                                    {
+                                                        <tr>
+                                                            <td><input type='text' disabled name="date_hf_submitted_reply[]" value="@s" /></td>
+                                                            <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
+                                                        </tr>
+                                                    }
+                                                </table>
                                             </div>
                                         </li>
                                         <li>
@@ -258,7 +278,15 @@
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="input_date_release_to_records" />
                                                 <strong><a class="waves-effect btn-small waves-light green" href="#" id="date_release_to_records"><i class="material-icons right">add</i>Add Dates</a></strong>
-                                                <table class="striped date_release_to_records"></table>
+                                                <table class="striped date_release_to_records">
+                                                    @foreach (String s in Model.date_release_to_records)
+                                                    {
+                                                        <tr>
+                                                            <td><input type='text' disabled name="date_release_to_records[]" value="@s" /></td>
+                                                            <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
+                                                        </tr>
+                                                    }
+                                                </table>
                                             </div>
                                         </li>
                                         <li>
@@ -266,7 +294,15 @@
                                             <div class="collapsible-body">
                                                 <input type="hidden" class="datepicker" name="input_date_final_resolution" />
                                                 <strong><a href="#" class="waves-effect btn-small waves-light green" id="date_final_resolution"><i class="material-icons right">add</i>Add Dates</a></strong>
-                                                <table class="striped date_final_resolution"></table>
+                                                <table class="striped date_final_resolution">
+                                                    @foreach (String s in Model.date_final_resolution)
+                                                    {
+                                                        <tr>
+                                                            <td><input type='text' disabled name="date_final_resolution[]" value="@s" /></td>
+                                                            <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
+                                                        </tr>
+                                                    }
+                                                </table>
                                             </div>
                                         </li>
                                     </ul>
@@ -285,6 +321,14 @@
                                             <th>Action Takened</th>
                                             <th>Remove</th>
                                         </tr>
+                                        @foreach(complaint_action_dates cd in Model._complaintActionDates)
+                                        {
+                                            <tr>
+                                                <td><input type='text' disabled name='actionDate[]' value="@cd.Date.ToShortDateString()" /></td>
+                                                <td><input type='text' disabled name='actionTaken[]' value="@cd.Action" /></td>
+                                                <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
+                                            </tr>
+                                        }
                                     </table>
                                 </div>
                             </div>

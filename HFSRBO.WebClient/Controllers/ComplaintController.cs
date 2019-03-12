@@ -50,7 +50,6 @@ namespace HFSRBO.WebClient
         [ValidateAntiForgeryToken]
         public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm,List<String> date_informed_the_hf,List<String> date_hf_submitted_reply,List<String> date_release_to_records,List<String> date_final_resolution, List<String> complaint_type,List<String> complaint_assistance,List<String> actionTaken,List<String> actionDate)
         {
-            Boolean isNew = true;
             civm.complaint_type = complaint_type;
             civm.assistanceNeeded = complaint_assistance;
             civm.date_informed_the_hf = date_informed_the_hf;
@@ -59,12 +58,7 @@ namespace HFSRBO.WebClient
             civm.date_final_resolution = date_final_resolution;
             civm.actionTaken = actionTaken;
             civm.actionDate = actionDate;
-            SaveComplaint(civm,isNew);
-            return RedirectToAction("Complaints");
-        }
 
-        public void SaveComplaint(ComplaintInfoViewModel civm,Boolean isNew)
-        {
             //ADD NEW COMPLAINT TO DATABASE AND RETURN ITS ID(PRIMARY KEY) AFTER INSERTED
             Int32 complaintID = this.cr.Add(civm._complaints);
             civm._nameOfComplainant.complaintId = complaintID;
@@ -72,6 +66,13 @@ namespace HFSRBO.WebClient
             civm._complaintPatient.complaintID = complaintID;
             this._patientRepo.Add(civm._complaintPatient);
 
+
+            SaveComplaint(civm,complaintID);
+            return RedirectToAction("Complaints");
+        }
+
+        public void SaveComplaint(ComplaintInfoViewModel civm,Int32 complaintID)
+        {
             if(civm.complaint_type != null)
             {
                 this.cr.RemoveComplaintTypeByComplaintID(complaintID,"C");
@@ -179,9 +180,31 @@ namespace HFSRBO.WebClient
         }
         public ActionResult EditComplaint(String ID)
         {
+            Session["EditComplaintID"] = ID;
             Int32 complaintID = Convert.ToInt32(ID);
             var result = this.cr.EditComplaint(complaintID);
             return View(result);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm, List<String> date_informed_the_hf, List<String> date_hf_submitted_reply, List<String> date_release_to_records, List<String> date_final_resolution, List<String> complaint_type, List<String> complaint_assistance, List<String> actionTaken, List<String> actionDate)
+        {
+            Int32 complaintID = Convert.ToInt32(Session["EditComplaintID"].ToString());
+            civm.complaint_type = complaint_type;
+            civm.assistanceNeeded = complaint_assistance;
+            civm.date_informed_the_hf = date_informed_the_hf;
+            civm.date_hf_submitted_reply = date_hf_submitted_reply;
+            civm.date_release_to_records = date_release_to_records;
+            civm.date_final_resolution = date_final_resolution;
+            civm.actionTaken = actionTaken;
+            civm.actionDate = actionDate;
+
+            //UPDATE THE COMPLAINT
+            this.cr.Edit(civm._complaints);
+            this.nameOfComplainantRepo.Edit(civm._nameOfComplainant);
+            this._patientRepo.Edit(civm._complaintPatient);
+            SaveComplaint(civm,complaintID);
+            return RedirectToAction("EditComplaint",new { ID = complaintID.ToString() });
         }
     }
 }

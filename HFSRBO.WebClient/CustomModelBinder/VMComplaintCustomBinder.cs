@@ -5,17 +5,36 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using HFSRBO.Core;
+using HFSRBO.Infra;
 namespace HFSRBO.WebClient
 {
     public class VMComplaintCustomBinder : IModelBinder
     {
+        private IComplaintsRepository cr = new ComplaintsRepository();
+        private INameOfComplainantRepository nameOfComplainantRepo = new NameOfComplainantRepo();
+        private IComplaintPatientRepository _patientRepo = new PatientRepo();
+        private IHospitalRepo hr = new HospitalRepo();
+
+        
+        public VMComplaintCustomBinder() { }
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var form = controllerContext.HttpContext.Request.Form;
             ComplaintInfoViewModel _civm = new ComplaintInfoViewModel();
-            _civm._complaints = new complaints();
-            _civm._nameOfComplainant = new complaint_nameOfComplainant();
-            _civm._complaintPatient = new complaint_patient();
+            
+            if(HttpContext.Current.Session["EditComplaintID"] != null)
+            {
+                Int32 complaintID = Convert.ToInt32(HttpContext.Current.Session["EditComplaintID"].ToString());
+                _civm._complaints = this.cr.FindById(complaintID);
+                _civm._nameOfComplainant = this.nameOfComplainantRepo.FindById(complaintID);
+                _civm._complaintPatient = this._patientRepo.FindById(complaintID);
+            }
+            else
+            {
+                _civm._complaints = new complaints();
+                _civm._nameOfComplainant = new complaint_nameOfComplainant();
+                _civm._complaintPatient = new complaint_patient();
+            }
 
             //COMPLAINT INFORMATION
             if (form.Get("anonymous").Trim().ToLower() == "1")
@@ -27,14 +46,18 @@ namespace HFSRBO.WebClient
                 _civm._complaints.pccCheck = true;
                 _civm._complaints.pccNumber = form.Get("pccNumber");
             }
-            else _civm._complaints.pccCheck = false;
+            else
+            {
+                _civm._complaints.pccCheck = false;
+                _civm._complaints.communication_form = Convert.ToInt32(form.Get("communication_form"));
+            }
 
 
             _civm._complaints.codeNumber = form.Get("codeNumber");
             try { _civm._complaints.hospitalID = Convert.ToInt32(form.Get("hospitalID")); } catch { }
             _civm._complaints.reasonOfConfinement = form.Get("reasonOfConfinement");
+
             
-            _civm._complaints.communication_form = form.Get("communication_form");
             _civm._complaints.ownership = form.Get("ownership");
             _civm._complaints.date_created = DateTime.Now;
             _civm._complaints.status = "O";

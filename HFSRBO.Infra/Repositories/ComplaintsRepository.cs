@@ -131,7 +131,7 @@ namespace HFSRBO.Infra
                               hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
                               nameOfComplainant = (from name in db.complainantName where name.complaintId == list.ID select name.firstname + " " + name.mi + " " + name.lastname).FirstOrDefault(),
                               ownership = list.ownership,
-                              communication_form = (from comm_form in db._communication where comm_form.ID.ToString() == list.communication_form select comm_form.desc).FirstOrDefault(),
+                              communication_form = (from comm_form in db._communication where comm_form.ID == list.communication_form select comm_form.desc).FirstOrDefault(),
                               annonymos = list.annonymos,
                               pccCheck = list.pccCheck,
                               pccNumber = list.pccNumber,

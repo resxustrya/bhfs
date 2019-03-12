@@ -16,7 +16,7 @@ namespace HFSRBO.Core
         public String other_complaint { get; set; }
         public String reasonOfConfinement { get; set; }
         public String assistance_needed { get; set; }
-        public String communication_form { get; set; }
+        public Int32 communication_form { get; set; }
         public String pccNumber { get; set; }
         public String ownership { get; set; }
         public String status { get; set; }

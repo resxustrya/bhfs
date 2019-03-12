@@ -16,8 +16,6 @@ namespace HFSRBO.WebClient
             bundles.Add(new ScriptBundle("~/material/js").Include(
                         "~/Scripts/material/material.js",
                         "~/Scripts/material/init.js",
-                        "~/Scripts/material/datatable.js",
-                        "~/Scripts/material/datatable_material.js",
                         "~/Scripts/select2.js",
                         "~/Scripts/material/createComplaintFormSubmit.js"
                         ));
