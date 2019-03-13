@@ -1,20 +1,36 @@
-﻿
+﻿@model CreateComplaintViewModel
 <form action="@Url.Action("Filter","Complaint")" method="post">
     @Html.AntiForgeryToken()
     <div class="row">
-        <h6>Filter by type of complaint :</h6>
-        <div class="col l12 m12 s12">
-            <div class="row">
-                
-            </div>
+        <h6>Filter by complaint type :</h6>
+        <div class="input-field col l12 m12 s12">
+            <select class="browser-default js-example-basic-multiple" name="complaintType[]" multiple>
+                @foreach (type_complaint tc in Model._complaint_type)
+                {
+                    <option value="@tc.ID">@tc.Description</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <h6>Filter by assistance needed :</h6>
+        <div class="input-field col l12 m12 s12">
+            <select class="browser-default js-example-basic-multiple" name="complaintType[]" multiple>
+                @foreach (complaint_assistance ca in Model._complaintAssistance)
+                {
+                    <option value="@ca.ID">@ca.assistance</option>
+                }
+            </select>
         </div>
     </div>
     <div class="row">
         <h6>Filter by Hospital</h6>
         <div class="input-field col l12 m12 s12">
-            <select name="hospitalID" id="hospitalID" multiple>
-                <option value="" disabled selected>Choose your option</option>
-                
+            <select class="browser-default js-example-basic-multiple" name="hospitalID[]" id="hospitalID" multiple>
+                @foreach (hospitals h in Model._hospitals)
+                {
+                    <option value="@h.ID">@h.name</option>
+                }
             </select>
         </div>
     </div>
@@ -69,3 +85,12 @@
         </div>
     </div>
 </form>
+<script>
+    (function () {
+        $('.js-example-basic-multiple').select2({
+            placeholder: 'Select and option'
+        });
+        var elems = document.querySelectorAll('.datepicker');
+        var instances = M.Datepicker.init(elems);
+    })();
+</script>

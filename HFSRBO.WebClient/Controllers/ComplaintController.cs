@@ -190,21 +190,35 @@ namespace HFSRBO.WebClient
         public ActionResult EditComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm, List<String> date_informed_the_hf, List<String> date_hf_submitted_reply, List<String> date_release_to_records, List<String> date_final_resolution, List<String> complaint_type, List<String> complaint_assistance, List<String> actionTaken, List<String> actionDate)
         {
             Int32 complaintID = Convert.ToInt32(Session["EditComplaintID"].ToString());
-            civm.complaint_type = complaint_type;
-            civm.assistanceNeeded = complaint_assistance;
-            civm.date_informed_the_hf = date_informed_the_hf;
-            civm.date_hf_submitted_reply = date_hf_submitted_reply;
-            civm.date_release_to_records = date_release_to_records;
-            civm.date_final_resolution = date_final_resolution;
-            civm.actionTaken = actionTaken;
-            civm.actionDate = actionDate;
+            try
+            {
+                civm.complaint_type = complaint_type;
+                civm.assistanceNeeded = complaint_assistance;
+                civm.date_informed_the_hf = date_informed_the_hf;
+                civm.date_hf_submitted_reply = date_hf_submitted_reply;
+                civm.date_release_to_records = date_release_to_records;
+                civm.date_final_resolution = date_final_resolution;
+                civm.actionTaken = actionTaken;
+                civm.actionDate = actionDate;
 
-            //UPDATE THE COMPLAINT
-            this.cr.Edit(civm._complaints);
-            this.nameOfComplainantRepo.Edit(civm._nameOfComplainant);
-            this._patientRepo.Edit(civm._complaintPatient);
-            SaveComplaint(civm,complaintID);
+                //UPDATE THE COMPLAINT
+                this.cr.Edit(civm._complaints);
+                this.nameOfComplainantRepo.Edit(civm._nameOfComplainant);
+                this._patientRepo.Edit(civm._complaintPatient);
+                SaveComplaint(civm, complaintID);
+                TempData["EditSuccess"] = true;
+            }
+            catch
+            {
+                TempData["EditSuccess"] = false;
+            }
             return RedirectToAction("EditComplaint",new { ID = complaintID.ToString() });
+        }
+
+        public ActionResult Filter()
+        {
+            CreateComplaintViewModel filterViewData = this.cr.getCreateComplaintViewModel();
+            return PartialView(filterViewData);
         }
     }
 }

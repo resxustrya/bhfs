@@ -339,12 +339,12 @@
     <Content Include="Views\MasterData\EditComplaintType.cshtml" />
     <Content Include="Views\MasterData\AddComplaintType.cshtml" />
     <Content Include="Views\Complaint\CreateComplaint.cshtml" />
-    <Content Include="Views\Complaint\Filters.cshtml" />
     <Content Include="Views\MasterData\HealthFacility.cshtml" />
     <Content Include="Views\MasterData\AddComplaintAssistance.cshtml" />
     <Content Include="Views\SysAccount\UserAccounts.cshtml" />
     <Content Include="Views\SysAccount\CreateUser.cshtml" />
     <Content Include="Views\Complaint\EditComplaint.cshtml" />
+    <Content Include="Views\Complaint\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

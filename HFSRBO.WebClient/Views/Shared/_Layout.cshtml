@@ -1,4 +1,11 @@
 ﻿
+@{ 
+    bool editComplaintSuccess = false;
+    if (TempData["EditSuccess"] != null)
+    {
+        editComplaintSuccess = Convert.ToBoolean(TempData["EditSuccess"]);
+    }
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +78,17 @@
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/material/js")
+    @if(editComplaintSuccess)
+    {
+        <script>
+            Lobibox.notify('success', {
+                rounded: true,
+                size: 'mini',
+                position: 'center top',
+                msg: 'Changes saved.'
+            });
+        </script>
+    }
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.datepicker');

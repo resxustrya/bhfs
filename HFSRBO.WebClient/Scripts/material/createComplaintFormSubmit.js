@@ -79,8 +79,6 @@
             + "</div>"
         );
     });
-
-    
 });
 
 function addDates(date, classMemeber) {
@@ -236,20 +234,22 @@ function createInputElement(input,value)
     return element;
 }
 
-$(document).ready(function () {
-    var url = $("#complaintID").data('get_healthfacility');
-    var data = {};
-    $.getJSON(url, function (res) {
-        for (var i = 0; i < res.length; i++) {
-            data[res[i].Name] = null;
-        }
-    });
-    console.log(data);
-    $('input.autocomplete').autocomplete({
-        data:data
-    });
-});
 
 $('.js-example-basic-single').select2({
     placeholder: 'Select an option'
 });
+
+
+function showFilter(el)
+{
+    if (!$(".filter-container-ul li").first().hasClass('active')) {
+        var url = $(el).data('url');
+        $(".collapsible-body").html('Loading filter');
+        $.get(url, function (res) {
+            $(".collapsible-body").html(res);
+        });
+    } else {
+        $(".collapsible-body").html('');
+    }
+    
+}
