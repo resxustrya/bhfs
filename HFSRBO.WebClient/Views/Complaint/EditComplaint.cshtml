@@ -3,8 +3,6 @@
     ViewBag.Title = "Edit Complaint";
     
 }
-    
-
 <div class="row">
     <div class="col l12 m12 s12">
         <form action="#" data-action="@Url.Action("EditComplaint","Complaint")" id="CreateComplaint" data-method="post">
@@ -110,7 +108,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="input-field col l12 s12 m12">
-                                        <textarea id="address" class="materialize-textarea" name="address">@Model._nameOfComplainant.address</textarea>
+                                        <input type="text" id="address" name="address" value="@Model._nameOfComplainant.address" />
                                         <label for="address">Address</label>
                                     </div>
                                 </div>

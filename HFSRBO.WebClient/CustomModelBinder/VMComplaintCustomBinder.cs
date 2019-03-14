@@ -56,7 +56,8 @@ namespace HFSRBO.WebClient
             _civm._complaints.codeNumber = form.Get("codeNumber");
             try { _civm._complaints.hospitalID = Convert.ToInt32(form.Get("hospitalID")); } catch { }
             _civm._complaints.reasonOfConfinement = form.Get("reasonOfConfinement");
-
+            _civm._complaints.other_complaint = form.Get("other_complaint");
+            _civm._complaints.assistance_needed = form.Get("other_assistance");
             
             _civm._complaints.ownership = form.Get("ownership");
             _civm._complaints.date_created = DateTime.Now;
@@ -65,6 +66,7 @@ namespace HFSRBO.WebClient
             _civm._complaints.staff = HttpContext.Current.User.Identity.GetUserName();
             
             //COMPLAINANT INFORMATION
+            
             _civm._nameOfComplainant.firstname = form.Get("firstname");
             _civm._nameOfComplainant.lastname = form.Get("lastname");
             _civm._nameOfComplainant.mi = form.Get("mi");

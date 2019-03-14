@@ -24,6 +24,7 @@ namespace HFSRBO.Infra
         public void Edit(complaints _complaints)
         {
             db.Entry(_complaints).State = EntityState.Modified;
+            db.SaveChanges();
         }
         public void Remove(Int32 ID)
         {
@@ -163,6 +164,35 @@ namespace HFSRBO.Infra
                 _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == complaintID),
                 _createComplaintViewModel = this.getCreateComplaintViewModel()
             };
+            return result;
+        }
+        public IEnumerable<DisplayComplaintViewModel> FilterComplaints(FilterViewModel filterViewData)
+        {
+            var result = (from list in db.complaints
+                          where list.active == true
+                          select new DisplayComplaintViewModel
+                          {
+                              complaintID = list.ID,
+                              codeNumber = list.codeNumber,
+                              dateCreated = list.date_created,
+                              hospitalName = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.name).FirstOrDefault(),
+                              hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
+                              nameOfComplainant = (from name in db.complainantName where name.complaintId == list.ID select name.firstname + " " + name.mi + " " + name.lastname).FirstOrDefault(),
+                              ownership = list.ownership,
+                              communication_form = (from comm_form in db._communication where comm_form.ID == list.communication_form select comm_form.desc).FirstOrDefault(),
+                              annonymos = list.annonymos,
+                              pccCheck = list.pccCheck,
+                              pccNumber = list.pccNumber,
+                              status = list.status,
+                              staff = list.staff,
+                              complaint_type = (from ct in db.complaintType join ctl in db._complaint_types_list on ct.ID equals ctl.ComplaintTypeId where ctl.ComplaintID == list.ID && ctl.Member == "C" select ct.Description).ToList(),
+                              assistanceNeeded = (from ca in db.complaintAssistance join ctl in db._complaint_types_list on ca.ID equals ctl.ComplaintTypeId where ctl.ComplaintID == list.ID && ctl.Member == "A" select ca.assistance).ToList(),
+                              date_informed_the_hf = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_informed_the_hf").ToList().Select(p => p.Date).ToList(),
+                              date_hf_submitted_reply = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_hf_submitted_reply").ToList().Select(p => p.Date).ToList(),
+                              date_release_to_records = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_release_to_records").ToList().Select(p => p.Date).ToList(),
+                              date_final_resolution = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_final_resolution").ToList().Select(p => p.Date).ToList(),
+                              _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == list.ID)
+                          }).ToList();
             return result;
         }
     }

@@ -73,9 +73,17 @@ namespace HFSRBO.WebClient
 
         public void SaveComplaint(ComplaintInfoViewModel civm,Int32 complaintID)
         {
-            if(civm.complaint_type != null)
+            this.cr.RemoveComplaintTypeByComplaintID(complaintID, "C");
+            this.cr.RemoveComplaintTypeByComplaintID(complaintID, "A");
+            this.cr.RemoveComplaintsDates(complaintID, "date_informed_the_hf");
+            this.cr.RemoveComplaintsDates(complaintID, "date_hf_submitted_reply");
+            this.cr.RemoveComplaintsDates(complaintID, "date_release_to_records");
+            this.cr.RemoveComplaintsDates(complaintID, "date_final_resolution");
+            this.cr.RemoveComplaintActions(complaintID);
+
+            if (civm.complaint_type != null)
             {
-                this.cr.RemoveComplaintTypeByComplaintID(complaintID,"C");
+                
                 foreach (String complaintTypeID in civm.complaint_type)
                 {
                     this.cr.InsertComplaintTypeAssistance(
@@ -88,7 +96,7 @@ namespace HFSRBO.WebClient
             }
             if(civm.assistanceNeeded != null)
             {
-                this.cr.RemoveComplaintTypeByComplaintID(complaintID, "A");
+                
                 foreach (String complaintTypeID in civm.assistanceNeeded)
                 {
                     this.cr.InsertComplaintTypeAssistance(
@@ -102,7 +110,7 @@ namespace HFSRBO.WebClient
             }
             if(civm.date_informed_the_hf != null)
             {
-                this.cr.RemoveComplaintsDates(complaintID, "date_informed_the_hf");
+                
                 foreach(String s in civm.date_informed_the_hf)
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates {
@@ -115,7 +123,7 @@ namespace HFSRBO.WebClient
 
             if (civm.date_hf_submitted_reply != null)
             {
-                this.cr.RemoveComplaintsDates(complaintID, "date_hf_submitted_reply");
+                
                 foreach (String s in civm.date_hf_submitted_reply)
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates
@@ -129,7 +137,7 @@ namespace HFSRBO.WebClient
 
             if (civm.date_release_to_records != null)
             {
-                this.cr.RemoveComplaintsDates(complaintID, "date_release_to_records");
+                
                 foreach (String s in civm.date_release_to_records)
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates
@@ -143,7 +151,7 @@ namespace HFSRBO.WebClient
 
             if (civm.date_final_resolution != null)
             {
-                this.cr.RemoveComplaintsDates(complaintID, "date_final_resolution");
+                
                 foreach (String s in civm.date_final_resolution)
                 {
                     this.cr.InsertComplaintsDates(new complaint_dates
@@ -156,7 +164,7 @@ namespace HFSRBO.WebClient
             }
             if(civm.actionTaken != null)
             {
-                this.cr.RemoveComplaintActions(complaintID);
+                
                 for(int i = 0; i < civm.actionTaken.Count();i++)
                 {
                     this.cr.InsertComplaintActions(new complaint_action_dates {
@@ -219,6 +227,14 @@ namespace HFSRBO.WebClient
         {
             CreateComplaintViewModel filterViewData = this.cr.getCreateComplaintViewModel();
             return PartialView(filterViewData);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Filter(FilterViewModel filterViewData)
+        {
+            IEnumerable<DisplayComplaintViewModel> list = this.cr.FilterComplaints(filterViewData);
+            return View();
         }
     }
 }

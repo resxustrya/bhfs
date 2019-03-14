@@ -97,9 +97,11 @@ function romoveMember(el) {
 }
 
 function addAction() {
+    
     var action = $("input[name='actionTaken']").val();
     var actionDate = $("input[name='actionDate']").val();
-    $("table.actionTakenList")
+    if (action && actionDate) {
+        $("table.actionTakenList")
        .append(
            "<tr>"
            + "<td><input type='text' disabled name='actionDate[]' value='" + actionDate + "' /></td>"
@@ -107,7 +109,8 @@ function addAction() {
            + "<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
            + "</tr>"
        );
-    $("#add_type_complaint").modal('close');
+       $("#add_type_complaint").modal('close');
+    }
 }
 
 $("#btnSave").on('click', function (e) {
@@ -148,7 +151,6 @@ $("#btnSave").on('click', function (e) {
     form.appendChild(createInputElement('pccNumber', $("input[name='pccNumber']").val()));
     form.appendChild(createInputElement('communication_form', $("select[name='communication_form']").val()));
     form.appendChild(createInputElement('ownership', $("select[name='ownership']").val()));
-
 
     $("input[name='date_informed_the_hf']").remove();
     $('input[name^="date_informed_the_hf"]').each(function () {
@@ -229,8 +231,8 @@ function createInputElement(input,value)
 {
     var element = document.createElement("input");
     element.type = "hidden";
-    element.name = input; //"__RequestVerificationToken";
-    element.value = value;//$("input[name='__RequestVerificationToken']").val();
+    element.name = input; 
+    element.value = value;
     return element;
 }
 
@@ -244,7 +246,7 @@ function showFilter(el)
 {
     if (!$(".filter-container-ul li").first().hasClass('active')) {
         var url = $(el).data('url');
-        $(".collapsible-body").html('Loading filter');
+        $(".collapsible-body").html('Loading filter. Please wait');
         $.get(url, function (res) {
             $(".collapsible-body").html(res);
         });

@@ -7,13 +7,13 @@ namespace HFSRBO.Infra.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class new_table : IMigrationMetadata
+    public sealed partial class fresh : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(new_table));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fresh));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903110321377_new_table"; }
+            get { return "201903140337380_fresh"; }
         }
         
         string IMigrationMetadata.Source

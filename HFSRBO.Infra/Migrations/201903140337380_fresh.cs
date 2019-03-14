@@ -3,10 +3,19 @@ namespace HFSRBO.Infra.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial_Migration : DbMigration
+    public partial class fresh : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.communications",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        desc = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
             CreateTable(
                 "dbo.complaint_types_list",
                 c => new
@@ -33,7 +42,8 @@ namespace HFSRBO.Infra.Migrations
                 "dbo.complaint_nameOfComplainant",
                 c => new
                     {
-                        complaintId = c.Int(nullable: false, identity: true),
+                        ID = c.Int(nullable: false, identity: true),
+                        complaintId = c.Int(nullable: false),
                         firstname = c.String(),
                         lastname = c.String(),
                         mi = c.String(),
@@ -45,7 +55,7 @@ namespace HFSRBO.Infra.Migrations
                         mobile = c.String(),
                         Date = c.DateTime(),
                     })
-                .PrimaryKey(t => t.complaintId);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.complaint_action_dates",
@@ -78,7 +88,7 @@ namespace HFSRBO.Infra.Migrations
                         other_complaint = c.String(),
                         reasonOfConfinement = c.String(),
                         assistance_needed = c.String(),
-                        communication_form = c.String(),
+                        communication_form = c.Int(nullable: false),
                         pccNumber = c.String(),
                         ownership = c.String(),
                         status = c.String(),
@@ -124,13 +134,14 @@ namespace HFSRBO.Infra.Migrations
                 "dbo.complaint_patient",
                 c => new
                     {
-                        complaintID = c.Int(nullable: false, identity: true),
+                        ID = c.Int(nullable: false, identity: true),
+                        complaintID = c.Int(nullable: false),
                         p_firstname = c.String(),
                         p_lastname = c.String(),
                         p_mi = c.String(),
                         age = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.complaintID);
+                .PrimaryKey(t => t.ID);
             
         }
         
@@ -146,6 +157,7 @@ namespace HFSRBO.Infra.Migrations
             DropTable("dbo.complaint_nameOfComplainant");
             DropTable("dbo.complaint_dates");
             DropTable("dbo.complaint_types_list");
+            DropTable("dbo.communications");
         }
     }
 }

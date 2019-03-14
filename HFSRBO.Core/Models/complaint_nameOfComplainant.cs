@@ -8,6 +8,7 @@ namespace HFSRBO.Core
     public class complaint_nameOfComplainant
     {
         [Key]
+        public Int32 ID { get; set; }
         public Int32 complaintId { get; set; }
         public String firstname { get; set; }
         public String lastname { get; set; }

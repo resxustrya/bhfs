@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
 using HFSRBO.Core;
+using System.Data.Entity;
 namespace HFSRBO.Infra
 {
     public class NameOfComplainantRepo : INameOfComplainantRepository
@@ -18,6 +18,7 @@ namespace HFSRBO.Infra
         public void Edit(complaint_nameOfComplainant _nameOfComplainant)
         {
             db.Entry(_nameOfComplainant).State = EntityState.Modified;
+            db.SaveChanges();
         }
         public void Remove(Int32 ID)
         {

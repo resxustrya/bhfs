@@ -7,13 +7,13 @@ namespace HFSRBO.Core
 {
     public class complaint_patient
     {
-        public string date_confined;
-
         [Key]
+        public Int32 ID { get; set; }
         public Int32 complaintID { get; set; }
         public String p_firstname { get; set; }
         public String p_lastname { get; set; }
         public String p_mi { get; set; }
         public Int32 age { get; set; }
+        public string date_confined;
     }
 }

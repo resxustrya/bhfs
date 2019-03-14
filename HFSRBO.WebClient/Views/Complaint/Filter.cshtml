@@ -15,7 +15,7 @@
     <div class="row">
         <h6>Filter by assistance needed :</h6>
         <div class="input-field col l12 m12 s12">
-            <select class="browser-default js-example-basic-multiple" name="complaintType[]" multiple>
+            <select class="browser-default js-example-basic-multiple" name="complaintAssistance[]" multiple>
                 @foreach (complaint_assistance ca in Model._complaintAssistance)
                 {
                     <option value="@ca.ID">@ca.assistance</option>

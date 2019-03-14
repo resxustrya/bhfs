@@ -18,6 +18,7 @@ namespace HFSRBO.Infra
         public void Edit(complaint_patient _patient)
         {
             db.Entry(_patient).State = EntityState.Modified;
+            db.SaveChanges();
         }
         public void Remove(Int32 ID)
         {

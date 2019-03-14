@@ -91,9 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="hfsrboContext.cs" />
-    <Compile Include="Migrations\201903120550310_new_migration.cs" />
-    <Compile Include="Migrations\201903120550310_new_migration.Designer.cs">
-      <DependentUpon>201903120550310_new_migration.cs</DependentUpon>
+    <Compile Include="Migrations\201903140337380_fresh.cs" />
+    <Compile Include="Migrations\201903140337380_fresh.Designer.cs">
+      <DependentUpon>201903140337380_fresh.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -104,6 +104,7 @@
     <Compile Include="Repositories\HospitalRepo.cs" />
     <Compile Include="Repositories\NameOfComplainantRepo.cs" />
     <Compile Include="Repositories\PatientRepo.cs" />
+    <Compile Include="SeedCommunications.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HFSRBO.Core\HFSRBO.Core.csproj">
@@ -116,8 +117,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903120550310_new_migration.resx">
-      <DependentUpon>201903120550310_new_migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903140337380_fresh.resx">
+      <DependentUpon>201903140337380_fresh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,20 +1,15 @@
-namespace HFSRBO.Infra.Migrations
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using HFSRBO.Core;
+namespace HFSRBO.Infra
 {
-    using Core;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<HFSRBO.Infra.hfsrboContext>
+    public class SeedCommunications
     {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-        }
-
-        protected override void Seed(HFSRBO.Infra.hfsrboContext context)
-        {
+        // JUST A COPY OF communication model migration seeder to database
+        /*
             context._communication.RemoveRange(context._communication.ToList());
 
             context._communication.Add(new communication { ID = 1, desc = "By Photo" });
@@ -48,6 +43,6 @@ namespace HFSRBO.Infra.Migrations
             context.facilityType.Add(new facility_type { ID = 5, Name = "Birthing Center" });
 
             context.SaveChanges();
-        }
+        */
     }
 }
