@@ -168,32 +168,104 @@ namespace HFSRBO.Infra
         }
         public IEnumerable<DisplayComplaintViewModel> FilterComplaints(FilterViewModel filterViewData)
         {
-            var result = (from list in db.complaints
-                          where list.active == true
-                          select new DisplayComplaintViewModel
-                          {
-                              complaintID = list.ID,
-                              codeNumber = list.codeNumber,
-                              dateCreated = list.date_created,
-                              hospitalName = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.name).FirstOrDefault(),
-                              hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
-                              nameOfComplainant = (from name in db.complainantName where name.complaintId == list.ID select name.firstname + " " + name.mi + " " + name.lastname).FirstOrDefault(),
-                              ownership = list.ownership,
-                              communication_form = (from comm_form in db._communication where comm_form.ID == list.communication_form select comm_form.desc).FirstOrDefault(),
-                              annonymos = list.annonymos,
-                              pccCheck = list.pccCheck,
-                              pccNumber = list.pccNumber,
-                              status = list.status,
-                              staff = list.staff,
-                              complaint_type = (from ct in db.complaintType join ctl in db._complaint_types_list on ct.ID equals ctl.ComplaintTypeId where ctl.ComplaintID == list.ID && ctl.Member == "C" select ct.Description).ToList(),
-                              assistanceNeeded = (from ca in db.complaintAssistance join ctl in db._complaint_types_list on ca.ID equals ctl.ComplaintTypeId where ctl.ComplaintID == list.ID && ctl.Member == "A" select ca.assistance).ToList(),
-                              date_informed_the_hf = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_informed_the_hf").ToList().Select(p => p.Date).ToList(),
-                              date_hf_submitted_reply = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_hf_submitted_reply").ToList().Select(p => p.Date).ToList(),
-                              date_release_to_records = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_release_to_records").ToList().Select(p => p.Date).ToList(),
-                              date_final_resolution = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_final_resolution").ToList().Select(p => p.Date).ToList(),
-                              _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == list.ID)
-                          }).ToList();
-            return result;
+            IEnumerable<DisplayComplaintViewModel> filterComplaints = null;
+            IEnumerable<complaints> _complaints = null;
+            DateTime dateFrom = Convert.ToDateTime(filterViewData.date_from);
+            DateTime dateTo = Convert.ToDateTime(filterViewData.date_to);
+            String where = "";
+
+            where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
+
+            if(filterViewData.complaintType != null)
+            {
+                where += " AND ctl.ComplaintTypeId IN (";
+                if (filterViewData.complaintType.Count() == 1)
+                    where += "'" + filterViewData.complaintType[0].ToString().Trim() + "'";
+                else
+                {
+                    for (int i = 1; i <= filterViewData.complaintType.Count(); i++)
+                    {
+                        if (i == filterViewData.complaintType.Count())
+                            where += "'" + filterViewData.complaintType[i - 1].ToString().Trim() + "'";
+                        else
+                            where += "'" + filterViewData.complaintType[i - 1].ToString().Trim() + "',";
+                    }
+                }
+
+                where += ") AND ctl.Member = 'C' ";
+            }
+
+            if (filterViewData.complaintAssistance != null)
+            {
+                where += " AND ctl.ComplaintTypeId IN (";
+                if (filterViewData.complaintAssistance.Count() == 1)
+                    where += "'" + filterViewData.complaintAssistance[0].ToString().Trim() + "'";
+                else
+                {
+                    for (int i = 1; i <= filterViewData.complaintAssistance.Count(); i++)
+                    {
+                        if (i == filterViewData.complaintAssistance.Count())
+                            where += "'" + filterViewData.complaintAssistance[i - 1].ToString().Trim() + "'";
+                        else
+                            where += "'" + filterViewData.complaintAssistance[i - 1].ToString().Trim() + "',";
+                    }
+                }
+
+                where += ") AND ctl.Member = 'A' ";
+            }
+            if(filterViewData.hospitalID != null)
+            {
+                where += " AND complaint_list.hospitalID IN (";
+                if (filterViewData.hospitalID.Count() == 1)
+                    where += "'" + filterViewData.hospitalID[0].ToString().Trim() + "'";
+                else
+                {
+                    for (int i = 1; i <= filterViewData.hospitalID.Count(); i++)
+                    {
+                        if (i == filterViewData.hospitalID.Count())
+                            where += "'" + filterViewData.hospitalID[i - 1].ToString().Trim() + "'";
+                        else
+                            where += "'" + filterViewData.hospitalID[i - 1].ToString().Trim() + "',";
+                    }
+                }
+
+                where += ")";
+            }
+            if(filterViewData.status != null)
+            {
+                where += " AND complaint_list.status = '" + filterViewData.status + "'";
+            }
+            String query = "SELECT DISTINCT complaint_list.* FROM [hfsrbo].[dbo].[complaints] complaint_list JOIN [hfsrbo].[dbo].[complaint_types_list] ctl ON complaint_list.ID = ctl.ComplaintID" + where + " AND complaint_list.active = 1 ORDER BY complaint_list.date_created DESC";
+            System.Diagnostics.Debug.WriteLine(query);
+            _complaints = db.complaints.SqlQuery(query).ToList();
+
+
+            filterComplaints = _complaints.Select(list => new DisplayComplaintViewModel
+            {
+                
+                complaintID = list.ID,
+                codeNumber = list.codeNumber,
+                dateCreated = list.date_created,
+                hospitalName = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.name).FirstOrDefault(),
+                hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
+                nameOfComplainant = (from name in db.complainantName where name.complaintId == list.ID select name.firstname + " " + name.mi + " " + name.lastname).FirstOrDefault(),
+                ownership = list.ownership,
+                communication_form = (from comm_form in db._communication where comm_form.ID == list.communication_form select comm_form.desc).FirstOrDefault(),
+                annonymos = list.annonymos,
+                pccCheck = list.pccCheck,
+                pccNumber = list.pccNumber,
+                status = list.status,
+                staff = list.staff,
+                complaint_type = (from ct in db.complaintType join ctl in db._complaint_types_list on ct.ID equals ctl.ComplaintTypeId where ctl.ComplaintID == list.ID && ctl.Member == "C" select ct.Description).ToList(),
+                assistanceNeeded = (from ca in db.complaintAssistance join ctl in db._complaint_types_list on ca.ID equals ctl.ComplaintTypeId where ctl.ComplaintID == list.ID && ctl.Member == "A" select ca.assistance).ToList(),
+                date_informed_the_hf = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_informed_the_hf").ToList().Select(p => p.Date).ToList(),
+                date_hf_submitted_reply = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_hf_submitted_reply").ToList().Select(p => p.Date).ToList(),
+                date_release_to_records = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_release_to_records").ToList().Select(p => p.Date).ToList(),
+                date_final_resolution = db._complaintsDates.Where(p => p.complaintID == list.ID && p.member == "date_final_resolution").ToList().Select(p => p.Date).ToList(),
+                _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == list.ID)
+                          
+            });
+            return filterComplaints.ToList();
         }
     }
 }

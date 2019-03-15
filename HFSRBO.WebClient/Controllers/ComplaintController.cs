@@ -234,7 +234,7 @@ namespace HFSRBO.WebClient
         public ActionResult Filter(FilterViewModel filterViewData)
         {
             IEnumerable<DisplayComplaintViewModel> list = this.cr.FilterComplaints(filterViewData);
-            return View();
+            return View("~/Views/Complaint/Complaints.cshtml", list);
         }
     }
 }
