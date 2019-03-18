@@ -226,16 +226,10 @@
                                     <div class="col l6 s12 m12">
                                         <h6>Ownership</h6>
                                         <select name="ownership" class="browser-default" style="margin-top:15px;">
-                                            @{
-                                                var ownnership = new Dictionary<String, String>();
-                                                ownnership.Add("P", "Private");
-                                                ownnership.Add("G", "Government");
-                                            }
+                                            
                                             <option value="" disabled selected>Hospital/Facility Ownership</option>
-                                            @foreach (var o in ownnership)
-                                            {
-                                                <option value="@o.Key" @(Model._complaint.ownership == "P" ? " selected" : "")>@o.Value</option>
-                                            }
+                                            <option value="P" @(Model._complaint.ownership == "P" ? " selected" : "")>Private</option>
+                                            <option value="G" @(Model._complaint.ownership == "G" ? " selected" : "")>Government</option>
                                         </select>
                                     </div>
                                 </div>

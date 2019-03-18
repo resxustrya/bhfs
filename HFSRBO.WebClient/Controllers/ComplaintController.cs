@@ -19,6 +19,7 @@ namespace HFSRBO.WebClient
         private INameOfComplainantRepository nameOfComplainantRepo;
         private IComplaintPatientRepository _patientRepo;
         private IHospitalRepo hr;
+        
         // GET: Complaint
         public ComplaintController(IComplaintsRepository cr, INameOfComplainantRepository nameOfComplainantRepo, IComplaintPatientRepository _patientRepo, IHospitalRepo hr)
         {

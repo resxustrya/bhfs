@@ -176,7 +176,11 @@ namespace HFSRBO.Infra
 
             where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
 
-            if(filterViewData.complaintType != null)
+            if(filterViewData.complaintType != null && filterViewData.complaintAssistance != null)
+            {
+
+            }
+            else if(filterViewData.complaintType != null)
             {
                 where += " AND ctl.ComplaintTypeId IN (";
                 if (filterViewData.complaintType.Count() == 1)
@@ -194,8 +198,7 @@ namespace HFSRBO.Infra
 
                 where += ") AND ctl.Member = 'C' ";
             }
-
-            if (filterViewData.complaintAssistance != null)
+            else if(filterViewData.complaintAssistance != null)
             {
                 where += " AND ctl.ComplaintTypeId IN (";
                 if (filterViewData.complaintAssistance.Count() == 1)
