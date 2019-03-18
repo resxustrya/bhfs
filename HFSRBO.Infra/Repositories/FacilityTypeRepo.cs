@@ -18,6 +18,7 @@ namespace HFSRBO.Infra
         public void Edit(facility_type _facilityType)
         {
             db.Entry(_facilityType).State = EntityState.Modified;
+            db.SaveChanges();
         }
         public void Remove(Int32 ID)
         {

@@ -19,6 +19,7 @@ namespace HFSRBO.Infra
         public void Edit(hospitals _hospital)
         {
             db.Entry(_hospital).State = EntityState.Modified;
+            db.SaveChanges();
         }
         public void Remove(Int32 ID)
         {
@@ -36,16 +37,9 @@ namespace HFSRBO.Infra
             return result;
         }
 
-        public IEnumerable<HealthFacilityViewModel> GetHealthFacilities()
+        public IEnumerable<hospitals> GetHealthFacilities()
         {
-            IEnumerable<HealthFacilityViewModel> result = (from hospital in db.hospitals join ft in db.facilityType on hospital.facilityID equals ft.ID
-            select new HealthFacilityViewModel
-            {
-                ID = hospital.ID,
-                Name =  hospital.name,
-                Address = hospital.address,
-                FacilityType = ft.Name
-            }).ToList();
+            IEnumerable<hospitals> result = db.hospitals.ToList();
             return result;
         }
     }

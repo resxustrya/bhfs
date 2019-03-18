@@ -95,6 +95,14 @@
     <Compile Include="Migrations\201903140337380_fresh.Designer.cs">
       <DependentUpon>201903140337380_fresh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903180901529_change_format.cs" />
+    <Compile Include="Migrations\201903180901529_change_format.Designer.cs">
+      <DependentUpon>201903180901529_change_format.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903181011390_added_col.cs" />
+    <Compile Include="Migrations\201903181011390_added_col.Designer.cs">
+      <DependentUpon>201903181011390_added_col.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ComplaintAssistanceRepo.cs" />
@@ -119,6 +127,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903140337380_fresh.resx">
       <DependentUpon>201903140337380_fresh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903180901529_change_format.resx">
+      <DependentUpon>201903180901529_change_format.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903181011390_added_col.resx">
+      <DependentUpon>201903181011390_added_col.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

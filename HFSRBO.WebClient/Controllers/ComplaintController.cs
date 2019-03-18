@@ -182,11 +182,6 @@ namespace HFSRBO.WebClient
             this.cr.Remove(complaintID);
             return RedirectToAction("Complaints");
         }
-        public ActionResult GetHealthFacility()
-        {
-            var result = this.hr.GetHealthFacilities().Select(p => new { p.Name, p.ID }).ToList();
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
         public ActionResult EditComplaint(String ID)
         {
             Session["EditComplaintID"] = ID;

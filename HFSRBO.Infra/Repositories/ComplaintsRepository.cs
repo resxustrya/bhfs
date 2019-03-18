@@ -175,10 +175,43 @@ namespace HFSRBO.Infra
             String where = "";
 
             where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
-
+            
+            
             if(filterViewData.complaintType != null && filterViewData.complaintAssistance != null)
             {
+                where += " AND (ctl.ComplaintTypeId IN (";
+                if (filterViewData.complaintType.Count() == 1)
+                    where += "'" + filterViewData.complaintType[0].ToString().Trim() + "'";
+                else
+                {
+                    for (int i = 1; i <= filterViewData.complaintType.Count(); i++)
+                    {
+                        if (i == filterViewData.complaintType.Count())
+                            where += "'" + filterViewData.complaintType[i - 1].ToString().Trim() + "'";
+                        else
+                            where += "'" + filterViewData.complaintType[i - 1].ToString().Trim() + "',";
+                    }
+                }
 
+                where += ") AND ctl.Member = 'C') ";
+
+                where += " OR (ctl.ComplaintTypeId IN (";
+              
+
+                if (filterViewData.complaintAssistance.Count() == 1)
+                    where += "'" + filterViewData.complaintAssistance[0].ToString().Trim() + "'";
+                else
+                {
+                    for (int i = 1; i <= filterViewData.complaintAssistance.Count(); i++)
+                    {
+                        if (i == filterViewData.complaintAssistance.Count())
+                            where += "'" + filterViewData.complaintAssistance[i - 1].ToString().Trim() + "'";
+                        else
+                            where += "'" + filterViewData.complaintAssistance[i - 1].ToString().Trim() + "',";
+                    }
+                }
+
+                where += ") AND ctl.Member = 'A') ";
             }
             else if(filterViewData.complaintType != null)
             {
@@ -216,6 +249,7 @@ namespace HFSRBO.Infra
 
                 where += ") AND ctl.Member = 'A' ";
             }
+
             if(filterViewData.hospitalID != null)
             {
                 where += " AND complaint_list.hospitalID IN (";
@@ -234,6 +268,7 @@ namespace HFSRBO.Infra
 
                 where += ")";
             }
+
             if(filterViewData.status != null)
             {
                 where += " AND complaint_list.status = '" + filterViewData.status + "'";
@@ -242,10 +277,8 @@ namespace HFSRBO.Infra
             System.Diagnostics.Debug.WriteLine(query);
             _complaints = db.complaints.SqlQuery(query).ToList();
 
-
             filterComplaints = _complaints.Select(list => new DisplayComplaintViewModel
             {
-                
                 complaintID = list.ID,
                 codeNumber = list.codeNumber,
                 dateCreated = list.date_created,

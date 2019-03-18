@@ -80,15 +80,20 @@ namespace HFSRBO.WebClient.Controllers
         }
         public ActionResult  HealthFacility()
         {
-            var hostpitals = hospitals.GetHealthFacilities();
-            var facilitytypes = facilityType.GetFacilityTypes();
             HealthFacilityTypeFacilityVM hftvm = new HealthFacilityTypeFacilityVM
             {
-                healthFacility = hostpitals,
-                facilityType = facilitytypes
+                healthFacility = this.hospitals.GetHealthFacilities(),
+                facilityType = this.facilityType.GetFacilityTypes()
             };
             return View(hftvm);
         }
+
+        public ActionResult AddHealthFacitlity()
+        {
+            var facilitytypes = this.facilityType.GetFacilityTypes();
+            return PartialView(facilitytypes);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddHealthFacility(hospitals _hospitals)
@@ -96,6 +101,17 @@ namespace HFSRBO.WebClient.Controllers
             hospitals.Add(_hospitals);
             return RedirectToAction("HealthFacility");
         }
+        public ActionResult EditHealthFacility(String ID)
+        {
+            EditHealthFacilityVM data = new EditHealthFacilityVM
+            {
+                _hospital = this.hospitals.FindById(Convert.ToInt32(ID)),
+                _facilityType = this.facilityType.GetFacilityTypes()
+            };
+            
+            return PartialView(data);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddFacilityType(facility_type ft)

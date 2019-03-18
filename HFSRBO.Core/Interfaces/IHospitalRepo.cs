@@ -13,6 +13,6 @@ namespace HFSRBO.Core
         void Remove(Int32 ID);
         hospitals FindById(Int32 ID);
         IEnumerable<hospitals> GetHospitals();
-        IEnumerable<HealthFacilityViewModel> GetHealthFacilities();
+        IEnumerable<hospitals> GetHealthFacilities();
     }
 }

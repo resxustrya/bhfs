@@ -9,7 +9,7 @@ namespace HFSRBO.Core
 {
     public class HealthFacilityTypeFacilityVM
     {
-        public IEnumerable<HealthFacilityViewModel> healthFacility { get; set; }
+        public IEnumerable<hospitals> healthFacility { get; set; }
         public IEnumerable<facility_type> facilityType { get; set; }
     }
 }

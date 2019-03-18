@@ -353,6 +353,8 @@
     <Content Include="Views\SysAccount\CreateUser.cshtml" />
     <Content Include="Views\Complaint\EditComplaint.cshtml" />
     <Content Include="Views\Complaint\Filter.cshtml" />
+    <Content Include="Views\MasterData\AddHealthFacitlity.cshtml" />
+    <Content Include="Views\MasterData\EditHealthFacility.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

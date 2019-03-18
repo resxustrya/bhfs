@@ -12,7 +12,6 @@ namespace HFSRBO.Core
         public Int32 ID { get; set; }
         public String codeNumber { get; set; }
         public Int32 hospitalID { get; set; }
-        public DateTime? date_confined { get; set; }
         public String other_complaint { get; set; }
         public String reasonOfConfinement { get; set; }
         public String assistance_needed { get; set; }

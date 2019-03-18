@@ -1,0 +1,34 @@
+﻿@model EditHealthFacilityVM
+
+<form action="@Url.Action("EditHealthFacility","MasterData")" method="POST">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col l12 m12 s12 input-field">
+            <input type="text" name="name" required autocomplete="off" value="@Model._hospital.name" autofocus="true" />
+            <label for="description">Hospital Name</label>
+        </div>
+        <div class="input-field col l12 s12 m12">
+            <input type="text" name="address" required autocomplete="off" value="@Model._hospital.address" autofocus="true" />
+            <label for="description">Hospital Address</label>
+        </div>
+        <div class="input-field col l12 s12 m12">
+            <select name="facilityType" class="browser-default js-example-basic-single" style="width:100%;" required>
+                <option value="" disabled selected>Select option</option>
+                @foreach (facility_type ft in Model._facilityType)
+                {
+                    <option value="@ft.Name" @(Model._hospital.facilityType == ft.Name ? " selected" : "")>@ft.Name</option>
+                }
+            </select>
+        </div>
+        <input type="hidden" name="facilityID" />
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
+    </div>
+</form>
+
+<script>
+    $('.js-example-basic-single').select2({
+        placeholder: 'Select an option'
+    });
+</script>

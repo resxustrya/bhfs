@@ -12,5 +12,6 @@ namespace HFSRBO.Core
         public String name { get; set; }
         public String address { get; set; }
         public Int32 facilityID { get; set;}
+        public String facilityType { get; set; }
     }
 }
