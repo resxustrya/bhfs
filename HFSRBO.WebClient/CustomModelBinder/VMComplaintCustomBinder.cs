@@ -58,10 +58,8 @@ namespace HFSRBO.WebClient
             _civm._complaints.reasonOfConfinement = form.Get("reasonOfConfinement");
             _civm._complaints.other_complaint = form.Get("other_complaint");
             _civm._complaints.assistance_needed = form.Get("other_assistance");
-            
             _civm._complaints.ownership = form.Get("ownership");
-            _civm._complaints.date_created = DateTime.Now;
-            _civm._complaints.status = "O";
+            _civm._complaints.status = form.Get("status") == "1" ? true : false;
             _civm._complaints.active = true;
             _civm._complaints.staff = HttpContext.Current.User.Identity.GetUserName();
             

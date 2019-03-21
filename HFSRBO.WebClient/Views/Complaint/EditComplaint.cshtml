@@ -5,7 +5,7 @@
 }
 <div class="row">
     <div class="col l12 m12 s12">
-        <form action="#" data-action="@Url.Action("EditComplaint","Complaint")" id="CreateComplaint" data-method="post">
+        <form action="" data-action="@Url.Action("EditComplaint","Complaint")" id="CreateComplaint" data-method="post">
             @Html.AntiForgeryToken()
             <div class="card white darken-4">
                 <div class="card-content">
@@ -214,7 +214,6 @@
                                             </div>
                                             <div class="col l5 s12 m12">
                                                 <select name="communication_form" id="communication_form" class="browser-default" style="margin-top:10px;" @(Model._complaint.pccCheck == true ? "disabled" : "")>
-                                                    <option value="" disabled selected>Form of Communication received</option>
                                                     @foreach (communication c in Model._createComplaintViewModel._communications)
                                                     {
                                                         <option value="@c.ID" @(Model._complaint.communication_form == c.ID ? " selected" : "")>@c.desc</option>
@@ -226,8 +225,6 @@
                                     <div class="col l6 s12 m12">
                                         <h6>Ownership</h6>
                                         <select name="ownership" class="browser-default" style="margin-top:15px;">
-                                            
-                                            <option value="" disabled selected>Hospital/Facility Ownership</option>
                                             <option value="P" @(Model._complaint.ownership == "P" ? " selected" : "")>Private</option>
                                             <option value="G" @(Model._complaint.ownership == "G" ? " selected" : "")>Government</option>
                                         </select>
@@ -306,6 +303,17 @@
                                 <div class="row">
                                     <div class="col l12 m12 s12">
                                         <button type="button" class="waves-effect btn-small waves-light green left addAction"><i class="material-icons right">add</i>Action Taken</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row switch" style="margin-top:20px;">
+                                        <h6>Status</h6>
+                                        <label>
+                                            <span>On Going</span>
+                                            <input type="checkbox" name="status" value="1" @(Model._complaint.status == false ? " checked" : "")>
+                                            <span class="lever"></span>
+                                            <span>Complete</span>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="row">

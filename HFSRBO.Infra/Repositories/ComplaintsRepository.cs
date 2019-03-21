@@ -172,8 +172,8 @@ namespace HFSRBO.Infra
             IEnumerable<complaints> _complaints = null;
             DateTime dateFrom = Convert.ToDateTime(filterViewData.date_from);
             DateTime dateTo = Convert.ToDateTime(filterViewData.date_to);
-            String where = "";
-
+            String where = "",query = "", join = "";
+            
             where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
             
             
@@ -271,10 +271,15 @@ namespace HFSRBO.Infra
 
             if(filterViewData.status != null)
             {
-                where += " AND complaint_list.status = '" + filterViewData.status + "'";
+                where += " AND complaint_list.status = " + filterViewData.status;
             }
-            String query = "SELECT DISTINCT complaint_list.* FROM [hfsrbo].[dbo].[complaints] complaint_list JOIN [hfsrbo].[dbo].[complaint_types_list] ctl ON complaint_list.ID = ctl.ComplaintID" + where + " AND complaint_list.active = 1 ORDER BY complaint_list.date_created DESC";
-            System.Diagnostics.Debug.WriteLine(query);
+            if(filterViewData.complaintType != null || filterViewData.complaintAssistance != null)
+            {
+                join = " JOIN[hfsrbo].[dbo].[complaint_types_list] ctl ON complaint_list.ID = ctl.ComplaintID ";
+            }
+            query = "SELECT DISTINCT complaint_list.* FROM [hfsrbo].[dbo].[complaints] complaint_list " + join + where + " AND complaint_list.active = 1 ORDER BY complaint_list.date_created DESC";
+           
+            
             _complaints = db.complaints.SqlQuery(query).ToList();
 
             filterComplaints = _complaints.Select(list => new DisplayComplaintViewModel

@@ -18,12 +18,17 @@ namespace HFSRBO.Core
         public Int32 communication_form { get; set; }
         public String pccNumber { get; set; }
         public String ownership { get; set; }
-        public String status { get; set; }
+        public Boolean status { get; set; }
         public String staff { get; set; }
         public DateTime date_created { get; set; }
         public Boolean active { get; set; }
         public Boolean annonymos { get; set; }
         public Boolean pccCheck { get; set; }
         public Int32 year { get; set; }
+
+        public complaints()
+        {
+            this.date_created = DateTime.Now;
+        }
     }
 }

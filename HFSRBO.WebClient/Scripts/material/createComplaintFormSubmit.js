@@ -59,6 +59,14 @@
         }
     });
 
+    $("input[name='status']").change(function () {
+        var stat = $(this).prop('checked');
+        if (stat) {
+            $(this).val(1);
+        } else {
+            $(this).val(0);
+        }
+    });
     $(".addAction").click(function () {
         var elem = $("#add_type_complaint");
         elem.modal('open');
@@ -114,7 +122,6 @@ function addAction() {
 }
 
 $("#btnSave").on('click', function (e) {
-    
     $("#CustomComplaintForm").remove();
     $("input[name='actionDate']").remove();
     $("input[name='actionTaken']").remove();
@@ -124,12 +131,12 @@ $("#btnSave").on('click', function (e) {
     form.action = $("#CreateComplaint").data('action');
     form.style.display = "none";
     form.id = "CustomComplaintForm";
-    
-    form.appendChild(createInputElement('__RequestVerificationToken',$("input[name='__RequestVerificationToken']").val()));
-    form.appendChild(createInputElement('codeNumber',$("input[name='codeNumber']").val()));
+
+    form.appendChild(createInputElement('__RequestVerificationToken', $("input[name='__RequestVerificationToken']").val()));
+    form.appendChild(createInputElement('codeNumber', $("input[name='codeNumber']").val()));
     form.appendChild(createInputElement('anonymous', $("input[name='anonymous']").val()));
     form.appendChild(createInputElement('firstname', $("input[name='firstname']").val()));
-    form.appendChild(createInputElement('lastname',$("input[name='lastname']").val()));
+    form.appendChild(createInputElement('lastname', $("input[name='lastname']").val()));
     form.appendChild(createInputElement('mi', $("input[name='mi']").val()));
     form.appendChild(createInputElement('civil_status', $("select[name='civil_status']").val()));
     form.appendChild(createInputElement('gender', $("select[name='gender']").val()));
@@ -151,6 +158,8 @@ $("#btnSave").on('click', function (e) {
     form.appendChild(createInputElement('pccNumber', $("input[name='pccNumber']").val()));
     form.appendChild(createInputElement('communication_form', $("select[name='communication_form']").val()));
     form.appendChild(createInputElement('ownership', $("select[name='ownership']").val()));
+    form.appendChild(createInputElement('status', $("input[name='status']").val()));
+
 
     $("input[name='date_informed_the_hf']").remove();
     $('input[name^="date_informed_the_hf"]').each(function () {
@@ -179,7 +188,7 @@ $("#btnSave").on('click', function (e) {
         form.appendChild(date_release_to_records);
     });
 
-    
+
     $('input[name^="date_final_resolution"]').each(function () {
         var date_final_resolution = document.createElement("input");
         date_final_resolution.type = "hidden";
@@ -225,6 +234,7 @@ $("#btnSave").on('click', function (e) {
 
     document.body.appendChild(form);
     form.submit();
+    
 });
 
 function createInputElement(input,value)
@@ -253,5 +263,9 @@ function showFilter(el)
     } else {
         $(".collapsible-body").html('');
     }
-    
+}
+
+function validateComplaintForm(form)
+{
+
 }

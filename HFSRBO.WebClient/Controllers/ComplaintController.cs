@@ -230,6 +230,16 @@ namespace HFSRBO.WebClient
         public ActionResult Filter(FilterViewModel filterViewData)
         {
             IEnumerable<DisplayComplaintViewModel> list = this.cr.FilterComplaints(filterViewData);
+            if (filterViewData.display == "P")
+            {
+                (new ComplaintPDFReport()).createReport(list, filterViewData);
+                var fileStream = new FileStream(Server.MapPath("~/Content/PDF/complaints.pdf"),
+                                        FileMode.Open,
+                                        FileAccess.Read
+                                    );
+                var fsResult = new FileStreamResult(fileStream, "application/pdf");
+                return fsResult;
+            }
             return View("~/Views/Complaint/Complaints.cshtml", list);
         }
     }
