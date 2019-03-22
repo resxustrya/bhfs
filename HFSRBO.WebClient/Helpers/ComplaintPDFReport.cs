@@ -192,7 +192,7 @@ namespace HFSRBO.WebClient
                 {
                     complaints_table.AddCell(new PdfPCell(new Paragraph("-", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 }
-                complaints_table.AddCell(new PdfPCell(new Paragraph(c.status == true ? "On Going" : "Complete", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                complaints_table.AddCell(new PdfPCell(new Paragraph(c.status == 1 ? "On Going" : "Resolved", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph(c.staff, new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
             }
 

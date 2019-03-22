@@ -310,9 +310,9 @@
                                         <h6>Status</h6>
                                         <label>
                                             <span>On Going</span>
-                                            <input type="checkbox" name="status" value="1" @(Model._complaint.status == false ? " checked" : "")>
+                                            <input type="checkbox" name="status" value="@(Model._complaint.status == 1 ? "1" : "0")" @(Model._complaint.status == 1 ? " checked" : "")>
                                             <span class="lever"></span>
-                                            <span>Complete</span>
+                                            <span>Resolved</span>
                                         </label>
                                     </div>
                                 </div>

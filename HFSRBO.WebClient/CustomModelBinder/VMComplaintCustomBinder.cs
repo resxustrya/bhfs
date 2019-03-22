@@ -32,6 +32,7 @@ namespace HFSRBO.WebClient
             else
             {
                 _civm._complaints = new complaints();
+                _civm._complaints.active = true;
                 _civm._nameOfComplainant = new complaint_nameOfComplainant();
                 _civm._complaintPatient = new complaint_patient();
             }
@@ -59,8 +60,9 @@ namespace HFSRBO.WebClient
             _civm._complaints.other_complaint = form.Get("other_complaint");
             _civm._complaints.assistance_needed = form.Get("other_assistance");
             _civm._complaints.ownership = form.Get("ownership");
-            _civm._complaints.status = form.Get("status") == "1" ? true : false;
-            _civm._complaints.active = true;
+
+            _civm._complaints.status = Convert.ToInt32(form.Get("status"));
+            
             _civm._complaints.staff = HttpContext.Current.User.Identity.GetUserName();
             
             //COMPLAINANT INFORMATION

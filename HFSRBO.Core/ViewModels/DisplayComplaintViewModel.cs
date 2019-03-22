@@ -19,7 +19,7 @@ namespace HFSRBO.Core
         public String otherAssistanceNeed { get; set; }
         public String communication_form { get; set; }
         public String ownership { get; set; }
-        public Boolean status { get; set; }
+        public Int32 status { get; set; }
         public String staff { get; set; }
         public Boolean annonymos { get; set; }
         public Boolean pccCheck { get; set; }
