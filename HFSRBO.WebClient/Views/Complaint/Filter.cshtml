@@ -2,8 +2,8 @@
 <form action="@Url.Action("Filter","Complaint")" method="post">
     @Html.AntiForgeryToken()
     <div class="row">
-        <h6>Filter by complaint type :</h6>
-        <div class="input-field col l12 m12 s12">
+        <div class="input-field col l4 m12 s12">
+            <h6>Filter by complaint type :</h6>
             <select class="browser-default js-example-basic-multiple" name="complaintType[]" multiple>
                 @foreach (type_complaint tc in Model._complaint_type)
                 {
@@ -11,10 +11,8 @@
                 }
             </select>
         </div>
-    </div>
-    <div class="row">
-        <h6>Filter by assistance needed :</h6>
-        <div class="input-field col l12 m12 s12">
+        <div class="input-field col l4 m12 s12">
+            <h6>Filter by assistance needed :</h6>
             <select class="browser-default js-example-basic-multiple" name="complaintAssistance[]" multiple>
                 @foreach (complaint_assistance ca in Model._complaintAssistance)
                 {
@@ -22,10 +20,8 @@
                 }
             </select>
         </div>
-    </div>
-    <div class="row">
-        <h6>Filter by Hospital</h6>
-        <div class="input-field col l12 m12 s12">
+        <div class="input-field col l4 m12 s12">
+            <h6>Filter by Hospital</h6>
             <select class="browser-default js-example-basic-multiple" name="hospitalID[]" id="hospitalID" multiple>
                 @foreach (hospitals h in Model._hospitals)
                 {
@@ -35,8 +31,8 @@
         </div>
     </div>
     <div class="row">
-        <h6>Filter by Status</h6>
-        <div class="input-field col l12 m12 s12">
+        <div class="input-field col l3 m12 s12">
+            <h6>Filter by Status</h6>
             <p>
                 <label for="O">
                     <input name="status" type="radio" value="1" id="O" />
@@ -50,21 +46,17 @@
                 </label>
             </p>
         </div>
-    </div>
-    <div class="row">
-        <h6>Filter by Date Created</h6>
-        <div class="input-field col l6 s12 m12">
+        
+        <div class="input-field col l3 s12 m12">
             <input type="date" name="date_from" />
             <label for="date_from">Complaint From</label>
         </div>
-        <div class="input-field col l6 s12 m12">
+        <div class="input-field col l3 s12 m12">
             <input type="date" name="date_to" />
             <label for="date_to">Complaint To</label>
         </div>
-    </div>
-    <div class="row">
-        <h6>Display Mode</h6>
-        <div class="input-field col l12 m12 s12">
+        <div class="input-field col l3 m12 s12">
+            <h6>Display Mode</h6>
             <p>
                 <label for="W">
                     <input name="display" type="radio" value="W" id="W" />
