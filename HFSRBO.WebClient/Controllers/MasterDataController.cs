@@ -114,6 +114,14 @@ namespace HFSRBO.WebClient.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult EditHealthFacility(hospitals _hospitals)
+        {
+            hospitals.Edit(_hospitals);
+            return RedirectToAction("HealthFacility");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddFacilityType(facility_type ft)
         {
             facilityType.Add(ft);

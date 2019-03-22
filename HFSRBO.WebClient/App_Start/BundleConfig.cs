@@ -20,7 +20,8 @@ namespace HFSRBO.WebClient
                         "~/Scripts/material/createComplaintFormSubmit.js",
                         "~/Scripts/lolibox.min.js",
                         "~/Scripts/material/datatable.js",
-                        "~/Scripts/material/init.js"
+                        "~/Scripts/material/init.js",
+                        "~/Scripts/material/page.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

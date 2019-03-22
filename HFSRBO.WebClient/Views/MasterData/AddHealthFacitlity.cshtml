@@ -11,7 +11,7 @@
             <label for="description">Hospital Address</label>
         </div>
         <div class="input-field col l12 s12 m12">
-            <select name="facilityType" class="browser-default js-example-basic-single" style="width:100%;" required>
+            <select name="facilityType" class="browser-default js-example-basic-single" style="width:100%;" required onchange="setFacilityID(this);">
                 <option value="" disabled selected>Select option</option>
                 @foreach (facility_type ft in Model)
                 {
@@ -19,7 +19,7 @@
                 }
             </select>
         </div>
-        <input type="hidden" name="facilityID" />
+        <input type="hidden" name="facilityIDInfo" />
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn-large waves-effect waves-light green">Submit</button>
