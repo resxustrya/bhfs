@@ -266,7 +266,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\datatablematerial.css" />
+    <Content Include="Content\datatable.css" />
     <Content Include="Content\fonts.css" />
     <Content Include="Content\ligne-paginate.css" />
     <Content Include="Content\lolibox.min.css" />
@@ -305,7 +305,6 @@
     <Content Include="Scripts\lolibox.min.js" />
     <Content Include="Scripts\material\createComplaintFormSubmit.js" />
     <Content Include="Scripts\material\datatable.js" />
-    <Content Include="Scripts\material\datatable_material.js" />
     <Content Include="Scripts\material\init.js" />
     <Content Include="Scripts\material\material.js" />
     <Content Include="Scripts\material\page.js" />

@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 using System.IO;
 using HFSRBO.Core;
 using System.Web.UI;
-
+using PagedList;
 namespace HFSRBO.WebClient
 {
     [Authorize]
@@ -30,10 +30,12 @@ namespace HFSRBO.WebClient
         }
         public ComplaintController()
         {}
-        public ActionResult Complaints()
+        public ActionResult Complaints(int? page)
         {
+            Int32 pageSize = 20, pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             IEnumerable<DisplayComplaintViewModel> list = this.cr.GetComplaints();
-            return View(list);
+            return View(list.ToPagedList(pageIndex,pageSize));
         }
 
         public ActionResult GetComplaints()

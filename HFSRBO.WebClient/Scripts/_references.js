@@ -8,7 +8,6 @@
 /// <reference path="lolibox.min.js" />
 /// <reference path="material/createcomplaintformsubmit.js" />
 /// <reference path="material/datatable.js" />
-/// <reference path="material/datatable_material.js" />
 /// <reference path="material/init.js" />
 /// <reference path="material/material.js" />
 /// <reference path="material/page.js" />

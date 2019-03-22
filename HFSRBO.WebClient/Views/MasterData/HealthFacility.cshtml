@@ -13,43 +13,51 @@
                         </ul>
                     </div>
                     <div id="tab1" class="col s12">
-                        <table id="type_complaint" class="responsive-table">
-                            <tr>
-                                <th>Health Facility</th>
-                                <th>Address</th>
-                                <th>Facility Type</th>
-                                <th>*</th>
-                            </tr>
-                            @foreach (hospitals hospital in Model.healthFacility)
-                            {
+                        <table id="healthFacility" class="responsive-table">
+                            <thead>
                                 <tr>
-                                    <td>@hospital.name</td>
-                                    <td>@hospital.address</td>
-                                    <td>@hospital.facilityType</td>
-                                    <td>
-                                        <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
-                                        <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData", new { ID = hospital.ID })"><i class="material-icons">edit</i></a>
-                                    </td>
+                                    <th>Health Facility</th>
+                                    <th>Address</th>
+                                    <th>Facility Type</th>
+                                    <th>*</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
+                                @foreach (hospitals hospital in Model.healthFacility)
+                                {
+                                    <tr>
+                                        <td>@hospital.name</td>
+                                        <td>@hospital.address</td>
+                                        <td>@hospital.facilityType</td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
+                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData", new { ID = hospital.ID })"><i class="material-icons">edit</i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                     <div id="tab2" class="col s12">
-                        <table id="type_complaint" class="responsive-table">
-                            <tr>
-                                <th>Facility Description</th>
-                                <th>*</th>
-                            </tr>
-                            @foreach (facility_type ft in Model.facilityType)
-                            {
+                        <table id="facilityType" class="responsive-table">
+                            <thead>
                                 <tr>
-                                    <td>@ft.Name</td>
-                                    <td>
-                                        <a href="@Url.Action("DeleteFacility","MasterData",new { ID = ft.ID })" onclick="return confirm('Do you want to delete this item?');" ><i class="material-icons">delete</i></a>
-                                        <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData")"><i class="material-icons">edit</i></a>
-                                    </td>
+                                    <th>Facility Description</th>
+                                    <th>*</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
+                                @foreach (facility_type ft in Model.facilityType)
+                                {
+                                    <tr>
+                                        <td>@ft.Name</td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteFacility","MasterData",new { ID = ft.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
+                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData")"><i class="material-icons">edit</i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                 </div>

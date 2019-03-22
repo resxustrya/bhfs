@@ -16,10 +16,11 @@ namespace HFSRBO.WebClient
                         "~/Scripts/jquery.validate*"));
             bundles.Add(new ScriptBundle("~/material/js").Include(
                         "~/Scripts/material/material.js",
-                        "~/Scripts/material/init.js",
                         "~/Scripts/select2.js",
                         "~/Scripts/material/createComplaintFormSubmit.js",
-                        "~/Scripts/lolibox.min.js"
+                        "~/Scripts/lolibox.min.js",
+                        "~/Scripts/material/datatable.js",
+                        "~/Scripts/material/init.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -40,7 +41,8 @@ namespace HFSRBO.WebClient
                       "~/Content/paralax.css",
                       "~/Content/page.css",
                       "~/Content/select2.css",
-                      "~/Content/lolibox.min.css"
+                      "~/Content/lolibox.min.css",
+                      "~/Content/datatable.css"
                       ));
         }
     }
