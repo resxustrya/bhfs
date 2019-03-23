@@ -35,7 +35,7 @@ namespace HFSRBO.WebClient
             IEnumerable<DisplayComplaintViewModel> list;
             Int32 pageSize = 20, pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            if (Session["search"].ToString() == null)
+            if (Session["search"] == null || Session["search"].ToString().Trim() == "")
                  list = cr.GetComplaints();
             else
                  list = cr.Search(Session["search"].ToString());
