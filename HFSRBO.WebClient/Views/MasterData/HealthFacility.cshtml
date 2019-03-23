@@ -33,7 +33,7 @@
                                         <td>@hospital.facilityType</td>
                                         <td>
                                             <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
-                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData", new { ID = hospital.ID })"><i class="material-icons">edit</i></a>
+                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData")"><i class="material-icons">edit</i></a>
                                         </td>
                                     </tr>
                                 }
@@ -55,7 +55,7 @@
                                         <td>@ft.Name</td>
                                         <td>
                                             <a href="@Url.Action("DeleteFacility","MasterData",new { ID = ft.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
-                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData")"><i class="material-icons">edit</i></a>
+                                            <a href="#" onclick="updateFacilityType(this);" data-id="@ft.ID" data-ft="@ft.Name" data-url="@Url.Action("EditFacilityType","MasterData")"><i class="material-icons">edit</i></a>
                                         </td>
                                     </tr>
                                 }
@@ -73,26 +73,3 @@
         <i class="large material-icons">add_circle</i>
     </a>
 </div>
-
-@section scripts {
-    <script>
-        $("#health_add").click(function () {
-            if ($('.fal_list').hasClass('active')) {
-                var url = $(".fal_list").data('url');
-                $.get(url, function (res) {
-                    $("#add_type_complaint").modal('open');
-                    $("#add_type_complaint .modal-content").html(res);
-                });
-            } else if ($('.facility_type').hasClass('active')) {
-                $("#add_fal_type").modal('open');
-            }
-        });
-        function updateHealthFacility(el) {
-            var url = $(el).data('url');
-            $.get(url, function (res) {
-                $("#add_type_complaint").modal('open');
-                $("#add_type_complaint .modal-content").html(res);
-            });
-        }
-    </script>
-}

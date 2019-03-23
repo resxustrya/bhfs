@@ -60,13 +60,13 @@ namespace HFSRBO.WebClient
                 month = date_to.ToString("MMMM");
 
             sheet_num.AddCell(new PdfPCell(new Paragraph("Month of : " + month, new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0, Padding = 5f });
-            sheet_num.AddCell(new PdfPCell(new Paragraph("Year : " + date_to.ToString("yyyy"), new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_CENTER, Border = 0, Padding = 5f });
+            sheet_num.AddCell(new PdfPCell(new Paragraph("Year : " + date_to.ToString("yyyy"), new Font(Font.FontFamily.HELVETICA, 10f, Font.BOLD))) { HorizontalAlignment = Element.ALIGN_RIGHT, Border = 0, Padding = 5f });
 
             doc.Add(sheet_num);
 
             PdfPTable _thead_page_break = new PdfPTable(16);
             _thead_page_break.WidthPercentage = 100f;
-            float[] main = { 40, 40, 40, 40, 40, 40, 50, 40, 40, 40, 40, 40, 40, 40,40,40 };
+            float[] main = { 40, 40, 40, 40, 40, 40, 50, 50, 40, 40, 40, 40, 40, 40,40,40 };
             _thead_page_break.SetWidths(main);
 
 
@@ -100,35 +100,52 @@ namespace HFSRBO.WebClient
             {
                 complaints_table.AddCell(new PdfPCell(new Paragraph(c.dateCreated.ToShortDateString() , new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph(c.codeNumber, new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-                complaints_table.AddCell(new PdfPCell(new Paragraph(c.hospitalName, new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
-                complaints_table.AddCell(new PdfPCell(new Paragraph(c.hospitalAddress, new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                complaints_table.AddCell(new PdfPCell(new Paragraph(c.hospitalName, new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                complaints_table.AddCell(new PdfPCell(new Paragraph(c.hospitalAddress, new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph(c.ownership == "P" ? "Private" : "Government", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 complaints_table.AddCell(new PdfPCell(new Paragraph(c.annonymos == true ? c.nameOfComplainant : "Anonymous", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
 
-
+                Paragraph complaint_type = new Paragraph();
                 if (c.complaint_type != null && c.complaint_type.Count() > 0)
                 {
-                    Paragraph complaint_type = new Paragraph();
                     foreach (string complaintType in c.complaint_type)
                         complaint_type.Add(new Chunk(complaintType + "\n", new Font(Font.FontFamily.HELVETICA, 7f)));
-                    complaints_table.AddCell(new PdfPCell(complaint_type) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+
+                    if(c.other_complaint != null)
+                        complaint_type.Add(new Chunk("Others : " + c.other_complaint, new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL)));
+                    complaints_table.AddCell(new PdfPCell(complaint_type) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 }
                 else
                 {
-                    complaints_table.AddCell(new PdfPCell(new Paragraph("-", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    if(c.other_complaint != null)
+                    {
+                        Chunk otherComplaint = new Chunk("Others : " + c.other_complaint, new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL));
+                        complaint_type.Add(otherComplaint);
+                        complaints_table.AddCell(new PdfPCell(complaint_type) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    } else
+                        complaints_table.AddCell(new PdfPCell(new Paragraph("-")) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 }
 
-                
+                Paragraph complaint_assistance = new Paragraph();
                 if (c.assistanceNeeded != null && c.assistanceNeeded.Count() > 0)
                 {
-                    Paragraph complaint_assistance = new Paragraph();
                     foreach (string complaintAssistance in c.assistanceNeeded)
                         complaint_assistance.Add(new Chunk(complaintAssistance + "\n", new Font(Font.FontFamily.HELVETICA, 7f)));
-                    complaints_table.AddCell(new PdfPCell(complaint_assistance) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    if(c.otherAssistanceNeed != null)
+                        complaint_assistance.Add(new Chunk("Others : " + c.otherAssistanceNeed, new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL)));
+                    complaints_table.AddCell(new PdfPCell(complaint_assistance) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    
                 }
                 else
                 {
-                    complaints_table.AddCell(new PdfPCell(new Paragraph("-", new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    if(c.otherAssistanceNeed != null)
+                    {
+                        Chunk otherAssistance = new Chunk("Others : " + c.otherAssistanceNeed, new Font(Font.FontFamily.HELVETICA, 7f, Font.NORMAL));
+                        complaint_assistance.Add(otherAssistance);
+                        complaints_table.AddCell(new PdfPCell(complaint_assistance) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    }else
+                        complaints_table.AddCell(new PdfPCell(new Paragraph("-")) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+
                 }
 
                 complaints_table.AddCell(new PdfPCell(new Paragraph(c.pccCheck == true ? "PCC No. " + c.pccNumber : c.communication_form , new Font(Font.FontFamily.HELVETICA, 7f))) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
@@ -138,7 +155,7 @@ namespace HFSRBO.WebClient
                     Paragraph complaint_action_dates = new Paragraph();
                     foreach (complaint_action_dates acd in c._complaintActionDates)
                         complaint_action_dates.Add(new Chunk("(" + acd.Date.ToShortDateString() + ") " + acd.Action + "\n", new Font(Font.FontFamily.HELVETICA, 7f)));
-                    complaints_table.AddCell(new PdfPCell(complaint_action_dates) { HorizontalAlignment = Element.ALIGN_CENTER, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
+                    complaints_table.AddCell(new PdfPCell(complaint_action_dates) { HorizontalAlignment = Element.ALIGN_LEFT, Rowspan = 4, VerticalAlignment = Element.ALIGN_CENTER });
                 }
                 else
                 {

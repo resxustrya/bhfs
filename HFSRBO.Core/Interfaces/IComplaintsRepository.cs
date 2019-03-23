@@ -25,5 +25,6 @@ namespace HFSRBO.Core
         List<String> GetComplaintsDates(Int32 complaintID, String member);
         EditComplaintViewModel EditComplaint(Int32 complaintID);
         IEnumerable<DisplayComplaintViewModel> FilterComplaints(FilterViewModel filterViewData);
+        IEnumerable<DisplayComplaintViewModel> Search(String search);
     }
 }

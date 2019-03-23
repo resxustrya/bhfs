@@ -17,39 +17,47 @@
                         </ul>
                     </div>
                     <div id="tab1" class="col s12">
-                        <table id="type_complaint" class="responsive-table">
-                            <tr>
-                                <th>Description</th>
-                                <th>*</th>
-                            </tr>
-                            @foreach (type_complaint tp in Model.complaintTypes)
-                            {
+                        <table id="complaintType" class="responsive-table">
+                            <thead>
                                 <tr>
-                                    <td>@tp.Description</td>
-                                    <td>
-                                        <a href="@Url.Action("DeleteComplaintType","MasterData",new { ID = tp.ID })" onclick="return confirm('Do you want to delete this item?');" class="btn red"><i class="material-icons">delete</i></a>
-                                        <a href="#" onclick="edit(this);" data-url="@Url.Action("EditComplaintType","MasterData",new { ID = tp.ID })" class="btn red"><i class="material-icons">edit</i></a>
-                                    </td>
+                                    <th>Description</th>
+                                    <th>*</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
+                                @foreach (type_complaint tp in Model.complaintTypes)
+                                {
+                                    <tr>
+                                        <td>@tp.Description</td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteComplaintType","MasterData",new { ID = tp.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
+                                            <a href="#" onclick="edit(this);" data-url="@Url.Action("EditComplaintType","MasterData",new { ID = tp.ID })"><i class="material-icons">edit</i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                     <div id="tab2" class="col s12">
-                        <table id="type_complaint" class="responsive-table">
-                            <tr>
-                                <th>Description</th>
-                                <th>*</th>
-                            </tr>
-                            @foreach (complaint_assistance ca in Model.complaintAssistance)
-                            {
+                        <table id="complaintAssistance" class="responsive-table">
+                            <thead>
                                 <tr>
-                                    <td>@ca.assistance</td>
-                                    <td>
-                                        <a href="@Url.Action("DeleteComplaintType","MasterData",new { ID = ca.ID })" onclick="return confirm('Do you want to delete this item?');" class="btn red"><i class="material-icons">delete</i></a>
-                                        <a href="#" onclick="edit(this);" data-url="@Url.Action("EditComplaintType","MasterData",new { ID = ca.ID })" class="btn red"><i class="material-icons">edit</i></a>
-                                    </td>
+                                    <th>Description</th>
+                                    <th>*</th>
                                 </tr>
-                            }
+                            </thead>
+                            <tbody>
+                                @foreach (complaint_assistance ca in Model.complaintAssistance)
+                                {
+                                    <tr>
+                                        <td>@ca.assistance</td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteAssistance","MasterData",new { ID = ca.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
+                                            <a href="#" onclick="editAssistance(this);" data-id="@ca.ID" data-assistance="@ca.assistance" data-url="@Url.Action("EditAssistance","MasterData")"><i class="material-icons">edit</i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                 </div>

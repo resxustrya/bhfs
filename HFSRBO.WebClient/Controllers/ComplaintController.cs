@@ -32,12 +32,21 @@ namespace HFSRBO.WebClient
         {}
         public ActionResult Complaints(int? page)
         {
+            IEnumerable<DisplayComplaintViewModel> list;
             Int32 pageSize = 20, pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
-            IEnumerable<DisplayComplaintViewModel> list = this.cr.GetComplaints();
+            if (Session["search"].ToString() == null)
+                 list = cr.GetComplaints();
+            else
+                 list = cr.Search(Session["search"].ToString());
             return View(list.ToPagedList(pageIndex,pageSize));
         }
-
+        [HttpPost]
+        public ActionResult search(String search)
+        {
+            Session["search"] = search;
+            return RedirectToAction("Complaints");
+        }
         public ActionResult GetComplaints()
         {
             IEnumerable<DisplayComplaintViewModel> list = this.cr.GetComplaints();

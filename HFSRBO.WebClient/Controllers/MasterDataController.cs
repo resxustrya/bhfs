@@ -15,12 +15,14 @@ namespace HFSRBO.WebClient.Controllers
         IFacilityTypeRepo facilityType;
         IHospitalRepo hospitals;
         IComplaintAssistanceRepo complaintAssistance;
-        public MasterDataController(IComplaintTypeRepo complaintType, IFacilityTypeRepo facilityType,IHospitalRepo hospitals, IComplaintAssistanceRepo complaintAssistance)
+        IComplaintsRepository cr;
+        public MasterDataController(IComplaintTypeRepo complaintType, IFacilityTypeRepo facilityType,IHospitalRepo hospitals, IComplaintAssistanceRepo complaintAssistance, IComplaintsRepository cr)
         {
             this.complaintType = complaintType;
             this.facilityType = facilityType;
             this.hospitals = hospitals;
             this.complaintAssistance = complaintAssistance;
+            this.cr = cr;
         }
         
         public ActionResult ComplaintTypes()
@@ -73,6 +75,7 @@ namespace HFSRBO.WebClient.Controllers
             {
                 Int32 id = Convert.ToInt32(ID);
                 complaintType.Remove(id);
+                this.cr.RemoveComplaintTypeByComplaintID(id, "C");
                 return RedirectToAction("ComplaintTypes");
             }
             catch { }
@@ -127,6 +130,13 @@ namespace HFSRBO.WebClient.Controllers
             facilityType.Add(ft);
             return RedirectToAction("HealthFacility");
         }
+
+        [HttpPost]
+        public ActionResult EditFacilityType(facility_type ft)
+        {
+            facilityType.Edit(ft);
+            return RedirectToAction("HealthFacility");
+        }
         public ActionResult AddComplaintAssistance()
         {
             return PartialView();
@@ -136,6 +146,18 @@ namespace HFSRBO.WebClient.Controllers
         public ActionResult AddComplaintAssistance(complaint_assistance _complaintAssistance)
         {
             complaintAssistance.Add(_complaintAssistance);
+            return RedirectToAction("ComplaintTypes");
+        }
+        [HttpPost]
+        public ActionResult EditAssistance(complaint_assistance _complaintAssistance)
+        {
+            complaintAssistance.Edit(_complaintAssistance);
+            return RedirectToAction("ComplaintTypes");
+        }
+        public ActionResult DeleteAssistance(String ID)
+        {
+            complaintAssistance.Remove(Convert.ToInt32(ID));
+            this.cr.RemoveComplaintTypeByComplaintID(Convert.ToInt32(ID), "A");
             return RedirectToAction("ComplaintTypes");
         }
         public ActionResult DeleteHospital(String ID)

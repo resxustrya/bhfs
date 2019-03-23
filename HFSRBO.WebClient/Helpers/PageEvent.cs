@@ -14,7 +14,7 @@ namespace HFSRBO.WebClient
 
             PdfPTable _thead_page_break = new PdfPTable(16);
             _thead_page_break.WidthPercentage = 100f;
-            float[] main = { 40, 40, 40, 40, 40, 40, 50, 40, 40, 40, 40, 40, 40, 40,40,40 };
+            float[] main = { 40, 40, 40, 40, 40, 40, 50, 50, 40, 40, 40, 40, 40, 40,40,40 };
             _thead_page_break.SetWidths(main);
             _thead_page_break.TotalWidth = document.PageSize.Width - document.LeftMargin - document.RightMargin; //this centers [table]
 
