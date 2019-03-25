@@ -33,7 +33,7 @@
                                         <td>@hospital.facilityType</td>
                                         <td>
                                             <a href="@Url.Action("DeleteHospital","MasterData",new { ID = hospital.ID })" onclick="return confirm('Do you want to delete this item?');"><i class="material-icons">delete</i></a>
-                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData")"><i class="material-icons">edit</i></a>
+                                            <a href="#" onclick="updateHealthFacility(this);" data-url="@Url.Action("EditHealthFacility","MasterData", new { ID = hospital.ID })"><i class="material-icons">edit</i></a>
                                         </td>
                                     </tr>
                                 }

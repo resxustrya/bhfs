@@ -254,14 +254,18 @@ $('.js-example-basic-single').select2({
 
 function showFilter(el)
 {
-    if (!$(".filter-container-ul li").first().hasClass('active')) {
-        var url = $(el).data('url');
-        $(".collapsible-body").html('Loading filter. Please wait');
+    var filter = $('.filter-container');
+    var url = $(el).data('url');
+    if (filter.hasClass('hidden')) {
+        filter.removeClass('hidden').addClass('show').show();
+        
+        $(".filter-container").append('<span>Loading filter. Please wait</span>');
         $.get(url, function (res) {
-            $(".collapsible-body").html(res);
+            
+            $(".filter-container").html(res);
         });
     } else {
-        $(".collapsible-body").html('');
+        filter.html('').hide().addClass('hidden');
     }
 }
 
