@@ -72,22 +72,6 @@
     </div>
 </div>
 
-<div id="search" class="modal">
-    <div class="modal-content">
-        <div class="nav-wrapper">
-            <p>Quick Search</p>
-            <form action="@Url.Action("Search","Complaint")" method="post">
-                <div class="input-field">
-                    <input id="search" type="search" name="search" value="@(Session["search"] != null ? Session["search"].ToString() : "")" />
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
 <!-- Modal Structure -->
 <div id="filter" class="modal  modal-fixed-footer">
     <div class="modal-content">

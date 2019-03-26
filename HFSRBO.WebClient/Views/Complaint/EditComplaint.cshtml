@@ -326,8 +326,8 @@
                                         @foreach(complaint_action_dates cd in Model._complaintActionDates)
                                         {
                                             <tr>
-                                                <td><input type='text' disabled name='actionDate[]' value="@cd.Date.ToShortDateString()" /></td>
-                                                <td><input type='text' disabled name='actionTaken[]' value="@cd.Action" /></td>
+                                                <td><strong>@cd.Date.ToShortDateString()</strong><input type='hidden'  name='actionDate[]' value="@cd.Date.ToShortDateString()" /></td>
+                                                <td><strong>@cd.Action</strong><input type='hidden' name='actionTaken[]' value="@cd.Action" /></td>
                                                 <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
                                             </tr>
                                         }

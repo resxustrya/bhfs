@@ -112,8 +112,8 @@ function addAction() {
         $("table.actionTakenList")
        .append(
            "<tr>"
-           + "<td><input type='text' disabled name='actionDate[]' value='" + actionDate + "' /></td>"
-           + "<td><input type='text' disabled name='actionTaken[]' value='" + action + "' /></td>"
+           + "<td><strong>"+ actionDate+"</strong><input type='hidden' name='actionDate[]' value='" + actionDate + "' /></td>"
+           + "<td><strong>"+ action+"</strong><input type='hidden' name='actionTaken[]' value='" + action + "' /></td>"
            + "<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
            + "</tr>"
        );
@@ -258,10 +258,8 @@ function showFilter(el)
     var url = $(el).data('url');
     if (filter.hasClass('hidden')) {
         filter.removeClass('hidden').addClass('show').show();
-        
         $(".filter-container").append('<span>Loading filter. Please wait</span>');
         $.get(url, function (res) {
-            
             $(".filter-container").html(res);
         });
     } else {
