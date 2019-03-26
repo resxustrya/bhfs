@@ -129,7 +129,7 @@
                                         <label for="p_mi">Middle Name</label>
                                     </div>
                                     <div class="input-field col l4 m12 s12">
-                                        <input type="text" name="date_confined" class="datepicker" />
+                                        <input type="text" name="date_confined" />
                                         <label for="date_confined">Date patient confined(if applicable)</label>
                                     </div>
                                     <div class="input-field col l4 m12 s12 center">
@@ -152,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h6>(B.) Type of complaint :</h6>
+                                    <h6>(B.) Types of complaint :</h6>
                                     @foreach (type_complaint t in Model._complaint_type)
                                     {
                                         <p>
@@ -168,7 +168,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <h6>(C.) Assistance Needed</h6>
+                                    <h6>(C.) Types of assistance needed</h6>
                                     @foreach (complaint_assistance at in Model._complaintAssistance)
                                     {
                                         <p>
@@ -306,3 +306,4 @@
         </form>
     </div>
 </div>
+

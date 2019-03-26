@@ -122,7 +122,7 @@ namespace HFSRBO.Infra
         public IEnumerable<DisplayComplaintViewModel> GetComplaints()
         {
 
-            var result = (from list in db.complaints where list.active == true
+            var result = (from list in db.complaints where list.active == true orderby list.date_created descending
                           select new DisplayComplaintViewModel
                           {
                               complaintID = list.ID,

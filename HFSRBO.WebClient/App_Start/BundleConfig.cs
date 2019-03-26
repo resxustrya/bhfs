@@ -21,7 +21,9 @@ namespace HFSRBO.WebClient
                         "~/Scripts/lolibox.min.js",
                         "~/Scripts/material/datatable.js",
                         "~/Scripts/material/init.js",
-                        "~/Scripts/material/page.js"
+                        "~/Scripts/material/page.js",
+                        "~/Scripts/moment.js",
+                        "~/Scripts/daterangepicker.js"
                         ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -43,7 +45,8 @@ namespace HFSRBO.WebClient
                       "~/Content/page.css",
                       "~/Content/select2.css",
                       "~/Content/lolibox.min.css",
-                      "~/Content/datatable.css"
+                      "~/Content/datatable.css",
+                      "~/Content/daterangepicker.css"
                       ));
         }
     }

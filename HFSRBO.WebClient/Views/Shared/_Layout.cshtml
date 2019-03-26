@@ -122,6 +122,7 @@
         // Or with jQuery
 
         $(document).ready(function () {
+
             $("input").attr("autocomplete", "off");
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd'
@@ -133,11 +134,12 @@
             $('.tooltipped').tooltip();
             $('.sidenav').sidenav();
             $('.tabs').tabs();
-            $(document).ready(function () {
-                $('.collapsible').collapsible();
-            });
+            
+            $('.collapsible').collapsible();
+
         });
 
+        
     </script>
     @RenderSection("scripts", required: false)
 </body>

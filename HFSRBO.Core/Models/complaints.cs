@@ -26,9 +26,6 @@ namespace HFSRBO.Core
         public Boolean pccCheck { get; set; }
         public Int32 year { get; set; }
 
-        public complaints()
-        {
-            this.date_created = DateTime.Now;
-        }
+        
     }
 }
