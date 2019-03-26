@@ -35,24 +35,24 @@
             <h6>Filter by Status</h6>
             <p>
                 <label for="O">
-                    <input name="status" type="radio" value="1" id="O" />
+                    <input name="status" type="radio" value="0" id="O" />
                     <span>On Progress</span>
                 </label>
             </p>
             <p>
                 <label for="R">
-                    <input name="status" type="radio" id="R" value="0" />
+                    <input name="status" type="radio" id="R" value="1" />
                     <span>Resolved</span>
                 </label>
             </p>
         </div>
         
         <div class="input-field col l3 s12 m12">
-            <input type="date" name="date_from" />
+            <input type="date" name="date_from" required />
             <label for="date_from">Complaint From</label>
         </div>
         <div class="input-field col l3 s12 m12">
-            <input type="date" name="date_to" />
+            <input type="date" name="date_to" required />
             <label for="date_to">Complaint To</label>
         </div>
         <div class="input-field col l3 m12 s12">

@@ -14,18 +14,19 @@ namespace HFSRBO.WebClient
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
-            bundles.Add(new ScriptBundle("~/material/js").Include(
+            bundles.Add(new ScriptBundle("~/bundles/material/lib").Include(
                         "~/Scripts/material/material.js",
                         "~/Scripts/select2.js",
-                        "~/Scripts/material/createComplaintFormSubmit.js",
                         "~/Scripts/lolibox.min.js",
                         "~/Scripts/material/datatable.js",
-                        "~/Scripts/material/init.js",
-                        "~/Scripts/material/page.js",
                         "~/Scripts/moment.js",
                         "~/Scripts/daterangepicker.js"
                         ));
-
+            bundles.Add(new ScriptBundle("~/page").Include(
+                        "~/Scripts/material/createComplaintFormSubmit.js",
+                        "~/Scripts/material/init.js",
+                        "~/Scripts/material/page.js"
+                        ));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

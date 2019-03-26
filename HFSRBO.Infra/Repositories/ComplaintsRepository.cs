@@ -121,8 +121,8 @@ namespace HFSRBO.Infra
         
         public IEnumerable<DisplayComplaintViewModel> GetComplaints()
         {
-
-            var result = (from list in db.complaints where list.active == true orderby list.date_created descending
+            IEnumerable<DisplayComplaintViewModel> result = null;
+            result = (from list in db.complaints where list.active == true orderby list.date_created descending
                           select new DisplayComplaintViewModel
                           {
                               complaintID = list.ID,
@@ -175,7 +175,6 @@ namespace HFSRBO.Infra
             String where = "",query = "", join = "";
             
             where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
-            
             
             if(filterViewData.complaintType != null && filterViewData.complaintAssistance != null)
             {

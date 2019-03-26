@@ -33,8 +33,9 @@ namespace HFSRBO.WebClient
         public ActionResult Complaints(int? page)
         {
             IEnumerable<DisplayComplaintViewModel> list;
-            Int32 pageSize = 20, pageIndex = 1;
+            Int32 pageSize = 15, pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            ViewBag.PagingAction = "Complaints";
             if (Session["search"] == null || Session["search"].ToString().Trim() == "")
                  list = cr.GetComplaints();
             else
@@ -251,7 +252,23 @@ namespace HFSRBO.WebClient
                 var fsResult = new FileStreamResult(fileStream, "application/pdf");
                 return fsResult;
             }
-            return View("~/Views/Complaint/Complaints.cshtml", list);
+            else
+                Session["filterViewData"] = filterViewData;
+            return RedirectToAction("FilterResult");
+        }
+        public ActionResult FilterResult(int? page)
+        {
+            FilterViewModel filterViewData = null;
+            if (Session["filterViewData"] != null)
+                filterViewData = (FilterViewModel)Session["filterViewData"];
+            else
+                return RedirectToAction("Complaints");
+
+            IEnumerable<DisplayComplaintViewModel> list = this.cr.FilterComplaints(filterViewData);
+            Int32 pageSize = 15, pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            ViewBag.PagingAction = "FilterResult";
+            return View("~/Views/Complaint/Complaints.cshtml",list.ToPagedList(pageIndex, pageSize));
         }
     }
 }
