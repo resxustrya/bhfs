@@ -25,7 +25,7 @@ namespace HFSRBO.Core
         public Boolean pccCheck { get; set; }
         public String pccNumber { get; set; }
         public DateTime dateCreated { get; set; }
-
+        public DateTime dateReceive { get; set; }
         public List<String> complaint_type { get; set; }
         public List<String> assistanceNeeded { get; set; }
         public List<String> date_informed_the_hf { get; set; }

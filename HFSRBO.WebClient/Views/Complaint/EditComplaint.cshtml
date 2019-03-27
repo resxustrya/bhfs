@@ -5,7 +5,7 @@
 }
 <div class="row">
     <div class="col l12 m12 s12">
-        <form action="" data-action="@Url.Action("EditComplaint","Complaint")" id="CreateComplaint" data-method="post">
+        <form action="@Url.Action("EditComplaint","Complaint")" id="CreateComplaint" method="post">
             @Html.AntiForgeryToken()
             <div class="card white darken-4">
                 <div class="card-content">
@@ -14,7 +14,7 @@
                             <h5>[Update]Complaint Form</h5>
                         </div>
                         <div class="col l6 m12 s12">
-                            <button type="button" id="btnSave" class="waves-effect waves-light btn-large green right"><i class="material-icons left">check</i> Save Changes</button>
+                            <button type="submit" id="btnSave" class="waves-effect waves-light btn-large green right"><i class="material-icons left">check</i> Save Changes</button>
                         </div>
                     </div>
                     <div class="row">
@@ -28,17 +28,23 @@
                                 <li class="tab col l2 actionTaken"><a href="#actionTaken">Action Taken</a></li>
                             </ul>
                             <div id="complaintInfoCode">
-                                <div class="col l4  m12 s12">
-                                    <div class="row switch" style="margin-top:20px;">
-                                        <label>
-                                            <input type="checkbox" name="anonymous" value="@(Model._complaint.annonymos == true ? "1" : "0")" @(Model._complaint.annonymos == true ? " checked" : "")>
-                                            <span class="lever"></span>
-                                            <span>Anonymous</span>
-                                        </label>
+                                <div class="row">
+                                    <div class="col l4 m12 s12" style="margin-top:20px;">
+                                        <div class="switch">
+                                            <label>
+                                                <input type="checkbox" name="anonymous" value="@(Model._complaint.annonymos == true ? "1" : "0")" @(Model._complaint.annonymos == true ? " checked" : "")>
+                                                <span class="lever"></span>
+                                                <span>Anonymous</span>
+                                            </label>
+                                        </div>
                                     </div>
-                                    <div class="row input-field col 12 m12 s12">
+                                    <div class="input-field col l4 m12 s12">
                                         <input type="text" name="codeNumber" value="@Model._complaint.codeNumber" required />
                                         <label for="codeNumber">Code Number</label>
+                                    </div>
+                                    <div class="input-field col l4 m12 s12">
+                                        <input type="date" name="date_receive" value="@Model._complaint.dateReceive.ToString("yyyy-MM-dd")" />
+                                        <label for="date_receive">Date Receive</label>
                                     </div>
                                 </div>
                             </div>
@@ -88,8 +94,8 @@
                                         <label for="gender">Gender</label>
                                     </div>
                                     <div class="input-field col l4 s12 m12">
-                                        <input type="text" name="date" value="@(Model._nameOfComplainant.Date != null ? Model._nameOfComplainant.Date.Value.ToShortDateString() : "" )" class="datepicker">
-                                        <label for="date">Date</label>
+                                        <input type="text" name="email" value="@Model._nameOfComplainant.email">
+                                        <label for="email">Email</label>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -241,7 +247,7 @@
                                                     @foreach (String s in Model.date_informed_the_hf)
                                                     {
                                                         <tr>
-                                                            <td><input type='text' disabled name="date_informed_the_hf[]" value="@s" /></td>
+                                                            <td><strong>@s</strong><input type='hidden' name="date_informed_the_hf[]" value="@s" /></td>
                                                             <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
                                                         </tr>
                                                     }
@@ -257,7 +263,7 @@
                                                     @foreach (String s in Model.date_hf_submitted_reply)
                                                     {
                                                         <tr>
-                                                            <td><input type='text' disabled name="date_hf_submitted_reply[]" value="@s" /></td>
+                                                            <td><strong>@s</strong><input type='hidden' name="date_hf_submitted_reply[]" value="@s" /></td>
                                                             <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
                                                         </tr>
                                                     }
@@ -273,7 +279,7 @@
                                                     @foreach (String s in Model.date_release_to_records)
                                                     {
                                                         <tr>
-                                                            <td><input type='text' disabled name="date_release_to_records[]" value="@s" /></td>
+                                                            <td><strong>@s</strong><input type='hidden' name="date_release_to_records[]" value="@s" /></td>
                                                             <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
                                                         </tr>
                                                     }
@@ -289,7 +295,7 @@
                                                     @foreach (String s in Model.date_final_resolution)
                                                     {
                                                         <tr>
-                                                            <td><input type='text' disabled name="date_final_resolution[]" value="@s" /></td>
+                                                            <td><strong>@s</strong><input type='hidden' name="date_final_resolution[]" value="@s" /></td>
                                                             <td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>
                                                         </tr>
                                                     }

@@ -76,6 +76,7 @@ namespace HFSRBO.WebClient.Controllers
                 Int32 id = Convert.ToInt32(ID);
                 complaintType.Remove(id);
                 this.cr.RemoveComplaintTypeByComplaintID(id, "C");
+                ViewBag.CTADel = "C";
                 return RedirectToAction("ComplaintTypes");
             }
             catch { }
@@ -156,8 +157,13 @@ namespace HFSRBO.WebClient.Controllers
         }
         public ActionResult DeleteAssistance(String ID)
         {
-            complaintAssistance.Remove(Convert.ToInt32(ID));
-            this.cr.RemoveComplaintTypeByComplaintID(Convert.ToInt32(ID), "A");
+            try
+            {
+                complaintAssistance.Remove(Convert.ToInt32(ID));
+                this.cr.RemoveComplaintTypeByComplaintID(Convert.ToInt32(ID), "A");
+                ViewBag.CTADel = "A";
+            }
+            catch { }
             return RedirectToAction("ComplaintTypes");
         }
         public ActionResult DeleteHospital(String ID)

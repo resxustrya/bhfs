@@ -12,8 +12,8 @@
                 <div class="row">
                     <div class="col s12">
                         <ul class="tabs">
-                            <li class="tab col l6 m12 s12"><a href="#tab1" class="complaint-type active" data-url="@Url.Action("AddComplaintType","MasterData")">Type of Complaints</a></li>
-                            <li class="tab col l6 m12 s12"><a href="#tab2" class="complaint-assistance" data-url="@Url.Action("AddComplaintAssistance", "MasterData")">Complaint Assistance</a></li>
+                            <li class="tab col l6 m12 s12"><a href="#tab1" class="complaint-type @(ViewBag.CTADel == "C" ? " active" : "" )" data-url="@Url.Action("AddComplaintType","MasterData")">Type of Complaints</a></li>
+                            <li class="tab col l6 m12 s12"><a href="#tab2" class="complaint-assistance @(ViewBag.CTADel == "A" ? " active" : "" )" data-url="@Url.Action("AddComplaintAssistance", "MasterData")">Complaint Assistance</a></li>
                         </ul>
                     </div>
                     <div id="tab1" class="col s12">

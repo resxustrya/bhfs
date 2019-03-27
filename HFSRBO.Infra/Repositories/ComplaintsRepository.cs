@@ -127,6 +127,7 @@ namespace HFSRBO.Infra
                           {
                               complaintID = list.ID,
                               codeNumber = list.codeNumber,
+                              dateReceive = list.dateReceive,
                               dateCreated = list.date_created,
                               hospitalName = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.name).FirstOrDefault(),
                               hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
@@ -285,6 +286,7 @@ namespace HFSRBO.Infra
             {
                 complaintID = list.ID,
                 codeNumber = list.codeNumber,
+                dateReceive = list.dateReceive,
                 dateCreated = list.date_created,
                 hospitalName = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.name).FirstOrDefault(),
                 hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),
@@ -326,6 +328,7 @@ namespace HFSRBO.Infra
                 {
                     complaintID = list.ID,
                     codeNumber = list.codeNumber,
+                    dateReceive = list.dateReceive,
                     dateCreated = list.date_created,
                     hospitalName = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.name).FirstOrDefault(),
                     hospitalAddress = db.hospitals.Where(p => p.ID == list.hospitalID).Select(p => p.address).FirstOrDefault(),

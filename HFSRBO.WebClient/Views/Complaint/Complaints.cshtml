@@ -36,6 +36,7 @@
                 <div class="row">
                     <table id="complaint" border="1" class="responsive-table highlight myTable table hover">
                         <tr style="background-color:#E5E7E9;">
+                            <th width="5%">Date Entry</th>
                             <th width="5%">Date Received</th>
                             <th width="5%">Code Number</th>
                             <th width="10%">Name of Health Facility Being Complained</th>
@@ -59,6 +60,7 @@
                         {
                             <tr>
                                 <td>@dcvm.dateCreated.ToShortDateString()</td>
+                                <td>@dcvm.dateReceive.ToShortDateString()</td>
                                 <td>@dcvm.codeNumber</td>
                                 <td>@dcvm.hospitalName</td>
                                 <td>@dcvm.hospitalAddress</td>

@@ -41,11 +41,11 @@ namespace HFSRBO.WebClient
             }
 
             //COMPLAINT INFORMATION
-            if (form.Get("anonymous").Trim().ToLower() == "1")
+            if (form.Get("anonymous") != null && form.Get("anonymous").Trim().ToLower() == "1")
                 _civm._complaints.annonymos = true;
             else _civm._complaints.annonymos = false;
 
-            if (form.Get("pccCheck").Trim().ToLower() == "1")
+            if (form.Get("pccCheck") != null && form.Get("pccCheck").Trim().ToLower() == "1")
             {
                 _civm._complaints.pccCheck = true;
                 _civm._complaints.pccNumber = form.Get("pccNumber");
@@ -56,26 +56,24 @@ namespace HFSRBO.WebClient
                 _civm._complaints.communication_form = Convert.ToInt32(form.Get("communication_form"));
             }
 
-
             _civm._complaints.codeNumber = form.Get("codeNumber");
             try { _civm._complaints.hospitalID = Convert.ToInt32(form.Get("hospitalID")); } catch { }
             _civm._complaints.reasonOfConfinement = form.Get("reasonOfConfinement");
             _civm._complaints.other_complaint = form.Get("other_complaint");
             _civm._complaints.assistance_needed = form.Get("other_assistance");
             _civm._complaints.ownership = form.Get("ownership");
-
+            try { _civm._complaints.dateReceive = Convert.ToDateTime(form.Get("date_receive")); } catch { _civm._complaints.dateReceive = DateTime.Now; }
             _civm._complaints.status = Convert.ToInt32(form.Get("status"));
-            
             
             
             //COMPLAINANT INFORMATION
             
             _civm._nameOfComplainant.firstname = form.Get("firstname");
+            _civm._nameOfComplainant.email = form.Get("email");
             _civm._nameOfComplainant.lastname = form.Get("lastname");
             _civm._nameOfComplainant.mi = form.Get("mi");
             _civm._nameOfComplainant.civil_status = form.Get("civil_status");
             _civm._nameOfComplainant.gender = form.Get("gender");
-            try { _civm._nameOfComplainant.Date = Convert.ToDateTime(form.Get("date")); } catch { }
             _civm._nameOfComplainant.relationship = form.Get("relationship");
             _civm._nameOfComplainant.telNo = form.Get("telNo");
             _civm._nameOfComplainant.mobile = form.Get("mobile");

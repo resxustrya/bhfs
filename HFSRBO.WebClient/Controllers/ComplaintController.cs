@@ -33,7 +33,7 @@ namespace HFSRBO.WebClient
         public ActionResult Complaints(int? page)
         {
             IEnumerable<DisplayComplaintViewModel> list;
-            Int32 pageSize = 15, pageIndex = 1;
+            Int32 pageSize = 10, pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             ViewBag.PagingAction = "Complaints";
             if (Session["search"] == null || Session["search"].ToString().Trim() == "")
@@ -265,7 +265,7 @@ namespace HFSRBO.WebClient
                 return RedirectToAction("Complaints");
 
             IEnumerable<DisplayComplaintViewModel> list = this.cr.FilterComplaints(filterViewData);
-            Int32 pageSize = 15, pageIndex = 1;
+            Int32 pageSize = 10, pageIndex = 1;
             pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             ViewBag.PagingAction = "FilterResult";
             return View("~/Views/Complaint/Complaints.cshtml",list.ToPagedList(pageIndex, pageSize));

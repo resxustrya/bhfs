@@ -25,6 +25,7 @@ namespace HFSRBO.Core
         public Boolean annonymos { get; set; }
         public Boolean pccCheck { get; set; }
         public Int32 year { get; set; }
+        public DateTime dateReceive { get; set; }
 
         
     }

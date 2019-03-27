@@ -19,6 +19,7 @@ namespace HFSRBO.Core
         public String relationship { get; set; }
         public String telNo { get; set; }
         public String mobile { get; set; }
-        public DateTime ? Date { get; set; }
+        public String email { get; set; }
+        public DateTime?  Date { get; set; }
     }
 }
