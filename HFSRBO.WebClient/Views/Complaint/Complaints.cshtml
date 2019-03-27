@@ -34,8 +34,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <table id="complaint" class="responsive-table highlight myTable table hover">
-                        <tr style="background-color:#D5DBDB;">
+                    <table id="complaint" border="1" class="responsive-table highlight myTable table hover">
+                        <tr style="background-color:#E5E7E9;">
                             <th width="5%">Date Received</th>
                             <th width="5%">Code Number</th>
                             <th width="10%">Name of Health Facility Being Complained</th>
@@ -46,9 +46,10 @@
                             <th width="10%">Types of Assistance Needed</th>
                             <th width="10%">Form of Communication received</th>
                             <th width="20%">Action Taken</th>
+                            <!--
                             <th width="10%">Date Informed the HF/concerned office</th>
                             <th width="10%">Date HF/concerned office submitted reply</th>
-                            <th width="10%">Date released to records section</th>
+                            <th width="10%">Date released to records section</th>-->
                             <th width="10%">Date Resolution of the complaint released to records/client</th>
                             <th width="10%">Status</th>
                             <th width="10%">Staff Assigned</th>
@@ -110,6 +111,7 @@
                                         <strong>- (@acd.Date.ToShortDateString()) @acd.Action </strong> <br />
                                     }
                                 </td>
+                                <!--
                                 <td>
                                     @foreach (String s in dcvm.date_informed_the_hf)
                                     {
@@ -127,7 +129,7 @@
                                     {
                                         <span>- @s</span><br />
                                     }
-                                </td>
+                                </td>-->
                                 <td>
                                     @foreach (String s in dcvm.date_final_resolution)
                                     {
@@ -149,7 +151,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col l12 m12 s12 center">
+    <div class="col l12 m12 s12">
         <div class="pagination">
             @if (Model.PageCount >= Model.PageSize)
             {
