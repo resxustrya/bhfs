@@ -87,7 +87,39 @@
             + "</div>"
         );
     });
+
+    $(".addRemarks").click(function () {
+        var elem = $("#add_type_complaint");
+        elem.modal('open');
+        $("#add_type_complaint .modal-content")
+        .html('')
+        .append(
+            "<div class='row'>"
+                + "<div class='col l12 m12 s12 input-field'>"
+                    + "<input type='text' name='remark' required autocomplete='off' />"
+                    + "<label for='remark'>Remark</label>"
+                + "</div>"
+            + "</div>"
+            + "<div class='modal-footer'>"
+                + "<button type='submit' class='btn-large waves-effect waves-light green' onclick='addRemark();'>Add</button>"
+            + "</div>"
+        );
+    });
 });
+
+function addRemark() {
+    var remark = $("input[name='remark']").val();
+    if (remark) {
+        $("table.remarksList")
+       .append(
+           "<tr>"
+           + "<td><strong>" + remark + "</strong><input type='hidden' name='remarks[]' value='" + remark + "' /></td>"
+           + "<td><a href='#' onclick='romoveMember(this);'><i class='material-icons'>remove</i></a></td>"
+           + "</tr>"
+       );
+        $("#add_type_complaint").modal('close');
+    }
+}
 
 function addDates(date, classMemeber) {
     $("table." + classMemeber)

@@ -61,7 +61,7 @@ namespace HFSRBO.WebClient
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm,List<String> date_informed_the_hf,List<String> date_hf_submitted_reply,List<String> date_release_to_records,List<String> date_final_resolution, List<String> complaint_type,List<String> complaint_assistance,List<String> actionTaken,List<String> actionDate)
+        public ActionResult CreateComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm,List<String> date_informed_the_hf,List<String> date_hf_submitted_reply,List<String> date_release_to_records,List<String> date_final_resolution, List<String> complaint_type,List<String> complaint_assistance,List<String> actionTaken,List<String> actionDate,List<String> remarks)
         {
             civm.complaint_type = complaint_type;
             civm.assistanceNeeded = complaint_assistance;
@@ -203,7 +203,7 @@ namespace HFSRBO.WebClient
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm, List<String> date_informed_the_hf, List<String> date_hf_submitted_reply, List<String> date_release_to_records, List<String> date_final_resolution, List<String> complaint_type, List<String> complaint_assistance, List<String> actionTaken, List<String> actionDate)
+        public ActionResult EditComplaint([ModelBinder(typeof(VMComplaintCustomBinder))] ComplaintInfoViewModel civm, List<String> date_informed_the_hf, List<String> date_hf_submitted_reply, List<String> date_release_to_records, List<String> date_final_resolution, List<String> complaint_type, List<String> complaint_assistance, List<String> actionTaken, List<String> actionDate,List<String> remarks)
         {
             Int32 complaintID = Convert.ToInt32(Session["EditComplaintID"].ToString());
             try

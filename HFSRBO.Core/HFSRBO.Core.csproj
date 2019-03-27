@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IHospitalRepo.cs" />
     <Compile Include="Interfaces\INameOfComplainantRepository.cs" />
     <Compile Include="Models\pcc_number.cs" />
+    <Compile Include="Models\remarks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\staff_assigend.cs" />
     <Compile Include="Models\type_complaint.cs" />
