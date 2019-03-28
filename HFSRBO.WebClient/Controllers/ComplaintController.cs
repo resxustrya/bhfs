@@ -71,6 +71,7 @@ namespace HFSRBO.WebClient
             civm.date_final_resolution = date_final_resolution;
             civm.actionTaken = actionTaken;
             civm.actionDate = actionDate;
+            civm.remarks = remarks;
 
             //ADD NEW COMPLAINT TO DATABASE AND RETURN ITS ID(PRIMARY KEY) AFTER INSERTED
             Int32 complaintID = this.cr.Add(civm._complaints);
@@ -78,8 +79,6 @@ namespace HFSRBO.WebClient
             this.nameOfComplainantRepo.Add(civm._nameOfComplainant);
             civm._complaintPatient.complaintID = complaintID;
             this._patientRepo.Add(civm._complaintPatient);
-
-
             SaveComplaint(civm,complaintID);
             return RedirectToAction("Complaints");
         }
@@ -93,6 +92,18 @@ namespace HFSRBO.WebClient
             this.cr.RemoveComplaintsDates(complaintID, "date_release_to_records");
             this.cr.RemoveComplaintsDates(complaintID, "date_final_resolution");
             this.cr.RemoveComplaintActions(complaintID);
+            this.cr.RemoveComplaintRemarks(complaintID);
+
+            if(civm.remarks != null)
+            {
+                foreach(String remark in civm.remarks)
+                {
+                    this.cr.InsertComplaintRemarks(new remarks {
+                        remark = remark,
+                        complaintID = complaintID
+                    });
+                }
+            }
 
             if (civm.complaint_type != null)
             {
@@ -216,6 +227,7 @@ namespace HFSRBO.WebClient
                 civm.date_final_resolution = date_final_resolution;
                 civm.actionTaken = actionTaken;
                 civm.actionDate = actionDate;
+                civm.remarks = remarks;
 
                 //UPDATE THE COMPLAINT
                 this.cr.Edit(civm._complaints);

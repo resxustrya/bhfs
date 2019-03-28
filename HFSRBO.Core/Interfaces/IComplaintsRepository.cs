@@ -19,6 +19,9 @@ namespace HFSRBO.Core
         void RemoveComplaintsDates(Int32 complaintID, String member);
         void InsertComplaintActions(complaint_action_dates _complaintActionDates);
         void RemoveComplaintActions(Int32 complaintID);
+        void InsertComplaintRemarks(remarks _remarks);
+        void RemoveComplaintRemarks(Int32 complaintID);
+        IEnumerable<remarks> GetComplaintRemarks(Int32 complaintID);
         IEnumerable<complaint_action_dates> GetComplaintActions(Int32 complaintID);
         IEnumerable<DisplayComplaintViewModel> GetComplaints();
         Int32[] GetComplaintTypeAssistance(Int32 complaintID, String member);

@@ -40,6 +40,7 @@ namespace HFSRBO.Infra
                 this.RemoveComplaintsDates(ID, "date_hf_submitted_reply");
                 this.RemoveComplaintsDates(ID, "date_release_to_records");
                 this.RemoveComplaintsDates(ID, "date_final_resolution");
+                this.RemoveComplaintRemarks(ID);
                 db.SaveChanges();
             }
             catch { }
@@ -106,7 +107,21 @@ namespace HFSRBO.Infra
             var result = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == member).ToList();
             db._complaintsDates.RemoveRange(result);
         }
-
+        public void InsertComplaintRemarks(remarks _remark)
+        {
+            db._remarks.Add(_remark);
+            db.SaveChanges();
+        }
+        public void RemoveComplaintRemarks(Int32 complaintID)
+        {
+            db._remarks.RemoveRange(this.GetComplaintRemarks(complaintID));
+            db.SaveChanges();
+        }
+        public IEnumerable<remarks> GetComplaintRemarks(Int32 complaintID)
+        {
+            var result = db._remarks.Where(p => p.complaintID == complaintID).ToList();
+            return result;
+        } 
         public void InsertComplaintActions(complaint_action_dates _complaintActionDates)
         {
             db.complaintActionDates.Add(_complaintActionDates);
@@ -163,7 +178,8 @@ namespace HFSRBO.Infra
                 date_release_to_records = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == "date_release_to_records").ToList().Select(p => p.Date).ToList(),
                 date_final_resolution = db._complaintsDates.Where(p => p.complaintID == complaintID && p.member == "date_final_resolution").ToList().Select(p => p.Date).ToList(),
                 _complaintActionDates = db.complaintActionDates.Where(p => p.complaintID == complaintID),
-                _createComplaintViewModel = this.getCreateComplaintViewModel()
+                _createComplaintViewModel = this.getCreateComplaintViewModel(),
+                _remarks = this.GetComplaintRemarks(complaintID)
             };
             return result;
         }

@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201903271120114_new_table.Designer.cs">
       <DependentUpon>201903271120114_new_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903280109103_add_col.cs" />
+    <Compile Include="Migrations\201903280109103_add_col.Designer.cs">
+      <DependentUpon>201903280109103_add_col.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ComplaintAssistanceRepo.cs" />
@@ -161,6 +165,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903271120114_new_table.resx">
       <DependentUpon>201903271120114_new_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903280109103_add_col.resx">
+      <DependentUpon>201903280109103_add_col.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

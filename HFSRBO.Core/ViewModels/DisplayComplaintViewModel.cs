@@ -33,6 +33,7 @@ namespace HFSRBO.Core
         public List<String> date_release_to_records { get; set; }
         public List<String> date_final_resolution { get; set; }
         public IEnumerable<complaint_action_dates> _complaintActionDates { get; set; }
+        public IEnumerable<remarks> _remarks { get; set; }
 
     }
 }

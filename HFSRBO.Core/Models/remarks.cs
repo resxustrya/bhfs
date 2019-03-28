@@ -10,6 +10,7 @@ namespace HFSRBO.Core
     {
         [Key]
         public Int32 ID { get; set; }
+        public Int32 complaintID { get; set; }
         public String remark { get; set; }
     }
 }
