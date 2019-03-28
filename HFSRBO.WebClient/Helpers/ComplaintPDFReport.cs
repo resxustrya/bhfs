@@ -20,6 +20,10 @@ namespace HFSRBO.WebClient
             catch
             { }
 
+            String[] dateReceive = null, dateEntry = null;
+
+            
+
             Document doc = new Document(PageSize.LEGAL.Rotate());
             var output = new FileStream(System.Web.HttpContext.Current.Server.MapPath("~/Content/PDF/complaints.pdf"), FileMode.Create);
             var writer = PdfWriter.GetInstance(doc, output);
@@ -50,7 +54,7 @@ namespace HFSRBO.WebClient
             float[] sheet_num_withs = { 100 };
             sheet_num.SetWidths(sheet_num_withs);
 
-            DateTime date_from = Convert.ToDateTime(filterViewData.date_from);
+            DateTime date_from = Convert.ToDateTime(filterViewData);
             DateTime date_to = Convert.ToDateTime(filterViewData.date_to);
 
             String month = "";

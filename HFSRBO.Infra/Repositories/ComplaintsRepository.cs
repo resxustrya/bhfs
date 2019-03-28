@@ -188,11 +188,20 @@ namespace HFSRBO.Infra
         {
             IEnumerable<DisplayComplaintViewModel> filterComplaints = null;
             IEnumerable<complaints> _complaints = null;
-            String where = "", query = "", join = "";
+            String where = " WHERE ", query = "", join = "";
             String[] dateReceive = null, dateEntry = null;
-            
 
-            if(filterViewData.date_entry != null && filterViewData.date_entry.Trim() != "")
+
+            if (filterViewData.facilityType != null)
+            {
+                join += " JOIN [hfsrbo].[dbo].[hospitals] _hospital ON "
+            }
+            if (filterViewData.complaintType != null || filterViewData.complaintAssistance != null)
+            {
+                join += " JOIN [hfsrbo].[dbo].[complaint_types_list] ctl ON complaint_list.ID = ctl.ComplaintID ";
+            }
+
+            if (filterViewData.date_entry != null && filterViewData.date_entry.Trim() != "")
             {
                 dateEntry = filterViewData.date_entry.Split('-');
             }
@@ -200,10 +209,8 @@ namespace HFSRBO.Infra
             {
                 dateReceive = filterViewData.date_receive.Split('-');
             }
-
             
-            
-            where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
+            //where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
             
             if(filterViewData.complaintType != null && filterViewData.complaintAssistance != null)
             {
@@ -301,13 +308,9 @@ namespace HFSRBO.Infra
             {
                 where += " AND complaint_list.status = " + filterViewData.status;
             }
-            if(filterViewData.complaintType != null || filterViewData.complaintAssistance != null)
-            {
-                join = " JOIN[hfsrbo].[dbo].[complaint_types_list] ctl ON complaint_list.ID = ctl.ComplaintID ";
-            }
+            
             query = "SELECT DISTINCT complaint_list.* FROM [hfsrbo].[dbo].[complaints] complaint_list " + join + where + " AND complaint_list.active = 1 ORDER BY complaint_list.date_created DESC";
            
-            
             _complaints = db.complaints.SqlQuery(query).ToList();
 
             filterComplaints = _complaints.Select(list => new DisplayComplaintViewModel

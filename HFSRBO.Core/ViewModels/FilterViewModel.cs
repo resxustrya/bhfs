@@ -16,7 +16,7 @@ namespace HFSRBO.Core
         public String search { get; set; }
         public String date_receive { get; set; }
         public String date_entry { get; set; }
-
+        public List<String> facilityType { get; set; }
 
 
     }
