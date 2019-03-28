@@ -20,6 +20,17 @@
                 }
             </select>
         </div>
+    </div>
+    <div class="row">
+        <div class="input-field col l4 s12 m12">
+            <h6>Facility Type</h6>
+            <select class="browser-default js-example-basic-multiple" name="facilityType[]" id="facilityType" multiple>
+                @foreach (String s in Model._facility_type)
+                {
+                    <option value="@s">@s</option>
+                }
+            </select>
+        </div>
         <div class="input-field col l4 m12 s12">
             <h6>Filter by Hospital</h6>
             <select class="browser-default js-example-basic-multiple" name="hospitalID[]" id="hospitalID" multiple>
@@ -31,7 +42,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="input-field col l3 m12 s12">
+        <div class="input-field col l4 s12 m12">
+            <input type="text" name="date_receive" />
+            <label for="date_receive">Date Receive</label>
+        </div>
+        <div class="input-field col l4 s12 m12">
+            <input type="text" name="date_entry" />
+            <label for="date_entry">Date Entry</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col l4 m12 s12">
             <h6>Filter by Status</h6>
             <p>
                 <label for="O">
@@ -46,16 +67,7 @@
                 </label>
             </p>
         </div>
-        
-        <div class="input-field col l3 s12 m12">
-            <input type="date" name="date_from" required />
-            <label for="date_from">Complaint From</label>
-        </div>
-        <div class="input-field col l3 s12 m12">
-            <input type="date" name="date_to" required />
-            <label for="date_to">Complaint To</label>
-        </div>
-        <div class="input-field col l3 m12 s12">
+        <div class="input-field col l4 m12 s12">
             <h6>Display Mode</h6>
             <p>
                 <label for="W">
@@ -85,5 +97,26 @@
         });
         var elems = document.querySelectorAll('.datepicker');
         var instances = M.Datepicker.init(elems);
+
+        $('input[name="date_receive"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+        $(".applyBtn").click("click");
+        $('input[name="date_receive"]').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
+
+        $('input[name="date_entry"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
+        $('input[name="date_entry"]').on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
     })();
 </script>

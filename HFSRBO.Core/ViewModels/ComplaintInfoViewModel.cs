@@ -21,5 +21,6 @@ namespace HFSRBO.Core
         public List<String> actionTaken { get; set; }
         public List<String> remarks { get; set; }
 
+
     }
 }

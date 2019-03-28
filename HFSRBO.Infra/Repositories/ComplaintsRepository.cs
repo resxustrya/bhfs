@@ -66,7 +66,8 @@ namespace HFSRBO.Infra
                 _hospitals = hr.GetHospitals(),
                 _communications = this.GetCommunicationForm(),
                 _complaint_type = ctr.GetComplaintTypes(),
-                _complaintAssistance = cat.GetComplaintAssistance()
+                _complaintAssistance = cat.GetComplaintAssistance(),
+                _facility_type = db.facilityType.Select(s => s.Name).ToList()
             };
             return _viewModel;
         }
@@ -187,9 +188,20 @@ namespace HFSRBO.Infra
         {
             IEnumerable<DisplayComplaintViewModel> filterComplaints = null;
             IEnumerable<complaints> _complaints = null;
-            DateTime dateFrom = Convert.ToDateTime(filterViewData.date_from);
-            DateTime dateTo = Convert.ToDateTime(filterViewData.date_to);
-            String where = "",query = "", join = "";
+            String where = "", query = "", join = "";
+            String[] dateReceive = null, dateEntry = null;
+            
+
+            if(filterViewData.date_entry != null && filterViewData.date_entry.Trim() != "")
+            {
+                dateEntry = filterViewData.date_entry.Split('-');
+            }
+            if(filterViewData.date_receive != null && filterViewData.date_receive.Trim() != "")
+            {
+                dateReceive = filterViewData.date_receive.Split('-');
+            }
+
+            
             
             where = " WHERE complaint_list.date_created BETWEEN '" + dateFrom.ToString() + "'" + " AND '" + dateTo.ToString() + "'";
             
@@ -329,7 +341,6 @@ namespace HFSRBO.Infra
         }
         public IEnumerable<DisplayComplaintViewModel> Search(String search)
         {
-            String query = "";
             IEnumerable<DisplayComplaintViewModel> result = null;
             IEnumerable<complaints> _complaints = null;
 
